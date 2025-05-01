@@ -22,6 +22,8 @@ const Navbar = () => {
     { name: 'About', href: '/about' },
     { name: 'Projects', href: '/projects' },
     { name: 'Contact', href: '/contact' },
+    { name: 'Singup', href: '/signup' },
+    { name: 'Login', href: '/login' },
   ];
 
   return (
@@ -29,7 +31,7 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        scrolled ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg' : 'bg-green-700'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,7 +49,7 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                  className="text-black dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   {link.name}
                 </Link>
