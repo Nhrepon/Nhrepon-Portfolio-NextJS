@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
         }
         
         const token = await encodeToken(user._id, user.email,  user.userName);
-        const response = NextResponse.json({message:"Logedin success", success:true});
+        const response = NextResponse.json({status:"success", message:"Logedin success", success:true});
         response.cookies.set("token", token, {httpOnly:true});
         return response;
 

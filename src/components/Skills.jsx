@@ -1,8 +1,6 @@
-'use client';
-
-import { motion } from 'framer-motion';
-
-const Skills = () => {
+"use client";
+import { motion } from "framer-motion";
+const SkillList = () => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -24,28 +22,85 @@ const Skills = () => {
     },
   };
 
-  const skills = {
-    technical: [
-      { name: 'JavaScript', level: 90, icon: '💻' },
-      { name: 'React', level: 85, icon: '⚛️' },
-      { name: 'Node.js', level: 80, icon: '🟢' },
-      { name: 'Next.js', level: 85, icon: '⏭️' },
-      { name: 'TypeScript', level: 75, icon: '📘' },
-      { name: 'Python', level: 70, icon: '🐍' },
-    ],
-    soft: [
-      { name: 'Problem Solving', level: 90, icon: '🧩' },
-      { name: 'Team Collaboration', level: 85, icon: '🤝' },
-      { name: 'Communication', level: 80, icon: '💬' },
-      { name: 'Time Management', level: 85, icon: '⏰' },
-      { name: 'Adaptability', level: 90, icon: '🔄' },
-      { name: 'Leadership', level: 75, icon: '👥' },
-    ],
-  };
+  const skills = [
+    {
+      id: 1,
+      title: "Flutter",
+      description: "Flutter",
+      image: "/flutter.svg",
+    },
+    {
+      id: 2,
+      title: "React",
+      description: "React",
+      image: "/react.svg",
+    },
+    {
+      id: 3,
+      title: "NextJs",
+      description: "NextJs",
+      image: "/next.svg",
+    },
+    {
+      id: 4,
+      title: "DotNet",
+      description: "DotNet",
+      image: "/dotnet.svg",
+    },
+    {
+      id: 5,
+      title: "Laravel",
+      description: "Laravel",
+      image: "/laravel.svg",
+    },
+    {
+      id: 6,
+      title: "Node.js",
+      description: "Node.js",
+      image: "/node.svg",
+    },
+    {
+      id: 7,
+      title: "PHP",
+      description: "PHP",
+      image: "/php.svg",
+    },
+    {
+      id: 8,
+      title: "MongoDB",
+      description: "MongoDB",
+      image: "/mongodb.svg",
+    },
+    {
+      id: 9,
+      title: "TypeScript",
+      description: "TypeScript",
+      image: "/typescript.svg",
+    },
+    {
+      id: 10,
+      title: "Dart",
+      description: "Dart",
+      image: "/dart.svg",
+    },
+    {
+      id: 11,
+      title: "ExpressJs",
+      description: "ExpressJs",
+      image: "/express.svg",
+    },
+    {
+      id: 12,
+      title: "MySQL",
+      description: "MySQL",
+      image: "/mysql.svg",
+    },
+  ];
+  // ['Flutter', 'Mobile Development', 'Dart','React','Next.js','Node.js', 'ExpressJs', 'Laravel', 'PHP', 'DotNet','MongoDB','TypeScript']
 
   return (
-    <section className="py-20 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 w-full">
+      <div className="max-w-7xl mx-auto py-20 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -57,150 +112,30 @@ const Skills = () => {
             variants={itemVariants}
             className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4"
           >
-            Skills & Expertise
+            Skills
           </motion.h2>
           <motion.p
             variants={itemVariants}
-            className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
-          >
-            A combination of technical expertise and soft skills that help me deliver
-            exceptional results.
+            className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Here are some of my recent projects. Each one was built to solve a
+            specific problem or explore new technologies.
           </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Technical Skills */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <motion.h3
-              variants={itemVariants}
-              className="text-2xl font-semibold text-gray-900 dark:text-white mb-6"
+        <div className="grid grid-cols-6 gap-4">
+          {skills.map((skill) => (
+            <div
+              className="flex flex-col items-center p-2 shadow-md border-1 border-gray-300 rounded bg-linear-to-r from-green-200 to-indigo-100 relative"
+              key={skill.id}
             >
-              Technical Skills
-            </motion.h3>
-            {skills.technical.map((skill) => (
-              <motion.div
-                key={skill.name}
-                variants={itemVariants}
-                className="space-y-2"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xl">{skill.icon}</span>
-                    <span className="text-gray-700 dark:text-gray-300 font-medium">
-                      {skill.name}
-                    </span>
-                  </div>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {skill.level}%
-                  </span>
-                </div>
-                <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, ease: 'easeOut' }}
-                    className="h-full bg-blue-600 dark:bg-blue-500 rounded-full"
-                  />
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Soft Skills */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <motion.h3
-              variants={itemVariants}
-              className="text-2xl font-semibold text-gray-900 dark:text-white mb-6"
-            >
-              Soft Skills
-            </motion.h3>
-            {skills.soft.map((skill) => (
-              <motion.div
-                key={skill.name}
-                variants={itemVariants}
-                className="space-y-2"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xl">{skill.icon}</span>
-                    <span className="text-gray-700 dark:text-gray-300 font-medium">
-                      {skill.name}
-                    </span>
-                  </div>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {skill.level}%
-                  </span>
-                </div>
-                <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, ease: 'easeOut' }}
-                    className="h-full bg-green-600 dark:bg-green-500 rounded-full"
-                  />
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+              <img className="w-3/4 h-3/4" src={skill.image} />
+              <p className="py-2 text-1xl font-bold">{skill.title}</p>
+            </div>
+          ))}
         </div>
-
-        {/* Additional Skills */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="mt-16"
-        >
-          <motion.h3
-            variants={itemVariants}
-            className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 text-center"
-          >
-            Additional Tools & Technologies
-          </motion.h3>
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-wrap justify-center gap-4"
-          >
-            {[
-              'Git',
-              'Docker',
-              'AWS',
-              'MongoDB',
-              'PostgreSQL',
-              'GraphQL',
-              'Redux',
-              'Tailwind CSS',
-              'Jest',
-              'Cypress',
-            ].map((tool) => (
-              <motion.span
-                key={tool}
-                whileHover={{ scale: 1.05 }}
-                className="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium"
-              >
-                {tool}
-              </motion.span>
-            ))}
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   );
 };
 
-export default Skills; 
+export default SkillList;

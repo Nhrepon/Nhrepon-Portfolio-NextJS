@@ -32,7 +32,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/app/dashboard/layout.js", "src/app/page.js", "src/app/layout.js", "src/components/skills.jsx"  ],
   "exclude": [
     "node_modules"
   ]

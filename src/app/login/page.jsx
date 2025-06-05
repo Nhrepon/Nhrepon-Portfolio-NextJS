@@ -1,12 +1,12 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
 const About = () => {
-
+  const router = useRouter();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -19,9 +19,14 @@ const About = () => {
       toast.error("Please fill in all fields");
       return;
     }
-    setIsLoading(true);
+    const response = await axios.post('/api/users/login', {email:email, password:password});
+    if(response.data.status === "success"){
+      toast.success("Login success");
+      router.push('/dashboard');
+    }else{
+      toast.error(response.data.message);
+    }
     
-    toast.success("Login success");
   };
 
 

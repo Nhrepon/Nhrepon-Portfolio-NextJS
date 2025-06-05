@@ -42,7 +42,7 @@ const Hero = () => {
         >
           {/* Greeting */}
           <motion.div variants={itemVariants} className="mb-4">
-            <span className="inline-block px-3 py-1 text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+            <span className="inline-block px-3 py-1 text-sm font-semibold text-green-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full">
               Hello, I'm
             </span>
           </motion.div>
@@ -53,7 +53,7 @@ const Hero = () => {
             className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6"
           >
             <span className="block">Nur Hossain Repon</span>
-            <span className="block text-blue-600 dark:text-blue-400">
+            <span className="block text-green-700 dark:text-blue-400">
               Full Stack Developer & Software Engineer
             </span>
           </motion.h1>
@@ -74,7 +74,7 @@ const Hero = () => {
           >
             <Link
               href="/projects"
-              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition-colors"
+              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-700 hover:bg-green-900 dark:bg-blue-500 dark:hover:bg-blue-600 transition-colors"
             >
               View My Work
             </Link>

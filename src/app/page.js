@@ -1,6 +1,6 @@
 import Hero from "@/components/Hero";
-import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
+import SkillList from "@/components/skills";
 
 
 export default function Home() {
@@ -8,7 +8,7 @@ export default function Home() {
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen gap-8 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col row-start-2 items-center w-full">
         <Hero />
-        <Skills />
+        <SkillList/>
         <Projects />
       </main>
     </div>
