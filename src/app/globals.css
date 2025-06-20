@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #008648;
   --foreground: #171717;
 }
 
@@ -14,7 +14,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #000000;
     --foreground: #ededed;
   }
 }
@@ -24,3 +24,45 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+i{
+  padding: 4px;
+}
+
+
+
+table{
+  border-collapse: collapse;
+  border: 1px solid #3f3f3f;
+  width: 100%;
+  margin: 20px 0;
+  font-size: 14px;
+  min-width: 400px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
+}
+table thead tr{
+  text-align: left;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: var(--background);
+}
+
+table th,
+table td{
+  padding: 10px;
+}
+
+table tbody tr{
+  border-bottom: 1px solid #dddddd;
+}
+
+
+
+
+
+
+
+

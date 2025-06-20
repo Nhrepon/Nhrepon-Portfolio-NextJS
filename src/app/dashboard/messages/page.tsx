@@ -1,13 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import { 
-  EnvelopeIcon, 
-  PaperAirplaneIcon,
-  UserCircleIcon
-} from "@heroicons/react/24/outline";
 
-const messages = [
+interface Message {
+    id: number;
+    sender: string;
+    content: string;
+    time: string;
+    unread: boolean;
+}
+
+const messages: Message[] = [
   {
     id: 1,
     sender: 'John Doe',
@@ -39,7 +42,7 @@ const messages = [
 ];
 
 export default function Messages() {
-  const [selectedMessage, setSelectedMessage] = useState(null);
+  const [selectedMessage, setSelectedMessage] = useState(messages[0]);
   const [newMessage, setNewMessage] = useState('');
 
   const handleSendMessage = () => {
@@ -58,7 +61,7 @@ export default function Messages() {
             <h2 className="text-lg font-semibold">Messages</h2>
           </div>
           <div className="overflow-y-auto h-full">
-            {messages.map((message) => (
+            {messages.map((message:any) => (
               <div
                 key={message.id}
                 className={`p-4 border-b cursor-pointer hover:bg-gray-50 ${
@@ -68,9 +71,9 @@ export default function Messages() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <UserCircleIcon className="h-8 w-8 text-gray-400" />
+                    <i className={"bi bi-person"}></i>
                     <div>
-                      <p className="font-medium">{message.sender}</p>
+                    <p className="font-medium">{message.sender}</p>
                       <p className="text-sm text-gray-500 truncate max-w-xs">
                         {message.content}
                       </p>
@@ -89,9 +92,9 @@ export default function Messages() {
             <>
               <div className="p-4 border-b">
                 <div className="flex items-center space-x-3">
-                  <UserCircleIcon className="h-8 w-8 text-gray-400" />
+                  <i className={"bi bi-person"}></i>
                   <div>
-                    <p className="font-medium">{selectedMessage.sender}</p>
+                  <p className="font-medium">{selectedMessage.sender}</p>
                     <p className="text-sm text-gray-500">Online</p>
                   </div>
                 </div>
@@ -100,7 +103,7 @@ export default function Messages() {
               <div className="flex-1 p-4 overflow-y-auto">
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3">
-                    <UserCircleIcon className="h-8 w-8 text-gray-400" />
+                    <i className={"bi bi-person"}></i>
                     <div className="bg-gray-100 rounded-lg p-3">
                       <p className="text-sm">{selectedMessage.content}</p>
                       <p className="text-xs text-gray-500 mt-1">{selectedMessage.time}</p>
@@ -122,7 +125,7 @@ export default function Messages() {
                     onClick={handleSendMessage}
                     className="bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700"
                   >
-                    <PaperAirplaneIcon className="h-5 w-5" />
+                    <i className={"bi bi-airplane"}></i>
                   </button>
                 </div>
               </div>
@@ -130,7 +133,7 @@ export default function Messages() {
           ) : (
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
-                <EnvelopeIcon className="h-12 w-12 text-gray-400 mx-auto" />
+                <i className={"bi bi-envelope"}></i>
                 <h3 className="mt-2 text-sm font-medium text-gray-900">No message selected</h3>
                 <p className="mt-1 text-sm text-gray-500">
                   Select a message from the list to start chatting

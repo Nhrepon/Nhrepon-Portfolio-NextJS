@@ -4,18 +4,18 @@ import { decodeToken } from '@/utility/jwtTokenHelper';
 import UserModel from '@/models/userModel';
 import { connect } from '@/db/dbConfig';
 
-connect();
+await connect();
 
-export async function POST(request: NextRequest) {
+export async function GET(request: NextRequest) {
     try {
-        const token = await request.cookies.get("token")?.value || "";
-        const data = await decodeToken(token);
-        const user = await UserModel.findOne({_id:data.userId}).select("-password");
+        const token = request.cookies.get("token")?.value || "";
+        let {email, userId}:any = await decodeToken(token);
+        const user = await UserModel.findOne({email: email}).select("-password");
 
         return NextResponse.json({status: "success", data: user});
-    } catch (error) {
+    } catch (error:any) {
         return NextResponse.json({
-            statusCode: 500, 
+            statusCode: 500,
             error: error.message
         });
     }

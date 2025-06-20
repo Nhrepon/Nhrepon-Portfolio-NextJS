@@ -1,10 +1,10 @@
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
-import {Modal} from "bootstrap";
 
 
 
-export function unauthorized(code){
+
+export function unauthorized(code: number){
     if(code===401){
         sessionStorage.clear();
         localStorage.clear();
@@ -12,7 +12,7 @@ export function unauthorized(code){
     }
 }
 
-export function setEmail(email){
+export function setEmail(email: string){
     sessionStorage.setItem("email",email)
 }
 
@@ -20,7 +20,7 @@ export function getEmail(){
     return sessionStorage.getItem("email")
 }
 
-export  function TimestampToDate(timestamp) {
+export  function TimestampToDate(timestamp: string | number | Date) {
     let date = new Date(timestamp);
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     return date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear();
@@ -40,7 +40,7 @@ export async  function DeleteAlert() {
     return result.isConfirmed;
 }
 
-export async  function DeleteAlertWithData(id, name) {
+export async  function DeleteAlertWithData(id: string, name: string) {
     const result = await Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this! \nDelete? \nid: "+id+" \nname: "+name+" ",
@@ -54,7 +54,7 @@ export async  function DeleteAlertWithData(id, name) {
     return result.isConfirmed;
 }
 
-export async  function SuccessAlert(msg) {
+export async  function SuccessAlert(msg: any) {
     const result = await Swal.fire({
         text: msg,
         icon: "success",
@@ -65,7 +65,7 @@ export async  function SuccessAlert(msg) {
     return result.isConfirmed;
 }
 
-export async  function FailAlert(msg) {
+export async  function FailAlert(msg: any) {
     const result = await Swal.fire({
         text: msg,
         icon: "warning",
@@ -76,7 +76,7 @@ export async  function FailAlert(msg) {
     return result.isConfirmed;
 }
 
-export async  function InfoAlert(msg) {
+export async  function InfoAlert(msg: any) {
     const result = await Swal.fire({
         text: msg,
         icon: "info",
@@ -88,19 +88,26 @@ export async  function InfoAlert(msg) {
 }
 
 
-export async function modalHide(id){
-    // Close the modal programmatically
-    const modalElement = document.getElementById(id);
-    const modalInstance = Modal.getInstance(modalElement) || new Modal(modalElement);
-    modalInstance.hide();
-}
+// export async function modalHide(id){
+//     // Close the modal programmatically
+//     const modalElement = document.getElementById(id);
+//     const modalInstance = Modal.getInstance(modalElement) || new Modal(modalElement);
+//     modalInstance.hide();
+// }
 
 
-export function truncateText (text, maxLength){
+
+
+export function truncateText (text: string, maxLength: number){
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + '...';
 }
 
+export async function logout(){
+    //(await cookies()).set('token', '')
+    //Cookies.remove("token", {httpOnly: true, expires: new Date(0)});
+    window.location.href="/login"
+}
 
 
 export function isLogin(){

@@ -1,12 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { 
-  BriefcaseIcon, 
-  ClockIcon, 
-  CheckCircleIcon,
-  ExclamationCircleIcon 
-} from "@heroicons/react/24/outline";
+
 
 const projects = [
   {
@@ -39,20 +34,7 @@ const projects = [
 ];
 
 export default function Projects() {
-  const [selectedProject, setSelectedProject] = useState(null);
 
-  const getStatusIcon = (status) => {
-    switch (status) {
-      case 'Completed':
-        return <CheckCircleIcon className="h-5 w-5 text-green-500" />;
-      case 'In Progress':
-        return <ClockIcon className="h-5 w-5 text-blue-500" />;
-      case 'On Hold':
-        return <ExclamationCircleIcon className="h-5 w-5 text-yellow-500" />;
-      default:
-        return null;
-    }
-  };
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -72,11 +54,11 @@ export default function Projects() {
             <div className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <BriefcaseIcon className="h-6 w-6 text-gray-400" />
+                  <i className={"bi bi-briefcase"}></i>
                   <h3 className="text-lg font-medium text-gray-900">{project.name}</h3>
                 </div>
                 <div className="flex items-center space-x-2">
-                  {getStatusIcon(project.status)}
+                  {(project.status)}
                   <span className="text-sm font-medium text-gray-500">{project.status}</span>
                 </div>
               </div>

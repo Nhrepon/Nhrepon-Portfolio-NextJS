@@ -1,6 +1,7 @@
-import mongoose, { Document, Model } from "mongoose";
+import mongoose from "mongoose";
 
-interface IUser extends Document {
+interface IUser {
+    _id: mongoose.Types.ObjectId;
     userName: string;
     email: string;
     password: string;
@@ -12,7 +13,7 @@ interface IUser extends Document {
     updatedAt: Date;
 }
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema<IUser>({
     userName: {type: String, required: [true, "Provide a user name."], unique: true},
     email: {type: String, unique: true, required: [true, "Email required"]},
     password: {type: String, required: [true, "Password required"]},
@@ -22,6 +23,9 @@ const userSchema = new mongoose.Schema({
     otpExpire: {type: Date},
 }, {timestamps: true, versionKey: false});
 
-const UserModel: Model<IUser> = mongoose.models.users || mongoose.model<IUser>("users", userSchema);
+// const UserModel: Model<IUser> = mongoose.models.users || mongoose.model<IUser>("users", userSchema);
+const UserModel = mongoose.models?.users || mongoose.model<IUser>("users", userSchema);
+
+
 export default UserModel;
 //module.exports = UserModel;

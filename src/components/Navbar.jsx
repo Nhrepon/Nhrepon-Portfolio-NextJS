@@ -3,10 +3,19 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import userState from "@/state/userState";
+
+
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const {isLogin, getLoginStatus} = userState();
+  useEffect(() => {
+    (async ()=>await getLoginStatus())()
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,22 +24,25 @@ const Navbar = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+
+
   }, []);
+
 
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
+    { name: 'Blogs', href: '/blogs' },
     { name: 'Projects', href: '/projects' },
     { name: 'Contact', href: '/contact' },
-    { name: 'Singup', href: '/signup' },
-    { name: 'Login', href: '/login' },
+
   ];
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${
+      className={`sticky top-0 w-full z-50 transition-all duration-300 ${
         scrolled ? 'bg-green-700/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg' : 'bg-green-700'
       }`}
     >
@@ -54,6 +66,29 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
+
+              {
+                isLogin ?
+                    <Link
+                        href="/dashboard"
+                        className="text-white dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                    >
+                      <i className={"bi bi-person"}></i>
+
+                    </Link>
+                    :
+                    <>
+                      <Link href="/signup"
+                            className="text-white dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        Signup
+                      </Link>
+                      <Link href="/login"
+                            className="text-white dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        Login
+                      </Link>
+                    </>
+              }
+
             </div>
           </div>
 
@@ -65,35 +100,9 @@ const Navbar = () => {
             >
               <span className="sr-only">Open main menu</span>
               {!isOpen ? (
-                <svg
-                  className="block h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
+                <i className={"bi bi-list text-white text-4xl"}></i>
               ) : (
-                <svg
-                  className="block h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+                <i className={"bi bi-x text-white text-4xl"}></i>
               )}
             </button>
           </div>

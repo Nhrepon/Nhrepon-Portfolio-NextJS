@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 export async function connect() {
     try {
         const url = "mongodb+srv://Repon:Repon7248@cluster0.nhslprh.mongodb.net/Portfolio";
-        mongoose.connect(url!);
+        await mongoose.connect(url!);
         const connection = mongoose.connection;
         connection.on("connected",()=>{
             console.log("Mongodb connected successfully")
@@ -13,7 +13,7 @@ export async function connect() {
             process.exit();
         });
         
-    } catch (error) {
+    } catch (error: any) {
         console.log("Something went wrong in database connection")
         console.log(error)
     }

@@ -1,17 +1,10 @@
 'use client';
 
-import { 
-  UserGroupIcon, 
-  BriefcaseIcon, 
-  EnvelopeIcon,
-  ChartBarIcon 
-} from "@heroicons/react/24/outline";
-
 const stats = [
-  { name: 'Total Projects', value: '12', icon: BriefcaseIcon },
-  { name: 'Messages', value: '8', icon: EnvelopeIcon },
-  { name: 'Team Members', value: '4', icon: UserGroupIcon },
-  { name: 'Performance', value: '98%', icon: ChartBarIcon },
+  { name: 'Total Projects', value: '12', icon: "bi bi-house" },
+  { name: 'Messages', value: '8', icon: "bi bi-chat-dots" },
+  { name: 'Team Members', value: '4', icon: "bi bi-people" },
+  { name: 'Performance', value: '98%', icon: "bi bi-house" },
 ];
 
 const recentActivity = [
@@ -38,7 +31,7 @@ export default function Dashboard() {
           >
             <dt>
               <div className="absolute rounded-md bg-blue-500 p-3">
-                <stat.icon className="h-6 w-6 text-white" aria-hidden="true" />
+                <i className={stat.icon} aria-hidden="true" />
               </div>
               <p className="ml-16 truncate text-sm font-medium text-gray-500">{stat.name}</p>
             </dt>

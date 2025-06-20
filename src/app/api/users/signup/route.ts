@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
             }
         });
 
-    } catch (error) {
+    } catch (error: any) {
         console.error('Signup error:', error);
         return NextResponse.json({
             statusCode: 500, 

@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { UserIcon, EnvelopeIcon, PhoneIcon, MapPinIcon } from "@heroicons/react/24/outline";
 
 export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);
@@ -34,7 +33,7 @@ export default function Profile() {
             {/* Profile Picture */}
             <div className="flex items-center space-x-4">
               <div className="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center">
-                <UserIcon className="w-12 h-12 text-gray-500" />
+                <i className={"bi bi-person"}></i>
               </div>
               <div>
                 <h2 className="text-xl font-semibold">{profile.name}</h2>
@@ -45,9 +44,9 @@ export default function Profile() {
             {/* Contact Information */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="flex items-center space-x-3">
-                <EnvelopeIcon className="w-5 h-5 text-gray-400" />
+                <i className={"bi bi-envelope"}></i>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Email</p>
+                <p className="text-sm font-medium text-gray-500">Email</p>
                   {isEditing ? (
                     <input
                       type="email"
@@ -62,9 +61,9 @@ export default function Profile() {
               </div>
 
               <div className="flex items-center space-x-3">
-                <PhoneIcon className="w-5 h-5 text-gray-400" />
+                <i className={"bi bi-phone"}></i>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Phone</p>
+                <p className="text-sm font-medium text-gray-500">Phone</p>
                   {isEditing ? (
                     <input
                       type="tel"
@@ -79,9 +78,9 @@ export default function Profile() {
               </div>
 
               <div className="flex items-center space-x-3">
-                <MapPinIcon className="w-5 h-5 text-gray-400" />
+                <i className={"bi bi-geo"}></i>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Location</p>
+                <p className="text-sm font-medium text-gray-500">Location</p>
                   {isEditing ? (
                     <input
                       type="text"

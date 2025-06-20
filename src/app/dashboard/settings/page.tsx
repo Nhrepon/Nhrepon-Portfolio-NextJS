@@ -1,14 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { 
-  BellIcon, 
-  KeyIcon, 
-  ShieldCheckIcon,
-  GlobeAltIcon,
-  MoonIcon,
-  SunIcon
-} from "@heroicons/react/24/outline";
 
 export default function Settings() {
   const [darkMode, setDarkMode] = useState(false);
@@ -18,7 +10,7 @@ export default function Settings() {
     updates: false,
   });
 
-  const handleNotificationChange = (type) => {
+  const handleNotificationChange = (type: keyof typeof notifications) => {
     setNotifications({
       ...notifications,
       [type]: !notifications[type],
@@ -37,9 +29,9 @@ export default function Settings() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <KeyIcon className="h-5 w-5 text-gray-400" />
+                  <i className={"bi bi-key"}></i>
                   <div>
-                    <p className="text-sm font-medium text-gray-900">Password</p>
+                  <p className="text-sm font-medium text-gray-900">Password</p>
                     <p className="text-sm text-gray-500">Change your password</p>
                   </div>
                 </div>
@@ -50,9 +42,9 @@ export default function Settings() {
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <ShieldCheckIcon className="h-5 w-5 text-gray-400" />
+                  <i className={"bi bi-check"}></i>
                   <div>
-                    <p className="text-sm font-medium text-gray-900">Two-Factor Authentication</p>
+                  <p className="text-sm font-medium text-gray-900">Two-Factor Authentication</p>
                     <p className="text-sm text-gray-500">Add an extra layer of security</p>
                   </div>
                 </div>
@@ -73,9 +65,9 @@ export default function Settings() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <BellIcon className="h-5 w-5 text-gray-400" />
+                  <i className={"bi bi-bell"}></i>
                   <div>
-                    <p className="text-sm font-medium text-gray-900">Email Notifications</p>
+                  <p className="text-sm font-medium text-gray-900">Email Notifications</p>
                     <p className="text-sm text-gray-500">Receive email updates</p>
                   </div>
                 </div>
@@ -95,9 +87,9 @@ export default function Settings() {
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <BellIcon className="h-5 w-5 text-gray-400" />
+                  <i className={"bi bi-bell"}></i>
                   <div>
-                    <p className="text-sm font-medium text-gray-900">Push Notifications</p>
+                  <p className="text-sm font-medium text-gray-900">Push Notifications</p>
                     <p className="text-sm text-gray-500">Receive push notifications</p>
                   </div>
                 </div>
@@ -128,9 +120,9 @@ export default function Settings() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   {darkMode ? (
-                    <MoonIcon className="h-5 w-5 text-gray-400" />
+                      <i className={"bi bi-moon"}></i>
                   ) : (
-                    <SunIcon className="h-5 w-5 text-gray-400" />
+                      <i className={"bi bi-sun"}></i>
                   )}
                   <div>
                     <p className="text-sm font-medium text-gray-900">Dark Mode</p>

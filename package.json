@@ -1,5 +1,5 @@
 {
-  "name": "nhrepon-portfolio",
+  "name": "Nhrepon-Portfolio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,10 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@heroicons/react": "^2.2.0",
     "axios": "^1.9.0",
     "bcryptjs": "^3.0.2",
-    "bootstrap": "^5.3.6",
     "bootstrap-icons": "^1.13.1",
     "framer-motion": "^12.7.4",
     "js-cookie": "^3.0.5",
@@ -23,12 +21,16 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.5.2",
-    "sweetalert2": "^11.22.0"
+    "sweetalert2": "^11.22.0",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/js-cookie": "^3.0.6",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "22.15.3",
+    "@types/nodemailer": "^6.4.17",
     "@types/react": "19.1.2",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
