@@ -57,7 +57,7 @@ export default function RootLayout({children}: { children: ReactNode }) {
 
     return (
         <html lang="en">
-        <body>
+        <body className="bg-gray-100 dark:bg-gray-900">
         <MainLayout>
             {children}
         </MainLayout>
