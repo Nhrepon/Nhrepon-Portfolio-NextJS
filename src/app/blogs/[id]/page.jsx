@@ -8,7 +8,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
-
 const SingleBlog = () => {
     const { id } = useParams();
     const blog = blogList.find((blog) => blog.id === parseInt(id));
@@ -34,6 +33,8 @@ const SingleBlog = () => {
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
         };
+        
+        fs.writeFileSync("./src/db/commentList.js", JSON.stringify(commentList));
         commentList.push(newComment);
         console.log(commentList);
         console.log(comment);

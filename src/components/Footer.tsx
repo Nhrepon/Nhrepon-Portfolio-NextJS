@@ -81,7 +81,7 @@ const Footer = () => {
             <ul className="mt-4 space-y-4">
               {quickLinks.map((item, index)=>(
                 <li key={index}>
-                  <Link href={item.href} className="text-base text-white hover:text-indigo-300">
+                  <Link href={item.href} className="text-base text-white hover:text-indigo-300 hover:ps-1 transition-all ease-in-out duration-300">
                   {item.title}
                   </Link>
                 </li>
@@ -99,7 +99,7 @@ const Footer = () => {
             <hr />
             <div className="mt-4 flex space-x-6">
               {socialLinks.map((item) => (
-                <Link key={item.name} href={item.href} className='hover:scale-110 duration-500 ease-in-out transition-all shadow-lg dark:text-gray-400 text-3xl text-indigo-300 hover:text-white'><i className={item.icon}></i></Link>
+                <Link key={item.name} href={item.href} className='hover:scale-110 duration-500 ease-in-out transition-all dark:text-gray-400 text-3xl text-green-100 hover:text-white'><i className={item.icon}></i></Link>
               ))}
             </div>
           </div>

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
+import {projects} from '@/db/data';
 
 
 
@@ -31,48 +32,7 @@ const Projects = () => {
     },
   };
 
-  const projects = [
-    {
-      id: 1,
-      title: 'E-commerce Platform',
-      description: 'A full-featured e-commerce platform built with Next.js and MongoDB, featuring real-time inventory management and secure payment processing.',
-      image: '/project-placeholder.svg',
-      tags: ['Next.js', 'MongoDB', 'Stripe', 'Tailwind CSS'],
-      category: 'web',
-      link: '#',
-      github: '#',
-    },
-    {
-      id: 2,
-      title: 'Task Management App',
-      description: 'A collaborative task management application with real-time updates, team collaboration features, and progress tracking.',
-      image: '/project-placeholder.svg',
-      tags: ['React', 'Firebase', 'Redux', 'Material UI'],
-      category: 'web',
-      link: '#',
-      github: '#',
-    },
-    {
-      id: 3,
-      title: 'AI Image Generator',
-      description: 'An AI-powered image generation tool that creates unique artwork based on user prompts using machine learning algorithms.',
-      image: '/project-placeholder.svg',
-      tags: ['Python', 'TensorFlow', 'React', 'FastAPI'],
-      category: 'ai',
-      link: '#',
-      github: '#',
-    },
-    {
-      id: 4,
-      title: 'Mobile Fitness App',
-      description: 'A cross-platform mobile application for tracking workouts, nutrition, and fitness goals with personalized recommendations.',
-      image: '/project-placeholder.svg',
-      tags: ['React Native', 'Firebase', 'Redux', 'Expo'],
-      category: 'mobile',
-      link: '#',
-      github: '#',
-    },
-  ];
+
 
   const filters = [
     { id: 'all', name: 'All Projects' },
@@ -121,9 +81,9 @@ const Projects = () => {
               key={filter.id}
               variants={itemVariants}
               onClick={() => setActiveFilter(filter.id)}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-6 py-2 rounded-full text-sm font-medium transition-colors hover:cursor-pointer ${
                 activeFilter === filter.id
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-green-600 text-white'
                   : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
               }`}
             >

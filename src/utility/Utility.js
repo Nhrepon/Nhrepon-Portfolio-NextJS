@@ -3,6 +3,10 @@ import Cookies from "js-cookie";
 
 
 
+export function saveComment(comment){
+    fs.writeFileSync("./src/db/commentList.js", JSON.stringify(commentList));
+}
+
 
 export function unauthorized(code){
     if(code===401){

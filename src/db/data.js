@@ -1,3 +1,4 @@
+
 export const user = [
     {
         id: 1,
@@ -141,7 +142,7 @@ export const commentList = [
         blogId: 1,
         name: 'Nur Hossain',
         email: 'john@example.com',
-        comment: 'This is a comment for blog 1. Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+        comment: 'ভাই খুব ভালো লিখেছেন। আমার সোনার বাংলা আমি তোমায় ভালোবাসি" : যেখানে নেই কোনো ধর্ম বর্ণ ভেদাভেদ, যে গানে আছে প্রকৃতি,ঋতু বৈচিত্র। যে গানের প্রথম লাইনেই আছে নিখাদ ভালোবাসা। এই গান আমার দেশের, এই গান আমার মা, মাটি ও মানুষের। এই গান আমার দেশের, এই গান আমার মা, মাটি ও মানুষের। এই গান আমার দেশের, এই গান আমার মা, মাটি ও মানুষের। This is a comment for blog 1. Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         userId: 1,
         createdAt: '2023-01-01',
         updatedAt: '2023-01-01',
@@ -197,3 +198,50 @@ export const commentList = [
         updatedAt: '2023-01-01',
     },
 ];
+
+
+
+
+
+export   const projects = [
+    {
+      id: 1,
+      title: 'E-commerce Platform',
+      description: 'A full-featured e-commerce platform built with Next.js and MongoDB, featuring real-time inventory management and secure payment processing.',
+      image: '/project-placeholder.svg',
+      tags: ['Next.js', 'MongoDB', 'Stripe', 'Tailwind CSS'],
+      category: 'web',
+      link: '#',
+      github: '#',
+    },
+    {
+      id: 2,
+      title: 'Task Management App',
+      description: 'A collaborative task management application with real-time updates, team collaboration features, and progress tracking.',
+      image: '/project-placeholder.svg',
+      tags: ['React', 'Firebase', 'Redux', 'Material UI'],
+      category: 'web',
+      link: '#',
+      github: '#',
+    },
+    {
+      id: 3,
+      title: 'AI Image Generator',
+      description: 'An AI-powered image generation tool that creates unique artwork based on user prompts using machine learning algorithms.',
+      image: '/project-placeholder.svg',
+      tags: ['Python', 'TensorFlow', 'React', 'FastAPI'],
+      category: 'ai',
+      link: '#',
+      github: '#',
+    },
+    {
+      id: 4,
+      title: 'Mobile Fitness App',
+      description: 'A cross-platform mobile application for tracking workouts, nutrition, and fitness goals with personalized recommendations.',
+      image: '/project-placeholder.svg',
+      tags: ['React Native', 'Firebase', 'Redux', 'Expo'],
+      category: 'mobile',
+      link: '#',
+      github: '#',
+    },
+  ];

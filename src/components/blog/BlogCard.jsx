@@ -1,7 +1,7 @@
 import Image from "next/image"
-import { truncateText } from "@/utility/Utility"
+import { TimestampToDate, truncateText } from "@/utility/Utility"
 import Link from "next/link"
-import { TimestampToDate } from "@/utility/Utility"
+
 
 const BlogCard = ({blog}) => {
     return (
@@ -23,8 +23,8 @@ const BlogCard = ({blog}) => {
                             
                             <Link href={`/blogs/${blog.id}`}>
                             <div className="card-body p-2">
-                                <h2 className="font-bold text-gray-900 dark:text-white text-lg">{truncateText(blog.title, 35)}</h2>
-                                <p className="text-gray-600 text-sm">{truncateText(blog.content, 100)}</p>
+                                <h2 className="text-lg font-bold text-gray-900 dark:text-white">{truncateText(blog.title, 100)}</h2>
+                                {/* <p className="text-gray-600 text-sm">{truncateText(blog.content, 100)}</p> */}
                             </div>
                             </Link>
 
