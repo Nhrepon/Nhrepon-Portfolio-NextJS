@@ -4,7 +4,13 @@ import {Toaster} from "react-hot-toast";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import {Metadata} from "next";
 import MainLayout from "@/components/MainLayout";
+import { Poppins } from "next/font/google";
 
+const poppins = Poppins({
+    subsets: ['latin'],
+    weight: ['400', '500', '600', '700', '800', '900'],
+    variable: '--font-poppins',
+});
 
 
 export const metadata: Metadata = {
@@ -57,7 +63,7 @@ export default function RootLayout({children}: { children: ReactNode }) {
 
     return (
         <html lang="en">
-        <body>
+        <body className={`bg-gray-100 dark:bg-gray-900 ${poppins.className}`} >
         <MainLayout>
             {children}
         </MainLayout>

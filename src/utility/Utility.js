@@ -3,8 +3,12 @@ import Cookies from "js-cookie";
 
 
 
+export function saveComment(comment){
+    fs.writeFileSync("./src/db/commentList.js", JSON.stringify(commentList));
+}
 
-export function unauthorized(code: number){
+
+export function unauthorized(code){
     if(code===401){
         sessionStorage.clear();
         localStorage.clear();
@@ -12,7 +16,7 @@ export function unauthorized(code: number){
     }
 }
 
-export function setEmail(email: string){
+export function setEmail(email){
     sessionStorage.setItem("email",email)
 }
 
@@ -20,10 +24,10 @@ export function getEmail(){
     return sessionStorage.getItem("email")
 }
 
-export  function TimestampToDate(timestamp: string | number | Date) {
+export  function TimestampToDate(timestamp) {
     let date = new Date(timestamp);
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    return date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear();
+    return date.getDate().toString().padStart(2, "0") + " " + monthNames[date.getMonth()] + " " + date.getFullYear();
 }
 
 export async  function DeleteAlert() {
@@ -40,7 +44,7 @@ export async  function DeleteAlert() {
     return result.isConfirmed;
 }
 
-export async  function DeleteAlertWithData(id: string, name: string) {
+export async  function DeleteAlertWithData(id, name) {
     const result = await Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this! \nDelete? \nid: "+id+" \nname: "+name+" ",
@@ -54,7 +58,7 @@ export async  function DeleteAlertWithData(id: string, name: string) {
     return result.isConfirmed;
 }
 
-export async  function SuccessAlert(msg: any) {
+export async  function SuccessAlert(msg) {
     const result = await Swal.fire({
         text: msg,
         icon: "success",
@@ -65,7 +69,7 @@ export async  function SuccessAlert(msg: any) {
     return result.isConfirmed;
 }
 
-export async  function FailAlert(msg: any) {
+export async  function FailAlert(msg) {
     const result = await Swal.fire({
         text: msg,
         icon: "warning",
@@ -76,7 +80,7 @@ export async  function FailAlert(msg: any) {
     return result.isConfirmed;
 }
 
-export async  function InfoAlert(msg: any) {
+export async  function InfoAlert(msg) {
     const result = await Swal.fire({
         text: msg,
         icon: "info",
@@ -98,7 +102,7 @@ export async  function InfoAlert(msg: any) {
 
 
 
-export function truncateText (text: string, maxLength: number){
+export function truncateText (text, maxLength){
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + '...';
 }

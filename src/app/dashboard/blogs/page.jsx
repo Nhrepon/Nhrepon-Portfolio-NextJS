@@ -3,54 +3,14 @@
 import { DeleteAlert } from '@/utility/Utility';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import {blogList} from '@/db/data';
+import { TimestampToDate } from '@/utility/Utility';
 
 export default function Profile() {
   
-  const [skills, setSkills] = useState(
-    [
-      {
-      "id":1,
-      "title":"Flutter",
-      "description":"Flutter",
-      "image":"/flutter.svg",
-      "created_at":"2022-08-01T00:00:00.000000Z",
-      "updated_at":"2022-08-01T00:00:00.000000Z"
-    },
-    {
-      "id":2,
-      "title":"React",
-      "description":"React",
-      "image":"/react.svg",
-      "created_at":"2022-08-01T00:00:00.000000Z",
-      "updated_at":"2022-08-01T00:00:00.000000Z"
-    },
-    {
-      "id":3,
-      "title":"Node.js",
-      "description":"Node.js",
-      "image":"/node.svg",
-      "created_at":"2022-08-01T00:00:00.000000Z",
-      "updated_at":"2022-08-01T00:00:00.000000Z"
-    },
-    {
-      "id":4,
-      "title":"NextJs",
-      "description":"NextJs",
-      "image":"/favicon.ico",
-      "created_at":"2022-08-01T00:00:00.000000Z",
-      "updated_at":"2022-08-01T00:00:00.000000Z"
-    },
-    {
-      "id":5,
-      "title":"Laravel",
-      "description":"Laravel",
-      "image":"/laravel.svg",
-      "created_at":"2022-08-01T00:00:00.000000Z",
-      "updated_at":"2022-08-01T00:00:00.000000Z"
-    }
-    ]
+
     // ['Flutter', 'Mobile Development', 'Dart','React','Next.js','Node.js', 'ExpressJs', 'Laravel', 'PHP', 'DotNet','MongoDB','TypeScript']
-  );
+
 
   const handleSave = () => {
     toast.success("Edit item");
@@ -64,22 +24,48 @@ export default function Profile() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="w-full mx-auto">
       <div className=''>
         <h1 className='text-2xl font-bold py-4'>Skills</h1>
-        <div className='grid grid-cols-4 gap-4'>
-          {skills.map((skill) => (
-            <div className='flex flex-col items-center p-2 shadow-md border-1 border-gray-300 rounded bg-linear-to-r from-green-200 to-yellow-100 w-1/4 relative' key={skill.id}>
-              <div className='flex gap-2 bg-gray-300 p-1 opacity-50 hover:opacity-100 rounded absolute top-1 right-1'>
-                <i className='bi bi-pencil text-green-700 hover:cursor-pointer' onClick={handleSave}></i>
-                <i className='bi bi-trash text-red-600 hover:cursor-pointer' onClick={()=>handleDelete(5)}></i>
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Title</th>
+              <th>Image</th>
+              <th>Category</th>
+              <th>Views</th>
+              <th>Comments</th>
+              <th>Author</th>
+              <th>Created At</th>
+              <th>Updated At</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {blogList.map((blog) => (
+            <tr key={blog.id}>
+              <td>{blog.id}</td>
+              <td>{blog.title}</td>
+              <td>
+                <img className='w-20 aspect-16/9' src={blog.img} alt={blog.title}/>
+              </td>
+              <td>{blog.category}</td>
+              <td>{blog.views}</td>
+              <td>{blog.comments}</td>
+              <td>{blog.author}</td>
+              <td>{TimestampToDate(blog.createdAt)}</td>
+              <td>{TimestampToDate(blog.updatedAt)}</td>              
+              <td>
+              <div className='flex gap-2 bg-gray-300 p-1 opacity-50 hover:opacity-100 rounded '>
+                <i className='bi bi-pencil text-green-700 hover:cursor-pointer'></i>
+                <i className='bi bi-trash text-red-600 hover:cursor-pointer' ></i>
               </div>
-              <img className='w-40 h-40' src={skill.image} alt={skill.title}/>
-              <p>{skill.title}</p>
-              
-            </div>
+              </td>
+            </tr>
           ))}
-        </div>
+          </tbody>
+        </table>
       </div>
     </div>
   );
