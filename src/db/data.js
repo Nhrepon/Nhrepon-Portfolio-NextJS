@@ -21,7 +21,7 @@ export const user = [
 export const blogList = [
     {
         id: 1,
-        title: 'Blog 1 Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+        title: 'Blog 1 Lorem Ipsum is simply dummy text of the printing and typesetting industry - 2025',
         content: `
         <p>Blog content goes here. Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
         <p>Blog content goes here. Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
