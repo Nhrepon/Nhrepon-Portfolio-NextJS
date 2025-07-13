@@ -38,6 +38,7 @@ export const blogList = [
         <p>Blog content goes here. Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
         <img src="https://www.mobiledokan.com/media/xiaomi-redmi-note-14-mist-purple-official-image_1.webp" alt="" title="" width={600} height={400}/>
         <p>Blog content goes here. Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        
         `,
         category: 'Flutter',
         tags: ['Tag 1', 'Tag 2', 'Tag 3'],

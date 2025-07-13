@@ -1,18 +1,28 @@
 "use client";
 import { useParams } from "next/navigation";
-import { user, blogList, commentList } from "@/db/data";
 import "@/app/blogs/style.css";
 import Image from "next/image";
 import { TimestampToDate, truncateText } from "@/utility/Utility";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import BlogState from "@/state/blogState";
+import { useEffect } from "react";
+import {commentList} from "@/db/data";
+
 
 const SingleBlog = () => {
     const { id } = useParams();
-    const blog = blogList.find((blog) => blog.id === parseInt(id));
-    const siteUrl = "http://localhost:3000/";
+    const {blogList, getBlogById, blog} = BlogState();
+    console.log("Blog id: "+id);
+    const siteUrl = "http://localhost:3000";
 
+    useEffect(() => {
+        (async () => {
+           await getBlogById(id);
+        })()
+      }, []);
+      
     const [comment, setComment] = useState({
         name: "",
         email: "",
@@ -33,14 +43,7 @@ const SingleBlog = () => {
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
         };
-        
-        fs.writeFileSync("./src/db/commentList.js", JSON.stringify(commentList));
-        commentList.push(newComment);
-        console.log(commentList);
-        console.log(comment);
         toast.success("Comment added successfully");
-
-
         setComment({
             name: "",
             email: "",
@@ -57,7 +60,7 @@ const SingleBlog = () => {
                 <div className="single-blog max-w-[600px] mx-auto flex flex-col gap-6 items-center">
                     <div className="single-blog-content flex flex-col gap-6 items-center">
                         <Image className="aspect-16/9 rounded-md shadow-lg"
-                            src={blog.img}
+                            src={blog.image}
                             alt={blog.title}
                             title={blog.title}
                             width={600}
@@ -66,8 +69,9 @@ const SingleBlog = () => {
                         <div className="w-full my-4">
                             <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{blog.title}</h1>
                             <div className="blog-post-meta w-full flex gap-4 justify-start mt-3">
-                                <span className="text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 text-xs shadow-sm p-2 rounded-md">{blog.author}</span>
-                                <span className="text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 text-xs shadow-sm p-2 rounded-md">{blog.category}</span>
+                                <span className="text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 text-xs shadow-sm p-2 rounded-md">{blog.author?.[0]?.userName ?? 'Unknown'}</span>
+                                <span className="text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 text-xs shadow-sm p-2 rounded-md">{(blog.category || []).map((category) => category.name).join(", ")}</span>
+                                <span className="text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 text-xs shadow-sm p-2 rounded-md">{(blog.tag || []).map((tag) => tag.name).join(", ")}</span>
                                 <span className="text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 text-xs shadow-sm p-2 rounded-md">{TimestampToDate(blog.updatedAt)}</span>
                                 <span className="text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 text-xs shadow-sm p-2 rounded-md">{commentList.filter((comment) => comment.blogId === blog.id).length} Comments</span>
                             </div>
@@ -102,8 +106,8 @@ const SingleBlog = () => {
                             {blogList.slice(0, 3).map((blog, i) => {
                                 return (
                                     <div key={i} className="flex w-1/3">
-                                        <Link href={`/blogs/${blog.id}`}>
-                                            <Image className="w-full aspect-16/9 rounded shadow-sm" src={blog.img} alt={blog.title} title={blog.title} width={120} height={80} />
+                                        <Link href={`/blogs/${blog._id}`}>
+                                            <Image className="w-full aspect-16/9 rounded shadow-sm" src={blog.image} alt={blog.title} title={blog.title} width={120} height={80} />
                                             <h3 className="text-sm my-2">{truncateText(blog.title, 50)}</h3>
                                         </Link>
                                     </div>
@@ -128,10 +132,10 @@ const SingleBlog = () => {
                     <div className="comments bg-gray-50 dark:bg-gray-800 p-6 rounded-md">
                         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Comments</h2>
                         <div className="comment">
-                            {commentList.filter((comment) => comment.blogId === blog.id).length > 0 ? commentList.filter((comment) => comment.blogId === blog.id).map((comment) => (
+                            {commentList.filter((comment) => comment.blogId === blog._id).length > 0 ? commentList.filter((comment) => comment.blogId === blog._id).map((comment) => (
                                 <div key={comment.id} className="flex py-2 my-6 shadow-sm rounded-md ">
                                     <div className="flex flex-col p-2 items-center">
-                                        <img src="/person.svg" className="w-12 h-12 rounded-full opacity-25" alt={comment.name} />
+                                        <Image src="/person.svg" className="w-12 h-12 rounded-full opacity-25" alt={comment.name} />
                                         <p className="text-gray-600 dark:text-gray-400 text-xs">{comment.name}</p>
                                         {/* <p className="text-gray-600 dark:text-gray-400 text-xs">{comment.email}</p> */}
                                     </div>
