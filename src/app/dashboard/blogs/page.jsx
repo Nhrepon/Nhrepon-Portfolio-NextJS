@@ -1,23 +1,33 @@
 'use client';
 
 import { DeleteAlert } from '@/utility/Utility';
-import { useState } from 'react';
 import toast from 'react-hot-toast';
-import {blogList} from '@/db/data';
 import { TimestampToDate } from '@/utility/Utility';
+import Link from 'next/link';
+import BlogState from '@/state/blogState';
+import { useEffect } from 'react';
+import Image from 'next/image';
 
 export default function Profile() {
   
-
     // ['Flutter', 'Mobile Development', 'Dart','React','Next.js','Node.js', 'ExpressJs', 'Laravel', 'PHP', 'DotNet','MongoDB','TypeScript']
 
 
-  const handleSave = () => {
+    const {blogList, fetchBlogs} = BlogState();
+    useEffect(() => {
+      (async () => {
+        await fetchBlogs();
+      })()
+    }, []);
+
+
+
+  const handleEdit = () => {
     toast.success("Edit item");
   };
   const handleDelete = async (id) => {
     if(await DeleteAlert()){
-      toast.error(`Delete item successfully ${id}`);
+      toast.success(`Delete item successfully ${id}`);
     }else{
       toast.error("Delete item failed");
     }
@@ -26,40 +36,47 @@ export default function Profile() {
   return (
     <div className="w-full mx-auto">
       <div className=''>
-        <h1 className='text-2xl font-bold py-4'>Skills</h1>
+        <div className='flex justify-between items-center'>
+          <h1 className='text-2xl font-bold py-4'>Blogs</h1>
+          <Link href="/dashboard/blogs/new" className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded">Add New Blog</Link>
+        </div>
         <table>
           <thead>
             <tr>
               <th>Id</th>
               <th>Title</th>
+              <th>Slug</th>
               <th>Image</th>
               <th>Category</th>
-              <th>Views</th>
-              <th>Comments</th>
+              <th>Tag</th>
               <th>Author</th>
+              <th>Status</th>
+              <th>Views</th>
+              <th>Likes</th>
               <th>Created At</th>
               <th>Updated At</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {blogList.map((blog) => (
-            <tr key={blog.id}>
-              <td>{blog.id}</td>
+            {blogList.map((blog, i) => (
+            <tr key={blog._id}>
+              <td>{i + 1}</td>
               <td>{blog.title}</td>
-              <td>
-                <img className='w-20 aspect-16/9' src={blog.img} alt={blog.title}/>
-              </td>
-              <td>{blog.category}</td>
-              <td>{blog.views}</td>
-              <td>{blog.comments}</td>
-              <td>{blog.author}</td>
+              <td>{blog.slug || ""}</td>
+              <td><Image className='w-20 aspect-16/9' src={blog.image} alt={blog.title} width={200} height={160}/></td>
+              <td>{blog.category.map((category) => category.name).join(", ") || ""}</td>
+              <td>{blog.tag.map((tag) => tag.name).join(", ") || ""}</td>
+              <td>{blog.author[0].userName || ""}</td>
+              <td>{blog.status || ""}</td>
+              <td>{blog.views || 0}</td>
+              <td>{blog.likes || 0}</td>
               <td>{TimestampToDate(blog.createdAt)}</td>
               <td>{TimestampToDate(blog.updatedAt)}</td>              
               <td>
               <div className='flex gap-2 bg-gray-300 p-1 opacity-50 hover:opacity-100 rounded '>
-                <i className='bi bi-pencil text-green-700 hover:cursor-pointer'></i>
-                <i className='bi bi-trash text-red-600 hover:cursor-pointer' ></i>
+                <i onClick={() => handleEdit(blog._id)} className='bi bi-pencil text-green-700 hover:cursor-pointer'></i>
+                <i onClick={() => handleDelete(blog._id)} className='bi bi-trash text-red-600 hover:cursor-pointer' ></i>
               </div>
               </td>
             </tr>
