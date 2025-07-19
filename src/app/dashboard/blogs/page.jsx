@@ -13,7 +13,7 @@ export default function Profile() {
     // ['Flutter', 'Mobile Development', 'Dart','React','Next.js','Node.js', 'ExpressJs', 'Laravel', 'PHP', 'DotNet','MongoDB','TypeScript']
 
 
-    const {blogList, fetchBlogs} = BlogState();
+    const {blogList, fetchBlogs, deleteBlog} = BlogState();
     useEffect(() => {
       (async () => {
         await fetchBlogs();
@@ -25,9 +25,16 @@ export default function Profile() {
   const handleEdit = () => {
     toast.success("Edit item");
   };
+
   const handleDelete = async (id) => {
     if(await DeleteAlert()){
-      toast.success(`Delete item successfully ${id}`);
+      const result = await deleteBlog(id);
+      if(result){
+        toast.success("Delete item successfully");
+      }else{
+        toast.error("Delete item failed");
+      }
+      await fetchBlogs();
     }else{
       toast.error("Delete item failed");
     }

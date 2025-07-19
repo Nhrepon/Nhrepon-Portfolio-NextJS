@@ -54,7 +54,10 @@ const BlogState = create((set) => ({
             body: JSON.stringify({ id }),
         });
         const data = await response.json();
-        return data;
+        if(data.status === "success"){
+            return true;
+        }
+        return false;
     },
 
 

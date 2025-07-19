@@ -3,12 +3,15 @@ import BlogModel from "@/models/blogModel";
 import BlogMetaModel from "@/models/blogMetaModel";
 import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
+import { skip } from "node:test";
 
 await connect();
 
 export async function GET(request: NextRequest){
     try {
         const id = request.nextUrl.searchParams.get("id");
+        const skip = Number(request.nextUrl.searchParams.get("skip")) || 0;
+        const limit = Number(request.nextUrl.searchParams.get("limit")) || 10;
 
         if(id){
             if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -46,8 +49,43 @@ export async function GET(request: NextRequest){
                         foreignField: "_id",
                         as: "author"
                     }
-                }
+                },
+                {
+                    $lookup: {
+                        from: "blogmetas",
+                        localField: "_id",
+                        foreignField: "blogId",
+                        as: "meta"
+                    }
+                },
+                {
+                    $lookup: {
+                        from: "comments",
+                        let: { blogId: "$_id" },
+                        pipeline: [
+                            { $match: { $expr: { $eq: ["$blogId", "$$blogId"] } } },
+                            { $count: "count" }
+                        ],
+                        as: "commentsCount"
+                    }
+                },
+                {
+                    $unwind: {
+                        path: "$commentsCount",
+                        preserveNullAndEmptyArrays: true
+                    }
+                },
+                {
+                    $addFields: {
+                        commentsCount: { $ifNull: ["$commentsCount.count", 0] }
+                    }
+                },
+                {
+                    $unwind: "$meta"
+                },
+                
             ]);
+            const view = await BlogMetaModel.findOneAndUpdate({blogId: id}, { $inc: { views: 1 } });
             return NextResponse.json({status:"success", message:"Blog details fetched successfully", data:blog});
         }
 
@@ -75,10 +113,52 @@ export async function GET(request: NextRequest){
                     foreignField: "_id",
                     as: "author"
                 }
-            }
+            },
+            {
+                $lookup: {
+                    from: "blogmetas",
+                    localField: "_id",
+                    foreignField: "blogId",
+                    as: "meta"
+                }
+            },
+            {
+                $lookup: {
+                    from: "comments",
+                    let: { blogId: "$_id" },
+                    pipeline: [
+                        { $match: { $expr: { $eq: ["$blogId", "$$blogId"] } } },
+                        { $count: "count" }
+                    ],
+                    as: "commentsCount"
+                }
+            },
+            {
+                $unwind: {
+                    path: "$commentsCount",
+                    preserveNullAndEmptyArrays: true
+                }
+            },
+            {
+                $addFields: {
+                    commentsCount: { $ifNull: ["$commentsCount.count", 0] }
+                }
+            },
+            {
+                $unwind: "$meta"
+            },
+            {
+                $sort: { updatedAt: -1 }
+            },
+            {
+                $facet: {
+                    totalCount: [ { $count: "totalCount" } ],
+                    data: [ { $skip: skip }, { $limit: limit } ]
+                }
+            },
         ]);
 
-        return NextResponse.json({status:"success", message:"Blogs fetched successfully", data:blogs});
+        return NextResponse.json({status:"success", message:"Blogs fetched successfully", total:blogs[0].totalCount[0].totalCount || 0, loaded:blogs[0].data.length, data:blogs[0].data});
     }catch (e:any) {
         NextResponse.json(
             {error: e.message},
@@ -110,10 +190,12 @@ try {
 
 
 
+
 export async function DELETE(request: NextRequest){
     const {id} = await request.json();
     const blog = await BlogModel.findByIdAndDelete(id);
-    return NextResponse.json({status:"success", message:"Blog deleted successfully", data:blog});
+    const blogMeta = await BlogMetaModel.findOneAndDelete({blogId: id});
+    return NextResponse.json({status:"success", message:"Blog deleted successfully", data:blog, meta:blogMeta});
 }
 
 export async function PUT(request: NextRequest){
@@ -121,4 +203,3 @@ export async function PUT(request: NextRequest){
     const blog = await BlogModel.findByIdAndUpdate(_id, {title, content, slug, categoryId, tagId, image, authorId, views, likes, comments, status}); 
     return NextResponse.json({status:"success", message:"Blog updated successfully", data:blog});
 }
-

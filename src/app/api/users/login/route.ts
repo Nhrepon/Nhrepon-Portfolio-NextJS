@@ -6,6 +6,10 @@ import { encodeToken } from '@/utility/jwtTokenHelper';
 
 
 
+
+
+
+
 await connect();
 
 export async function POST(request: NextRequest) {
@@ -24,7 +28,7 @@ export async function POST(request: NextRequest) {
         const token = encodeToken(user._id, user.email,  user.userName);
         const userData = { _id:user._id, userName:user.userName, email:user.email, userRole:user.userRole, isVerified:user.isVerified };
         const response = NextResponse.json({status:"success", message:"Logedin success", success:true, data:userData});
-        response.headers.set("userId", user._id);
+        response.cookies.set("userId", user._id);
         response.cookies.set("token", token, {httpOnly:true});
         return response;
 
