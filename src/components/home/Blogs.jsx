@@ -3,8 +3,16 @@ import {containerVariants, itemVariants} from "@/utility/motion";
 import {motion} from "framer-motion";
 import Link from "next/link";
 import BlogCard from "@/components/blog/BlogCard";
-import { blogList } from "@/db/data";
+import BlogState from "@/state/blogState";
+import { useEffect } from "react";
+
 const Blogs = () => {
+    const {blogList, fetchBlogs} = BlogState();
+    useEffect(() => {
+        (async () => {
+            await fetchBlogs();
+        })()
+    }, []);
 
     return (
         <div className="bg-gray-200 dark:bg-gray-900 w-full py-16 px-4 sm:px-6 lg:px-8 ">
