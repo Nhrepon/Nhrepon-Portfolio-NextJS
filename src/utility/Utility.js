@@ -16,12 +16,12 @@ export function unauthorized(code){
     }
 }
 
-export function setEmail(email){
-    sessionStorage.setItem("email",email)
+export function setSessionStorateItem(name, value){
+    sessionStorage.setItem(name,value)
 }
 
-export function getEmail(){
-    return sessionStorage.getItem("email")
+export function getSessionStorateItem(name){
+    return sessionStorage.getItem(name)
 }
 
 export  function TimestampToDate(timestamp) {

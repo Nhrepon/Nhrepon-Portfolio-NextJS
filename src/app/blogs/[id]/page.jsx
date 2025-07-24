@@ -11,25 +11,26 @@ import { useEffect } from "react";
 import CommentState from "@/state/commentState";
 
 
+
 const SingleBlog = () => {
-    const { id } = useParams();
+    const { slug } = useParams();
     const {blogList, getBlogById, blog, fetchBlogs} = BlogState();
     const {addComment, getCommentListByBlogId, commentList} = CommentState();
-    console.log("Blog id: "+id);
-    console.log(blogList);
+    // console.log("Blog id: "+id);
+    // console.log(blogList);
     const siteUrl = "http://localhost:3000";
 
     useEffect(() => {
         (async () => {
-           await getBlogById(id);
+           await getBlogById(slug);
            await fetchBlogs();
-           await getCommentListByBlogId(id);
+           await getCommentListByBlogId(blog.id);
         })()
       }, []);
-      
+      console.log("Slug: "+ slug);
 
     const [comment, setComment] = useState({
-        blogId: id,
+        blogId: blog.id,
         name: "",
         email: "",
         comment: "",
@@ -46,13 +47,13 @@ const SingleBlog = () => {
         if(data.status === "success"){
             toast.success(data.message);
             setComment({
-                blogId: id,
+                blogId: blog.id,
                 name: "",
                 email: "",
                 comment: "",
             });
-            await getBlogById(id);
-            await getCommentListByBlogId(id);
+            await getBlogById(slug);
+            await getCommentListByBlogId(blog.id);
         }else{
             toast.error(data.error);
         }
@@ -66,12 +67,12 @@ const SingleBlog = () => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ blogId: id }),
+            body: JSON.stringify({ blogId: blog.id }),
         });
         const data = await response.json();
         if(data.status === "success"){
             toast.success("Blog liked");
-            await getBlogById(id);
+            await getBlogById(slug);
         }else{
             toast.error(data.message);
         }
@@ -91,8 +92,11 @@ const SingleBlog = () => {
                             src={blog.image}
                             alt={blog.title}
                             title={blog.title}
-                            width={600}
-                            height={400}
+                            width={1200}
+                            height={800}
+                            loading="lazy"
+                            placeholder="blur"
+                            blurDataURL={blog.image}
                         />
                         }
                         <div className="w-full my-4">
@@ -106,7 +110,7 @@ const SingleBlog = () => {
                             </div>
                         </div>
 
-                        <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-md" dangerouslySetInnerHTML={{ __html: blog.content }} />
+                        <div className="single-blog-body bg-gray-50 dark:bg-gray-800 p-4 rounded-md" dangerouslySetInnerHTML={{ __html: blog.content }} />
                     </div>
 
                     <div className="blog-post-meta w-full flex gap-4 justify-start mt-3">
@@ -139,9 +143,9 @@ const SingleBlog = () => {
                         <div className="flex gap-6">
                             {blogList.slice(0, 3).map((blog, i) => {
                                 return (
-                                    <div key={i} className="flex w-1/3">
-                                        <Link href={`/blogs/${blog._id}`} className="w-full">
-                                            <Image className="w-full aspect-16/9 rounded shadow-sm" src={blog.image} alt={blog.title} title={blog.title} width={120} height={80} />
+                                    <div key={i+"-latest-blog"} className="flex w-1/3">
+                                        <Link href={`/blogs/${blog.slug}`} className="w-full">
+                                            <Image className="w-full aspect-16/9 rounded shadow-sm" src={blog.image} alt={blog.title} title={blog.title} width={120} height={80} loading="lazy" placeholder="blur" blurDataURL={blog.image} />
                                             <h3 className="text-sm my-2">{truncateText(blog.title, 50)}</h3>
                                         </Link>
                                     </div>
