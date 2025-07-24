@@ -7,9 +7,9 @@ await connect();
 export async function POST(request: NextRequest) {
     try {
         const { blogId } = await request.json();
-        const userId = request.cookies.get("userId")?.value;
-            
-        console.log("User ID: "+ userId);
+        //const userId = request.cookies.get("userId")?.value;
+        const userId = JSON.parse(request.cookies.get("userData")?.value || "").id;
+        
         const data = await BlogMetaModel.findOne({blogId});
         
         if(data.userId.includes(userId)){

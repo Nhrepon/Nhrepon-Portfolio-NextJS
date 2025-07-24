@@ -24,7 +24,7 @@
 }
 
 
-.single-blog .single-blog-content img{
+.single-blog .single-blog-body img{
     width: 100%;
     height: auto;
     object-fit: cover;

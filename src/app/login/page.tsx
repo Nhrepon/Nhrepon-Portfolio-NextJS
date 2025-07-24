@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { setEmail } from "@/utility/Utility";
+import { setSessionStorateItem } from "@/utility/Utility";
 import Link from 'next/link';
 
 const About = () => {
@@ -23,7 +23,7 @@ const About = () => {
     }
     const response = await axios.post('/api/users/login', { email: loginData.email, password: loginData.password });
     if (response.data.status === "success") {
-      setEmail(response.data.data.email);
+      setSessionStorateItem("email", response.data.data.email);
       toast.success("Login success");
       router.push('/dashboard');
     } else {

@@ -3,6 +3,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 
+
+
 interface User {
     _id: string;
     email: string;
@@ -28,12 +30,13 @@ interface UserSt {
     getLoginStatus: async () => {
         const res = await axios.get("/api/users/user");
         set({isLogin: res.data.status === "success" && res.data.data !== null});
-        console.log("cookies data: " + Cookies.get("token"));
+        console.log("cookies data: " + Cookies.get("token") + "\nuser data: " + Cookies.get("userData"));
     },
     logout: async () => {
         const res = await axios.post("/api/users/logout");
         set({isLogin: res.data.status === "success"});
-        Cookies.remove("token");
+        Cookies.remove("token", {httpOnly:true, expires: new Date(0)});
+        Cookies.remove("userData");
     }
 
 }));

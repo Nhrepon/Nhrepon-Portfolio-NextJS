@@ -1,18 +1,20 @@
 import Image from "next/image"
 import { TimestampToDate, truncateText } from "@/utility/Utility"
 import Link from "next/link"
-import { useEffect } from "react"
 
 const BlogCard = ({ blog }) => {
     return (
-        <div key={blog._id} className="card max-w-sm overflow-hidden rounded-md shadow-lg bg-white dark:bg-gray-800">
-            <Link href={`/blogs/${blog._id}`}>
+        <div key={blog._id+"-blog-card"} className="card max-w-sm overflow-hidden rounded-md shadow-lg bg-white dark:bg-gray-800">
+            <Link href={`/blogs/${blog.slug}`}>
                 <Image className="aspect-16/9"
                     src={blog.image}
                     alt={blog.title}
                     title={blog.title}
                     width={500}
                     height={500}
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL={blog.image}
                 />
             </Link>
             <div className="blog-card-meta pt-2 flex gap-4 items-center text-sm">
@@ -21,7 +23,7 @@ const BlogCard = ({ blog }) => {
                 <span><i className="bi bi-tag"></i>{blog.tag.map((tag) => tag.name).join(", ") || ""}</span>
             </div>
 
-            <Link href={`/blogs/${blog._id}`}>
+            <Link href={`/blogs/${blog.slug}`}>
                 <div className="card-body p-2">
                     <h2 className="text-lg text-gray-900 dark:text-white">{truncateText(blog.title, 100)}</h2>
                     {/* <p className="text-gray-600 text-sm">{truncateText(blog.content, 100)}</p> */}

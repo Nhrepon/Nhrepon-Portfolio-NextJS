@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import {containerVariants, itemVariants} from "@/utility/motion";
+import { containerVariants, itemVariants } from "@/utility/motion";
 
 const About = () => {
 
@@ -45,7 +45,7 @@ const About = () => {
       period: '2023',
       description:
         'Intensive 6-week program focusing on full-stack web development with MERN and modern technologies.',
-    },{
+    }, {
       degree: 'Mobile Application Development with Flutter',
       institution: 'Ostad ltd',
       period: '2024',
@@ -104,8 +104,9 @@ const About = () => {
                 <Image
                   src="/profile-placeholder.svg"
                   alt="Profile"
-                  fill
                   className="object-cover"
+                  width={500}
+                  height={500}
                 />
               </div>
             </motion.div>

@@ -24,12 +24,10 @@ const Blogs = () => {
                     viewport={{once: true}}
                     className="text-center mb-16"
                 >
-                    <motion.h2 variants={itemVariants}
-                               className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                    <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
                         Blogs
                     </motion.h2>
-                    <motion.p variants={itemVariants}
-                              className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    <motion.p variants={itemVariants} className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                         Here are some of my recent projects. Each one was built to solve a specific
                         problem or explore new technologies.
                     </motion.p>
@@ -37,17 +35,11 @@ const Blogs = () => {
                 
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                     {blogList.map((blog) => (
-                        <BlogCard key={blog.id} blog={blog}/>
+                        <BlogCard key={blog._id+"-blog-card"} blog={blog}/>
                     ))}
                 </div>
-                <motion.div
-                    variants={itemVariants}
-                    className="mt-12 text-center"
-                >
-                    <Link
-                        href="/blogs"
-                        className="inline-flex items-center px-6 py-2 text-base font-medium text-white bg-green-600 rounded-md hover:bg-green-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition-colors"
-                    >
+                <motion.div variants={itemVariants} className="mt-12 text-center">
+                    <Link href="/blogs" className="inline-flex items-center px-6 py-2 text-base font-medium text-white bg-green-600 rounded-md hover:bg-green-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition-colors">
                         View All Blogs
                         <i className='bi bi-arrow-right ml-2'></i>
                     </Link>
