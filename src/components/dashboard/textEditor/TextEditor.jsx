@@ -1,7 +1,20 @@
+import { useState } from "react";
 
-const TextEditor = () => {
+const TextEditor = ({onChange}) => {
+    const [content, setContent] = useState('');
+    const onChangeHandler = (e) => {
+        const value = e.target.value;
+        setContent(value);
+        onChange(value);
+    }
     return (
-        <textarea type="text" className="w-full h-96 border border-gray-300 rounded p-2" rows={10} cols={50} />
+        <textarea 
+            className="w-full h-96 border border-gray-300 rounded p-2" 
+            rows={10} 
+            cols={50} 
+            onChange={onChangeHandler} 
+            value={content}
+        />
     )
 }
 

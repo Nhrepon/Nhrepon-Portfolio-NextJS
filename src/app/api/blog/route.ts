@@ -10,7 +10,7 @@ export async function GET(request: NextRequest){
     try {
         const slug = request.nextUrl.searchParams.get("slug");
         const skip = Number(request.nextUrl.searchParams.get("skip")) || 0;
-        const limit = Number(request.nextUrl.searchParams.get("limit")) || 10;
+        const limit = Number(request.nextUrl.searchParams.get("limit")) || 12;
 
         if(slug){
             const blog = await BlogModel.aggregate([
@@ -40,7 +40,16 @@ export async function GET(request: NextRequest){
                         from: "users",
                         localField: "authorId",
                         foreignField: "_id",
-                        as: "author"
+                        as: "author",
+                        pipeline: [
+                            {
+                                $project: {
+                                    _id: 0,
+                                    userName: 1,
+                                }
+                            }
+                        ],
+                        
                     }
                 },
                 {
@@ -104,7 +113,15 @@ export async function GET(request: NextRequest){
                     from: "users",
                     localField: "authorId",
                     foreignField: "_id",
-                    as: "author"
+                    as: "author",
+                    pipeline: [
+                        {
+                            $project: {
+                                _id: 0,
+                                userName: 1,
+                            }
+                        }
+                    ],
                 }
             },
             {

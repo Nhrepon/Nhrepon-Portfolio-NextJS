@@ -2,7 +2,6 @@ import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 
 
-
 export function saveComment(comment){
     fs.writeFileSync("./src/db/commentList.js", JSON.stringify(commentList));
 }
@@ -128,3 +127,8 @@ export function isAdmin(){
 
 
 
+
+export const generateSlug = (data)=>{
+    const slug = data.trim().replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '').replace(/-+/g, '-').toLowerCase();
+    return slug;
+}

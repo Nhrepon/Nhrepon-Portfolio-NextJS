@@ -8,7 +8,7 @@ import BlogState from '@/state/blogState';
 import { useEffect } from 'react';
 import Image from 'next/image';
 
-export default function Profile() {
+export default function Blog() {
   
     // ['Flutter', 'Mobile Development', 'Dart','React','Next.js','Node.js', 'ExpressJs', 'Laravel', 'PHP', 'DotNet','MongoDB','TypeScript']
 
@@ -44,8 +44,8 @@ export default function Profile() {
     <div className="w-full mx-auto">
       <div className=''>
         <div className='flex justify-between items-center'>
-          <h1 className='text-2xl font-bold py-4'>Blogs</h1>
-          <Link href="/dashboard/blogs/new" className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded">Add New Blog</Link>
+          <h1 className='text-2xl font-bold py-4'>Blog</h1>
+          <Link href="/dashboard/blog/new" className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded">Add New Blog</Link>
         </div>
         <table>
           <thead>
