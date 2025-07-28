@@ -8,7 +8,7 @@ connect();
 export async function POST(request: NextRequest) {
     try {
         const { blogId, name, email, comment } = await request.json();
-        const userId = request.cookies.get("userId")?.value;
+        const userId = JSON.parse(request.cookies.get("userData")?.value || "").id;
         if(userId != null){
             const response = await CommentModel.create({blogId, userId, name, email, comment});
             return NextResponse.json({status:"success", message:"Comment added successfully", data:response});

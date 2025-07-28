@@ -1,29 +1,22 @@
 import { connect } from "@/db/dbConfig";
 import BlogModel from "@/models/blogModel";
 import BlogMetaModel from "@/models/blogMetaModel";
-import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
-import { skip } from "node:test";
+
 
 await connect();
 
 export async function GET(request: NextRequest){
     try {
-        const id = request.nextUrl.searchParams.get("id");
+        const slug = request.nextUrl.searchParams.get("slug");
         const skip = Number(request.nextUrl.searchParams.get("skip")) || 0;
-        const limit = Number(request.nextUrl.searchParams.get("limit")) || 10;
+        const limit = Number(request.nextUrl.searchParams.get("limit")) || 12;
 
-        if(id){
-            if (!mongoose.Types.ObjectId.isValid(id)) {
-                return NextResponse.json(
-                    { error: "Invalid blog ID format" },
-                    { status: 400 }
-                );
-            }
+        if(slug){
             const blog = await BlogModel.aggregate([
                 {
                     $match: {
-                        _id: new mongoose.Types.ObjectId(id)
+                        slug: slug
                     }
                 },
                 {
@@ -47,7 +40,16 @@ export async function GET(request: NextRequest){
                         from: "users",
                         localField: "authorId",
                         foreignField: "_id",
-                        as: "author"
+                        as: "author",
+                        pipeline: [
+                            {
+                                $project: {
+                                    _id: 0,
+                                    userName: 1,
+                                }
+                            }
+                        ],
+                        
                     }
                 },
                 {
@@ -85,8 +87,8 @@ export async function GET(request: NextRequest){
                 },
                 
             ]);
-            const view = await BlogMetaModel.findOneAndUpdate({blogId: id}, { $inc: { views: 1 } });
-            return NextResponse.json({status:"success", message:"Blog details fetched successfully", data:blog});
+            const view = await BlogMetaModel.findOneAndUpdate({blogId: blog[0]._id}, { $inc: { views: 1 } });
+            return NextResponse.json({status:"success", message:"Blog details fetched successfully", data:blog[0], meta:view[0]});
         }
 
         const blogs = await BlogModel.aggregate([
@@ -111,7 +113,15 @@ export async function GET(request: NextRequest){
                     from: "users",
                     localField: "authorId",
                     foreignField: "_id",
-                    as: "author"
+                    as: "author",
+                    pipeline: [
+                        {
+                            $project: {
+                                _id: 0,
+                                userName: 1,
+                            }
+                        }
+                    ],
                 }
             },
             {

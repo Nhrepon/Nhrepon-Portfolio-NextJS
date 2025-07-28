@@ -8,14 +8,13 @@ const BlogState = create((set) => ({
         if(data.status === "success"){
             set({ blogList: data.data });
         }
-        console.log(data.data);
     },
     blog:{},
-    getBlogById: async (id: string) => {
-        const response = await fetch(`/api/blog?id=${id}`);
+    getBlogById: async (slug: string) => {
+        const response = await fetch(`/api/blog?slug=${slug}`);
         const data = await response.json();
-        set({ blog: data.data[0] });
-        return data.data[0];
+        set({ blog: data.data });
+        return data.data;
     },
 
 
