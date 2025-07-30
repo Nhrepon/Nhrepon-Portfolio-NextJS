@@ -34,6 +34,7 @@ const SideNav = () => {
         {name: 'Blog', href: '/dashboard/blog', icon: "bi bi-card-text"},
         {name: 'Categories', href: '/dashboard/category', icon: "bi bi-border-all"},
         {name: 'Tags', href: '/dashboard/tag', icon: "bi bi-tag"},
+        {name: 'Media', href: '/dashboard/media', icon: "bi bi-image"},
         {name: 'Messages', href: '/dashboard/messages', icon: "bi bi-chat-dots"},
         {name: 'Profile', href: '/dashboard/profile', icon: "bi bi-person"},
         {name: 'Settings', href: '/dashboard/settings', icon: "bi bi-gear-fill"},

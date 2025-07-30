@@ -7,8 +7,10 @@ import Link from 'next/link';
 import BlogState from '@/state/blogState';
 import { useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function Blog() {
+  const router = useRouter();
   
     // ['Flutter', 'Mobile Development', 'Dart','React','Next.js','Node.js', 'ExpressJs', 'Laravel', 'PHP', 'DotNet','MongoDB','TypeScript']
 
@@ -24,6 +26,7 @@ export default function Blog() {
 
   const handleEdit = () => {
     toast.success("Edit item");
+    router.push("/dashboard/blog/update");
   };
 
   const handleDelete = async (id) => {
