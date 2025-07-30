@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import {containerVariants, itemVariants} from "@/utility/motion";
+import { containerVariants, itemVariants } from "@/utility/motion";
 
 const About = () => {
 
@@ -16,9 +16,9 @@ const About = () => {
         'Led the development of multiple web applications using React, Node.js, and MongoDB. Implemented CI/CD pipelines and improved application performance by 40%.',
     },
     {
-      role: 'Frontend Developer',
-      company: 'Digital Innovations',
-      period: '2019 - 2021',
+      role: 'Mobile Application Developer',
+      company: 'Neurosoft ltd',
+      period: '2025 - Present',
       description:
         'Developed responsive web applications and collaborated with UX designers to create intuitive user interfaces. Reduced page load time by 30%.',
     },
@@ -33,18 +33,24 @@ const About = () => {
 
   const education = [
     {
-      degree: 'Bachelor of Science in Computer Science',
-      institution: 'University of Technology',
-      period: '2014 - 2018',
+      degree: 'Bachelor of Business Sturdies',
+      institution: 'National University',
+      period: '2013 - 2015',
       description:
         'Specialized in Software Engineering and Web Development. Graduated with honors.',
     },
     {
-      degree: 'Web Development Bootcamp',
-      institution: 'Code Academy',
-      period: '2018',
+      degree: 'Full Stack Web Development with MERN',
+      institution: 'Ostad ltd',
+      period: '2023',
       description:
-        'Intensive 12-week program focusing on full-stack web development and modern technologies.',
+        'Intensive 6-week program focusing on full-stack web development with MERN and modern technologies.',
+    }, {
+      degree: 'Mobile Application Development with Flutter',
+      institution: 'Ostad ltd',
+      period: '2024',
+      description:
+        'Intensive 6-week program focusing on Mobile Application Development and modern technologies.',
     },
   ];
 
@@ -98,8 +104,9 @@ const About = () => {
                 <Image
                   src="/profile-placeholder.svg"
                   alt="Profile"
-                  fill
                   className="object-cover"
+                  width={500}
+                  height={500}
                 />
               </div>
             </motion.div>
@@ -200,12 +207,12 @@ const About = () => {
               </h2>
               <div className="flex flex-wrap gap-4">
                 {[
-                  'Open Source',
+                  'Programming',
                   'Photography',
                   'Hiking',
                   'Reading',
                   'Gaming',
-                  'Cooking',
+                  'Walking',
                 ].map((interest) => (
                   <span
                     key={interest}

@@ -31,7 +31,10 @@ const SideNav = () => {
         {name: 'Dashboard', href: '/dashboard', icon: "bi bi-house"},
         {name: 'Skills', href: '/dashboard/skills', icon: "bi bi-gear"},
         {name: 'Projects', href: '/dashboard/projects', icon: "bi bi-briefcase"},
-        {name: 'Blogs', href: '/dashboard/blogs', icon: "bi bi-card-text"},
+        {name: 'Blog', href: '/dashboard/blog', icon: "bi bi-card-text"},
+        {name: 'Categories', href: '/dashboard/category', icon: "bi bi-border-all"},
+        {name: 'Tags', href: '/dashboard/tag', icon: "bi bi-tag"},
+        {name: 'Media', href: '/dashboard/media', icon: "bi bi-image"},
         {name: 'Messages', href: '/dashboard/messages', icon: "bi bi-chat-dots"},
         {name: 'Profile', href: '/dashboard/profile', icon: "bi bi-person"},
         {name: 'Settings', href: '/dashboard/settings', icon: "bi bi-gear-fill"},
@@ -52,7 +55,7 @@ const SideNav = () => {
                         <Link
                             key={item.name}
                             href={item.href}
-                            className={`flex items-center px-4 py-2 text-md font-medium rounded-md ${
+                            className={`flex items-center px-2 py-2 text-sm font-medium rounded-md ${
                                 isActive
                                     ? 'bg-gray-200 font-bold text-gray-900 transition-all duration-200 ease-in-out'
                                     : 'text-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-200 ease-in-out'

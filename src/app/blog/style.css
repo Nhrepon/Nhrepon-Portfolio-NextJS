@@ -1,0 +1,33 @@
+.single-blog{}
+.single-blog .single-blog-content p{
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+.single-blog ul, .single-blog ol{
+    /* list-style-type: "> "; */
+    list-style-position: inside;
+    font-size: 16px;
+    margin: 24px 0px;
+    padding: 8px;
+    border: 1px solid #e9e9e9;
+    border-radius: 5px;
+}
+
+.single-blog ul li, .single-blog ol li{
+    padding: 8px 0px;
+}
+
+.single-blog ul li::marker, .single-blog ol li::marker{
+    content:"✅ ";
+    color: green;
+}
+
+
+.single-blog .single-blog-body img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+    margin: 24px 0px;
+}

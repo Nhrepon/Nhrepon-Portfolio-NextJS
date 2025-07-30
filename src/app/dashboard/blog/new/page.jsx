@@ -1,0 +1,146 @@
+'use client';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+import TextEditor from '@/components/dashboard/textEditor/TextEditor';
+import { useState, useEffect } from 'react';
+import CategoryState from '@/state/categoryState';
+import TagState from '@/state/tagState';
+import { generateSlug } from '@/utility/Utility';
+import FileUpload from '@/components/dashboard/media/FileUpload';
+import PickFile from '@/components/dashboard/media/pickFile';
+
+export default function NewBlog() {
+  const router = useRouter();
+  const { categoryList, getCategories } = CategoryState();
+  const { tagList, getTags } = TagState();
+
+
+    useEffect(() => {
+    (async()=>{
+      await getCategories();
+    await getTags();
+    })()
+  }, []);
+
+
+
+  const [blogData, setBlogData] = useState({
+    title: '',
+    content: '',
+    slug: '',
+    category: [],
+    tag: [],
+    image: '/nextjs.svg',
+  });
+console.log(blogData);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (blogData.title && blogData.content && blogData.slug && blogData.category && blogData.tag && blogData.image) {
+      setBlogData({
+        title: '',
+        content: '',
+        slug: '',
+        category: [],
+        tag: [],
+        image: '/next.svg',
+      });
+      router.push('/dashboard/blog');
+      toast.success("Blog added successfully");
+      console.log(blogData);
+    } else {
+      toast.error("Please fill all the fields");
+    }
+  }
+
+
+
+  const addTags = (e) =>{
+    
+    if (e.key === "Enter" && e.target.value != "" || e.key === "," && e.target.value != "") {
+      e.preventDefault();
+      setBlogData({ ...blogData, tag: [ ...blogData.tag, e.target.value]})
+      e.target.value = "";
+    }else if (e.key === "Enter" && e.target.value === "" || e.key === "," && e.target.value === "") {
+      e.preventDefault();
+      toast.error("Please input tag value.");
+    }
+
+    console.log(blogData.tag);
+  }
+  const removeTags = (e)=>{
+    setBlogData({ ...blogData, tag: blogData.tag.filter((item, i)=> i !== e)})
+  }
+
+
+
+  return (
+    <div className="w-full mx-auto">
+      <div className=''>
+        <h1 className='text-2xl font-bold py-4'>New blog</h1>
+        <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div className="flex gap-4">
+            <div className="flex flex-col gap-4 w-2/3">
+              <input type="text" name="title" placeholder="Title" className="w-full p-2 border border-gray-300 rounded" value={blogData.title} onChange={(e) => setBlogData({ ...blogData, title: e.target.value })} />
+              <TextEditor onChange={(value)=>setBlogData({ ...blogData, content: value })}/>
+            </div>
+            <div className="flex flex-col gap-4 w-1/3">
+              <input type="text" name="slug" placeholder="Slug" className="w-full p-2 border border-gray-300 rounded" value={blogData.slug} onChange={(e) => setBlogData({ ...blogData, slug: e.target.value})} />
+              <div className="flex items-center gap-2 text-xs text-gray-500"><i onClick={() => setBlogData({ ...blogData, slug: generateSlug(blogData.title) })} className="bi bi-check-square cursor-pointer text-xl"></i>Use title as slug</div>
+
+              <div>
+                <label>Categories:</label>
+                {/* <input type="text" name="category" placeholder="Category" className="w-full p-2 border border-gray-300 rounded" value={blogData.category} onChange={(e) => setBlogData({ ...blogData, category: e.target.value })} /> */}
+              <select multiple name="category" id="category" className="w-full p-2 border border-gray-300 rounded" value={blogData.category} onChange={(e) => setBlogData({ ...blogData, category: Array.from(e.target.selectedOptions, option => option.value) })}>
+                <option value="">Select Category</option>
+                {
+                  categoryList.map((category, i) => {
+                    return (
+                      <option key={i} value={category._id}>{category.name}</option>
+                    )
+                  })
+                }
+              </select>
+              </div>
+
+              <div className="my-2">
+                      <label>Tags:</label>
+                      <div className="flex flex-wrap gap-2">
+                        {
+                            blogData.tag != null && blogData.tag.map((item, i)=>(
+                                <div key={i} className="bg-gray-200 py-1 px-2 rounded flex items-center gap-2">{item}<i onClick={()=>removeTags(i)} className="bi bi-x-circle-fill text-red-600"></i></div>
+                              ))
+                          }
+                          
+                      <input list="tags" type="text" name="tag" placeholder="Tag" className="w-full p-2 border border-gray-300 rounded my-2" onKeyDown={addTags} />
+                      <datalist id="tags">
+                        {
+                          tagList.map((tag, i) => {
+                            return (
+                              <option key={i} value={tag.name}> {tag.name}</option>
+                            )
+                          })
+                        }
+                      </datalist>
+                      </div>
+                    </div>
+
+              {/* <input type="file" name="image" placeholder="Image" className="w-full h-30 p-2 border border-gray-300 rounded flex items-center hover:cursor-pointer" value={blogData.image} onChange={handleFile} accept='image/*'/>
+               */}
+
+              <div className="flex flex-col gap-4">
+                <label>Image URL:</label>
+                <input type="text" name="image" placeholder="Image URL" className="w-full p-2 border border-gray-300 rounded" value={blogData.image} onChange={(e) => setBlogData({ ...blogData, image: e.target.value })} />
+                <PickFile/> 
+                <FileUpload/>
+              </div>
+
+              
+            </div>
+          </div>
+          <button type="submit" className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded hover:cursor-pointer w-2xs">Save</button>
+        </form>
+      </div>
+    </div>
+  );
+} 
