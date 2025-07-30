@@ -12,7 +12,7 @@ export default function Category() {
     (async () => {
       await getCategories();
     })()
-  }, [categoryList]);
+  }, []);
 
   const handleEdit = (id:string) => {
     toast.success("Edit item");
