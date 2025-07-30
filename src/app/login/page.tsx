@@ -47,12 +47,12 @@ const About = () => {
               } text-white`} 
               disabled={!loginData.email || !loginData.password} type="submit">Send</button>
           <div>
-            <span className='text-sm'>Don't have an account? <Link className='text-green-600 hover:text-green-700' href={"/signup"}>Create account</Link></span>
+            <span className='text-sm'>Don&apos;t have an account? <Link className='text-green-600 hover:text-green-700' href={"/signup"}>Create account</Link></span>
           </div>
         </form>
       </div>
     </div>
   );
-}
+};
 
 export default About; 

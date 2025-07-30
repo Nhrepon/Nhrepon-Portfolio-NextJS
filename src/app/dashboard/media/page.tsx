@@ -13,7 +13,7 @@ export default function MediaPage() {
 
     useEffect(() => {
         (async () => await getFileList(skip, limit))();
-    }, []);
+    }, [fileList]);
 
 
     const deleteFileHandler = async (id: string) => {

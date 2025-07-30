@@ -28,9 +28,10 @@ interface UserSt {
     error: null,
     setUser: (user: User | null) => set({ user }),
     getLoginStatus: async () => {
-        const res = await axios.get("/api/users/user");
+        const resData = await fetch("/api/users/user");
+        const res = await resData.json();
         set({isLogin: res.data.status === "success" && res.data.data !== null});
-        console.log("cookies data: " + Cookies.get("token") + "\nuser data: " + Cookies.get("userData"));
+        //console.log("cookies data: " + Cookies.get("token") + "\nuser data: " + Cookies.get("userData"));
     },
     logout: async () => {
         const res = await axios.post("/api/users/logout");

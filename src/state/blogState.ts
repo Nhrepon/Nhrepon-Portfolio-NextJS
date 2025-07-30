@@ -3,7 +3,7 @@ import { create } from "zustand";
 const BlogState = create((set) => ({
     blogList: [],
     fetchBlogs: async () => {
-        const response = await fetch('/api/blog');
+        const response = await fetch('/api/blog', {cache:"no-cache"});
         const data = await response.json();
         if(data.status === "success"){
             set({ blogList: data.data });

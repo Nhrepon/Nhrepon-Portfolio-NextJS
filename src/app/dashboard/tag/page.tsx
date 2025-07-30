@@ -11,7 +11,7 @@ export default function Tags() {
       (async () => {
         await getTags();
       })()
-    }, []);
+    }, [tagList]);
   
     const handleEdit = (id:string) => {
       toast.success("Edit item");

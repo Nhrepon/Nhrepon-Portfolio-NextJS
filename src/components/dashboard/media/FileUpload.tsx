@@ -13,7 +13,7 @@ export default function FileUpload() {
     useEffect(() => {
         (async () => await getCategories()
     )();
-    }, []);
+    }, [categoryList]);
 
     const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
