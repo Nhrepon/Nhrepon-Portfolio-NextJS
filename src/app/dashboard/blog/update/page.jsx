@@ -7,13 +7,11 @@ import CategoryState from '@/state/categoryState';
 import TagState from '@/state/tagState';
 import { generateSlug } from '@/utility/Utility';
 import FileUpload from '@/components/dashboard/media/FileUpload';
-import PickFile from '@/components/dashboard/media/pickFile';
 
 export default function NewBlog() {
   const router = useRouter();
   const { categoryList, getCategories } = CategoryState();
   const { tagList, getTags } = TagState();
-
 
     useEffect(() => {
     (async()=>{
@@ -31,8 +29,7 @@ export default function NewBlog() {
     category: [],
     tag: [],
     image: '/nextjs.svg',
-  });
-console.log(blogData);
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -77,7 +74,7 @@ console.log(blogData);
   return (
     <div className="w-full mx-auto">
       <div className=''>
-        <h1 className='text-2xl font-bold py-4'>New blog</h1>
+        <h1 className='text-2xl font-bold py-4'>Update blog</h1>
         <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex gap-4">
             <div className="flex flex-col gap-4 w-2/3">
@@ -103,7 +100,7 @@ console.log(blogData);
               </select>
               </div>
 
-              <div className="my-2">
+              <div className="my-3">
                       <label>Tags:</label>
                       <div className="flex flex-wrap gap-2">
                         {
@@ -128,10 +125,9 @@ console.log(blogData);
               {/* <input type="file" name="image" placeholder="Image" className="w-full h-30 p-2 border border-gray-300 rounded flex items-center hover:cursor-pointer" value={blogData.image} onChange={handleFile} accept='image/*'/>
                */}
 
-              <div className="flex flex-col gap-4">
+              <div>
                 <label>Image URL:</label>
-                <input type="text" name="image" placeholder="Image URL" className="w-full p-2 border border-gray-300 rounded" value={blogData.image} onChange={(e) => setBlogData({ ...blogData, image: e.target.value })} />
-                <PickFile/> 
+                <input type="text" name="image" placeholder="Image URL" className="w-full p-2 border border-gray-300 rounded my-2" value={blogData.image} onChange={(e) => setBlogData({ ...blogData, image: e.target.value })} />
                 <FileUpload/>
               </div>
 

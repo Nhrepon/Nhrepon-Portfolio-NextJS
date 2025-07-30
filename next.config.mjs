@@ -18,7 +18,7 @@ const nextConfig = {
                 '!node_modules/.pnpm/**/*'
             ]
         }
-    }
+    }, 
 };
 
 export default nextConfig;
