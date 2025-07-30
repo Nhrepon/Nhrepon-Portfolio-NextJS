@@ -1,5 +1,6 @@
 import { create } from "zustand";
 
+
 const BlogState = create((set) => ({
     blogList: [],
     fetchBlogs: async () => {
