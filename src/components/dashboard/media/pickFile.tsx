@@ -9,7 +9,7 @@ function PickFile() {
 
     useEffect(() => {
         (async () => await getFileList((pageNo - 1) * limit, limit))();
-    }, [pageNo, fileList, limit]);
+    }, []);
 
     return (
         <div>
