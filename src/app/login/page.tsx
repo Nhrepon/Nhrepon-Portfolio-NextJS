@@ -1,5 +1,4 @@
 'use client';
-
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -10,11 +9,11 @@ const About = () => {
   const router = useRouter();
   const [loginData, setLoginData] = useState({
     email: "",
-    password: "",
+    password: ""
   });
 
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (!loginData.email || !loginData.password) {
       toast.error("Please fill in all fields");
@@ -44,6 +43,6 @@ const About = () => {
         </form>
     </div>
   );
-};
+}
 
 export default About; 
