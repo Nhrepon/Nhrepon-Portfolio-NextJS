@@ -16,11 +16,13 @@ const BlogSchema = new mongoose.Schema({
     content: {type: String, required: true},
     slug: {type: String, required: true, unique: true},
     categoryId: {type: [mongoose.Schema.Types.ObjectId], required: true, ref: "categories"},
-    tagId: {type: [mongoose.Schema.Types.ObjectId], ref: "tags"},
+    tagId: {type: [mongoose.Schema.Types.ObjectId], required: true, ref: "tags"},
     image: {type: String, required: true},
     authorId: {type: mongoose.Schema.Types.ObjectId, required: true, ref: "users"},
     status: {type: String, enum: ['Published', 'Draft'], default: 'Draft'},
 }, {timestamps: true, versionKey: false});
+
+BlogSchema.index({ slug: 1, title: 1 }, { unique: true });
 
 const BlogModel = mongoose.models?.blogs || mongoose.model<IBlog>("blogs", BlogSchema);
 

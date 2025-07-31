@@ -24,12 +24,12 @@ export default function Blog() {
 
 
 
-  const handleEdit = () => {
+  const handleEdit = (slug: string) => {
     toast.success("Edit item");
-    router.push("/dashboard/blog/update");
+    router.push(`/dashboard/blog/update/${slug}`);
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: string) => {
     if(await DeleteAlert()){
       const result = await deleteBlog(id);
       if(result){
@@ -75,8 +75,8 @@ export default function Blog() {
               <td>{blog.title}</td>
               <td>{blog.slug || ""}</td>
               <td><Image className='w-20 aspect-16/9' src={blog.image} alt={blog.title} width={200} height={160}/></td>
-              <td>{blog.category.map((category) => category.name).join(", ") || ""}</td>
-              <td>{blog.tag.map((tag) => tag.name).join(", ") || ""}</td>
+              <td>{blog.category.map((category: any) => category.name).join(", ") || ""}</td>
+              <td>{blog.tag.map((tag: any) => tag.name).join(", ") || ""}</td>
               <td>{blog.author[0].userName || ""}</td>
               <td>{blog.status || ""}</td>
               <td>{blog.views || 0}</td>
@@ -85,7 +85,7 @@ export default function Blog() {
               <td>{TimestampToDate(blog.updatedAt)}</td>              
               <td>
               <div className='flex gap-2 bg-gray-300 p-1 opacity-50 hover:opacity-100 rounded '>
-                <i onClick={() => handleEdit(blog._id)} className='bi bi-pencil text-green-700 hover:cursor-pointer'></i>
+                <i onClick={() => handleEdit(blog.slug)} className='bi bi-pencil text-green-700 hover:cursor-pointer'></i>
                 <i onClick={() => handleDelete(blog._id)} className='bi bi-trash text-red-600 hover:cursor-pointer' ></i>
               </div>
               </td>

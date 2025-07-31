@@ -17,10 +17,10 @@ const BlogCard = ({ blog }) => {
                     blurDataURL={blog.image}
                 />
             </Link>
-            <div className="blog-card-meta pt-2 flex gap-4 items-center text-sm">
-                <span><i className="bi bi-person"></i>{blog.author[0].userName}</span>
-                <span><i className="bi bi-tag"></i>{blog.category.map((category) => category.name).join(", ") || ""}</span>
-                <span><i className="bi bi-tag"></i>{blog.tag.map((tag) => tag.name).join(", ") || ""}</span>
+            <div className="blog-card-meta pt-2 pe-2 flex gap-2 justify-between items-center text-xs">
+                <span className="flex gap-1 items-center"><i className="bi bi-person"></i>{blog.author[0].userName}</span>
+                <span className="flex gap-1 items-center"><i className="bi bi-calendar"></i>{truncateText(blog.category.map((category) => category.name).join(", "), 15)}</span>
+                <span className="flex gap-1 items-center"><i className="bi bi-tag"></i>{truncateText(blog.tag.map((tag) => tag.name).join(", "), 15)}</span>
             </div>
 
             <Link href={`/blog/${blog.slug}`}>

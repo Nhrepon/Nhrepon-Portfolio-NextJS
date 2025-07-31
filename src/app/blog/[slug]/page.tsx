@@ -25,7 +25,7 @@ const SingleBlog = () => {
         const fetchBlogAndComments = async () => {
             try {
                 await fetchBlogs();
-                await getBlogById(slug);
+                await getBlogById(slug as string);
 
                 if (blog && blog._id) {
                     await getCommentListByBlogId(blog._id);
@@ -51,7 +51,7 @@ const SingleBlog = () => {
         email: "",
         comment: "",
     });
-    const handleComment = async (e) => {
+    const handleComment = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!comment.name || !comment.email || !comment.comment) {
             toast.error("Please fill in all fields");
@@ -67,7 +67,7 @@ const SingleBlog = () => {
                 email: "",
                 comment: "",
             });
-            await getBlogById(slug);
+            await getBlogById(slug as string);
             await getCommentListByBlogId(blog._id);
         } else {
             toast.error(data.error);
@@ -87,7 +87,7 @@ const SingleBlog = () => {
         const data = await response.json();
         if (data.status === "success") {
             toast.success("Blog liked");
-            await getBlogById(slug);
+            await getBlogById(slug as string);
         } else {
             toast.error(data.message);
         }
@@ -102,14 +102,14 @@ const SingleBlog = () => {
             <section className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
                 <div className="single-blog max-w-[600px] mx-auto flex flex-col gap-6 items-center">
                     <div className="single-blog-content flex flex-col gap-6 items-center">
-                        <div className="w-full">{currentPath.split("/").slice(1).join(" > ")}</div>
+                        <div className="w-full">{"Home" + " > " + currentPath.split("/").slice(1).join(" > ")}</div>
                         {blog.image &&
                             <Image className="aspect-16/9 rounded-md shadow-lg"
                                 src={blog.image}
                                 alt={blog.title}
                                 title={blog.title}
                                 width={1200}
-                                height={800}
+                                height={1200}
                                 loading="lazy"
                                 placeholder="blur"
                                 blurDataURL={blog.image}
@@ -119,8 +119,8 @@ const SingleBlog = () => {
                             <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{blog.title}</h1>
                             <div className="blog-post-meta w-full flex gap-4 justify-start mt-3">
                                 <span className="text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 text-xs shadow-sm p-2 rounded-md">{blog.author?.[0]?.userName ?? 'Unknown'}</span>
-                                <span className="text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 text-xs shadow-sm p-2 rounded-md">{(blog.category || []).map((category) => category.name).join(", ")}</span>
-                                <span className="text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 text-xs shadow-sm p-2 rounded-md">{(blog.tag || []).map((tag) => tag.name).join(", ")}</span>
+                                <span className="text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 text-xs shadow-sm p-2 rounded-md">{(blog.category || []).map((category: any) => category.name).join(", ")}</span>
+                                <span className="text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 text-xs shadow-sm p-2 rounded-md">{(blog.tag || []).map((tag: any) => tag.name).join(", ")}</span>
                                 <span className="text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 text-xs shadow-sm p-2 rounded-md">{TimestampToDate(blog.updatedAt)}</span>
                                 <span className="text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 text-xs shadow-sm p-2 rounded-md">{blog.commentsCount} Comments</span>
                             </div>
@@ -164,7 +164,7 @@ const SingleBlog = () => {
                             <div className="flex flex-col gap-4">
                                 <input value={comment.name} onChange={(e) => setComment({ ...comment, name: e.target.value })} id="name" name="name" className="p-2 rounded-md border border-gray-300" type="text" placeholder="Name" />
                                 <input value={comment.email} onChange={(e) => setComment({ ...comment, email: e.target.value })} id="email" name="email" className="p-2 rounded-md border border-gray-300" type="email" placeholder="Email" />
-                                <textarea value={comment.comment} onChange={(e) => setComment({ ...comment, comment: e.target.value })} id="comment" name="comment" className="p-2 rounded-md border border-gray-300" cols="30" rows="5"></textarea>
+                                <textarea value={comment.comment} onChange={(e) => setComment({ ...comment, comment: e.target.value })} id="comment" name="comment" className="p-2 rounded-md border border-gray-300" cols={30} rows={5}></textarea>
                                 <button className="bg-green-500 text-white p-2 rounded-md hover:cursor-pointer hover:bg-green-600" type="submit">Post Comment</button>
                             </div>
                         </form>

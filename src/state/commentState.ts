@@ -1,6 +1,14 @@
 import { create } from "zustand";
 
-const CommentState = create((set) => ({
+
+interface CommentState {
+    commentList: any[];
+    totalComment: number;
+    getCommentListByBlogId: (blogId: string) => Promise<void>;
+    addComment: (comment: any) => Promise<any>;
+}
+
+const CommentState = create<CommentState>((set) => ({
     commentList: [],
     totalComment: 0,
     getCommentListByBlogId: async (blogId: string) => {
