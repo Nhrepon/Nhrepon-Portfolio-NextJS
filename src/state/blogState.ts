@@ -1,7 +1,16 @@
 import { create } from "zustand";
 
+interface BlogStateInterface {
+    blogList: any[];
+    fetchBlogs: () => Promise<void>;
+    blog: any;
+    getBlogById: (slug: string) => Promise<any>;
+    createBlog: (blog: any) => Promise<any>;
+    updateBlog: (blog: any) => Promise<any>;
+    deleteBlog: (id: string) => Promise<boolean>;
+}
 
-const BlogState = create((set) => ({
+const BlogState = create<BlogStateInterface>((set) => ({
     blogList: [],
     fetchBlogs: async () => {
         const response = await fetch('/api/blog', {cache:"no-cache"});
@@ -15,10 +24,8 @@ const BlogState = create((set) => ({
         const response = await fetch(`/api/blog?slug=${slug}`);
         const data = await response.json();
         set({ blog: data.data });
-        return data.data;
+        return data;
     },
-
-
 
     createBlog: async (blog: any) => {
         const response = await fetch('/api/blog', {
@@ -29,9 +36,7 @@ const BlogState = create((set) => ({
             body: JSON.stringify(blog),
         });
         const data = await response.json();
-        if(data.status === "success"){
-            set({ blogList: data.data });
-        }
+        return data;
     },
 
     updateBlog: async (blog: any) => {

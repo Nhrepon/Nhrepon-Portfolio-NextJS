@@ -1,5 +1,4 @@
 import {create} from "zustand/react";
-import axios from "axios";
 import Cookies from "js-cookie";
 
 
@@ -34,8 +33,11 @@ interface UserSt {
         //console.log("cookies data: " + Cookies.get("token") + "\nuser data: " + Cookies.get("userData"));
     },
     logout: async () => {
-        const res = await axios.post("/api/users/logout");
-        set({isLogin: res.data.status === "success"});
+        const res = await fetch("/api/users/logout", {
+            method: 'POST',
+        });
+        const data = await res.json();
+        set({isLogin: data.status === "success"});
         Cookies.remove("token", {httpOnly:true, expires: new Date(0)});
         Cookies.remove("userData");
     }

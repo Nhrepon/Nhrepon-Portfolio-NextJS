@@ -6,70 +6,87 @@ import { useState, useEffect } from 'react';
 import CategoryState from '@/state/categoryState';
 import TagState from '@/state/tagState';
 import { generateSlug } from '@/utility/Utility';
-import FileUpload from '@/components/dashboard/media/FileUpload';
 import PickFile from '@/components/dashboard/media/pickFile';
+import Image from 'next/image';
+import BlogState from '@/state/blogState';
 
 export default function NewBlog() {
   const router = useRouter();
   const { categoryList, getCategories } = CategoryState();
   const { tagList, getTags } = TagState();
+  const { createBlog } = BlogState();
 
 
     useEffect(() => {
     (async()=>{
       await getCategories();
-    await getTags();
+      await getTags();
     })()
   }, []);
 
 
 
-  const [blogData, setBlogData] = useState({
-    title: '',
-    content: '',
-    slug: '',
-    category: [],
-    tag: [],
-    image: '/nextjs.svg',
-  });
-console.log(blogData);
+  interface BlogData {
+    title: string;
+    content: string;
+    slug: string;
+    categoryId: string[];
+    tagId: string[];
+    image: string;
+  }
 
-  const handleSubmit = (e) => {
+  const [blogData, setBlogData] = useState<BlogData>({
+    title: '',
+    content: '<p>start writing</p>',
+    slug: '',
+    categoryId: [],
+    tagId: [],
+    image: '',
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (blogData.title && blogData.content && blogData.slug && blogData.category && blogData.tag && blogData.image) {
-      setBlogData({
-        title: '',
-        content: '',
-        slug: '',
-        category: [],
-        tag: [],
-        image: '/next.svg',
-      });
-      router.push('/dashboard/blog');
-      toast.success("Blog added successfully");
-      console.log(blogData);
+    console.log("blogData: " + JSON.stringify(blogData));
+    if (blogData.title && blogData.content && blogData.slug && blogData.categoryId && blogData.tagId && blogData.image) {
+      const data = await createBlog(blogData);
+      if(data.status === "success"){
+        toast.success("Blog added successfully");
+        setBlogData({
+          title: '',
+          content: '<p>start writing</p>',
+          slug: '',
+          categoryId: [],
+          tagId: [],
+          image: '',
+        });
+        router.push('/dashboard/blog');
+      }else{
+        toast.error("Failed to add blog");
+      }
     } else {
       toast.error("Please fill all the fields");
     }
   }
 
+  console.log("blogData: " + JSON.stringify(blogData));
 
 
-  const addTags = (e) =>{
+  const addTags = (e: React.KeyboardEvent<HTMLInputElement>) =>{
     
-    if (e.key === "Enter" && e.target.value != "" || e.key === "," && e.target.value != "") {
+    if (e.key === "Enter" && e.currentTarget.value != "" || e.key === "," && e.currentTarget.value != "") {
       e.preventDefault();
-      setBlogData({ ...blogData, tag: [ ...blogData.tag, e.target.value]})
-      e.target.value = "";
-    }else if (e.key === "Enter" && e.target.value === "" || e.key === "," && e.target.value === "") {
+      const tagId = tagList.find((tag) => tag.name === e.currentTarget.value);
+      setBlogData({ ...blogData, tagId: [ ...blogData.tagId, tagId._id]})
+      e.currentTarget.value = "";
+    }else if (e.key === "Enter" && e.currentTarget.value === "" || e.key === "," && e.currentTarget.value === "") {
       e.preventDefault();
       toast.error("Please input tag value.");
     }
 
-    console.log(blogData.tag);
+    console.log(blogData.tagId);
   }
-  const removeTags = (e)=>{
-    setBlogData({ ...blogData, tag: blogData.tag.filter((item, i)=> i !== e)})
+  const removeTags = (e: number)=>{
+    setBlogData({ ...blogData, tagId: blogData.tagId.filter((item, i)=> i !== e)})
   }
 
 
@@ -77,12 +94,13 @@ console.log(blogData);
   return (
     <div className="w-full mx-auto">
       <div className=''>
-        <h1 className='text-2xl font-bold py-4'>New blog</h1>
+        <h1 className='text-2xl font-bold py-2'>New blog</h1>
+        <hr className='mb-4 border-gray-300'/>
         <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex gap-4">
             <div className="flex flex-col gap-4 w-2/3">
               <input type="text" name="title" placeholder="Title" className="w-full p-2 border border-gray-300 rounded" value={blogData.title} onChange={(e) => setBlogData({ ...blogData, title: e.target.value })} />
-              <TextEditor onChange={(value)=>setBlogData({ ...blogData, content: value })}/>
+              <TextEditor value={blogData.content} onChange={(value)=>setBlogData({ ...blogData, content: value })}/>
             </div>
             <div className="flex flex-col gap-4 w-1/3">
               <input type="text" name="slug" placeholder="Slug" className="w-full p-2 border border-gray-300 rounded" value={blogData.slug} onChange={(e) => setBlogData({ ...blogData, slug: e.target.value})} />
@@ -91,7 +109,7 @@ console.log(blogData);
               <div>
                 <label>Categories:</label>
                 {/* <input type="text" name="category" placeholder="Category" className="w-full p-2 border border-gray-300 rounded" value={blogData.category} onChange={(e) => setBlogData({ ...blogData, category: e.target.value })} /> */}
-              <select multiple name="category" id="category" className="w-full p-2 border border-gray-300 rounded" value={blogData.category} onChange={(e) => setBlogData({ ...blogData, category: Array.from(e.target.selectedOptions, option => option.value) })}>
+              <select multiple name="category" id="category" className="w-full p-2 border border-gray-300 rounded" value={blogData.categoryId} onChange={(e) => setBlogData({ ...blogData, categoryId: Array.from(e.target.selectedOptions, option => option.value) })}>
                 <option value="">Select Category</option>
                 {
                   categoryList.map((category, i) => {
@@ -107,17 +125,17 @@ console.log(blogData);
                       <label>Tags:</label>
                       <div className="flex flex-wrap gap-2">
                         {
-                            blogData.tag != null && blogData.tag.map((item, i)=>(
-                                <div key={i} className="bg-gray-200 py-1 px-2 rounded flex items-center gap-2">{item}<i onClick={()=>removeTags(i)} className="bi bi-x-circle-fill text-red-600"></i></div>
+                            blogData.tagId != null && blogData.tagId.map((item, i)=>(
+                                <div key={i} className="bg-gray-200 py-1 px-2 rounded flex items-center gap-2">{tagList.find((tag) => tag._id === item)?.name}<i onClick={()=>removeTags(i)} className="bi bi-x-circle-fill text-red-600"></i></div>
                               ))
                           }
                           
-                      <input list="tags" type="text" name="tag" placeholder="Tag" className="w-full p-2 border border-gray-300 rounded my-2" onKeyDown={addTags} />
+                      <input list="tags" type="text" name="tag" placeholder="Tag" className="w-full p-2 border border-gray-300 rounded my-2" onKeyDown={addTags}/>
                       <datalist id="tags">
                         {
                           tagList.map((tag, i) => {
                             return (
-                              <option key={i} value={tag.name}> {tag.name}</option>
+                              <option key={i} value={tag.name}/>
                             )
                           })
                         }
@@ -131,8 +149,10 @@ console.log(blogData);
               <div className="flex flex-col gap-4">
                 <label>Image URL:</label>
                 <input type="text" name="image" placeholder="Image URL" className="w-full p-2 border border-gray-300 rounded" value={blogData.image} onChange={(e) => setBlogData({ ...blogData, image: e.target.value })} />
-                <PickFile/> 
-                <FileUpload/>
+                {
+                  blogData.image && <Image src={blogData.image} alt={blogData.title} title={blogData.title} width={1200} height={1200} className="w-full h-auto object-contain rounded-lg" loading="lazy" />
+                }
+                <PickFile onFileSelect={(file) => setBlogData({ ...blogData, image: file })}/> 
               </div>
 
               
