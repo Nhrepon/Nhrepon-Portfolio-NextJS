@@ -1,6 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
+import AddSkill from "@/components/dashboard/skill/addSkill";
+import Modal from "@/components/Modal";
+import PickFile from "@/components/dashboard/media/pickFile";
 
 
 const projects = [
@@ -35,19 +38,38 @@ const projects = [
 
 export default function Projects() {
 
+  const [project, setProject] = useState({
+    name: 'E-commerce Platform',
+    description: 'A full-featured e-commerce platform with payment integration',
+    status: 'In Progress',
+    image: '/project-placeholder.svg',
+    team: ['NHRepon', 'John Doe', 'Jane Smith'],
+  });
+
 
   return (
     <div className="max-w-7xl mx-auto">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Projects</h1>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-          New Project
-        </button>
+
+        <Modal text="Add Project" heading="Add New Project">
+          <div className={"flex flex-col gap-4 w-full p-4"}>
+            <input type="text" name="name" id="name" placeholder="Project Name" className="border-2 border-gray-300 rounded-md p-2"/>
+            <input type="text" name="description" id="description" placeholder="Description" className="border-2 border-gray-300 rounded-md p-2"/>
+            <div className={"flex flex justify-between items-center gap-2 w-full"}>
+              <input type="text" name="image" id="image" placeholder="Image URL"
+                     className="border-2 border-gray-300 rounded-md p-2"
+                     value={project.image} onChange={(e)=>{setProject({...project, image: e.target.value})}}/>
+              <PickFile onFileSelect={(value)=>{setProject({...project, image: value})}} />
+            </div>
+            <button className="bg-green-500 hover:bg-green-600 w-fit mx-auto text-white cursor-pointer py-2 px-4 rounded">Submit</button>
+          </div>
+        </Modal>
       </div>
 
       <div className="grid grid-cols-1 gap-6">
         {projects.map((project) => (
-          <div
+            <div
             key={project.id}
             className="bg-white shadow rounded-lg overflow-hidden"
           >

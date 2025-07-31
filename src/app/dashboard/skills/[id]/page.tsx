@@ -1,13 +1,13 @@
 'use client';
-import React, {useEffect, useState} from "react";
+import React, {ReactNode, useEffect, useState} from "react";
 import toast from "react-hot-toast";
-import {useRouter} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import skillState from "@/state/skillState";
 
-export default function UpdateSkills({params}) {
+export default function UpdateSkills() {
     const {fetchSkills} = skillState();
     const router = useRouter();
-    const {id} = React.use(params);
+    const {id} = useParams();
 
     useEffect(() => {
         (async ()=>{
@@ -30,15 +30,15 @@ export default function UpdateSkills({params}) {
     });
 
     console.log(formData);
-    const onChangeFormData = (e) => {
-        const {name, value} = e.target;
+    const onChangeFormData = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let {name, value} = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
     };
 
-    const updateItem = async (e) => {
+    const updateItem = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const response = await fetch('/api/skills', {
             method: 'PUT',

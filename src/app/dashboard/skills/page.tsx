@@ -24,12 +24,12 @@ export default function Skills() {
 
   // ['Flutter', 'Mobile Development', 'Dart','React','Next.js','Node.js', 'ExpressJs', 'Laravel', 'PHP', 'DotNet','MongoDB','TypeScript']
 
-  const editItem = (id) => {
+  const editItem = (id: string) => {
     toast.success("Edit item" + id);
     router.push(`/dashboard/skills/${id}`);
 
   };
-  const deleteItem = async (id) => {
+  const deleteItem = async (id: string) => {
     if (await DeleteAlert()) {
       try {
         const response = await fetch(`/api/skills`, {
