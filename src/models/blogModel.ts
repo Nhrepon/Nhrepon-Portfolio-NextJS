@@ -11,7 +11,7 @@ interface IBlog {
     status: string;
 }
 
-const BlogSchema = new mongoose.Schema({
+const BlogSchema = new mongoose.Schema<IBlog>({
     title: {type: String, required: true, unique: true},
     content: {type: String, required: true},
     slug: {type: String, required: true, unique: true},
@@ -24,6 +24,6 @@ const BlogSchema = new mongoose.Schema({
 
 BlogSchema.index({ slug: 1, title: 1 }, { unique: true });
 
-const BlogModel = mongoose.models?.blogs || mongoose.model<IBlog>("blogs", BlogSchema);
+const BlogModel = mongoose.models?.blogs || mongoose.model("blogs", BlogSchema);
 
 export default BlogModel;

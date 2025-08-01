@@ -29,7 +29,8 @@ interface UserSt {
     getLoginStatus: async () => {
         const resData = await fetch("/api/users/user");
         const res = await resData.json();
-        set({isLogin: res.data.status === "success" && res.data.data !== null});
+        console.log("\n\nUser login status: "+ JSON.stringify(res)+"\n\n");
+        set({isLogin: res.status === "success" && res.data.data !== null});
         //console.log("cookies data: " + Cookies.get("token") + "\nuser data: " + Cookies.get("userData"));
     },
     logout: async () => {

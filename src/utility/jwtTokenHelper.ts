@@ -12,7 +12,7 @@ export const encodeToken=(userId: any, email: string, name: string)=>{
 
 export const decodeToken=(token: string)=>{
     try {
-        console.log("Decode token: "+Jwt.verify(token, jwtKey));
+        console.log("Decode token: "+ JSON.stringify(Jwt.verify(token, jwtKey)));
         return Jwt.verify(token, jwtKey);
         
     } catch (error) {

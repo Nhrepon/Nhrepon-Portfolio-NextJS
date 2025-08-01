@@ -2,9 +2,13 @@
 
 import Link from "next/link";
 
-export default function ShareButtons({ blog }) {
+type Props = {
+    blog: any
+
+}
+export default function ShareButtons({ blog }: Props) {
     // const siteUrl = window.location.href;
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.href;
+    const siteUrl = window.location.href;
     console.log(siteUrl);
 
     return (
@@ -19,7 +23,7 @@ export default function ShareButtons({ blog }) {
             </Link>
             <Link 
                 className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg shadow-md hover:bg-gray-50 hover:text-blue-500" 
-                href={`https://twitter.com/intent/tweet?text=${blog.title}&url=${siteUrl}`} 
+                href={`https://twitter.com/intent/tweet?text=${blog.title}&url=${siteUrl}`}
                 target="_blank" 
                 rel="noopener noreferrer"
             >

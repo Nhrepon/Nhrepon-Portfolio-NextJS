@@ -9,6 +9,8 @@ function PickFile({onFileSelect}: {onFileSelect: (file: string) => void}) {
 
     const handleFileSelect = (file: string) => {
         onFileSelect(file);
+        document.getElementById('pickFile')?.classList.toggle('hidden');
+        document.getElementById('pickFile')?.classList.toggle('flex');
     }
 
     useEffect(() => {

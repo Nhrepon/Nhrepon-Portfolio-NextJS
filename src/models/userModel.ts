@@ -4,6 +4,8 @@ interface IUser {
     _id: mongoose.Types.ObjectId;
     userName: string;
     email: string;
+    bio?: string;
+    image?: string;
     password: string;
     userRole: 'admin' | 'user';
     isVerified: boolean;
@@ -17,6 +19,8 @@ const userSchema = new mongoose.Schema<IUser>({
     userName: {type: String, required: [true, "Provide a user name."], unique: true},
     email: {type: String, unique: true, required: [true, "Email required"]},
     password: {type: String, required: [true, "Password required"]},
+    bio: {type: String, default: "", nullable: true},
+    image: {type: String, default: "", nullable: true},
     userRole: {type: String, enum: ['admin', 'user'], default: "user"},
     isVerified: {type: Boolean, default: false},
     otp: {type: String, default: "0"},
@@ -28,4 +32,3 @@ const UserModel = mongoose.models?.users || mongoose.model<IUser>("users", userS
 
 
 export default UserModel;
-//module.exports = UserModel;

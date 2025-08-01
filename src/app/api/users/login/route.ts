@@ -8,15 +8,29 @@ import { encodeToken } from '@/utility/jwtTokenHelper';
 
 await connect();
 
+interface loginReqBody {
+    email: string;
+    password: string
+}
+interface userDataInterface{
+    _id: string;
+    userName: string;
+    email: string;
+    password: string;
+    bio?: string;
+    image?: string;
+    userRole: string;
+    isVerified: boolean
+}
 export async function POST(request: NextRequest) {
     try {
-        const reqBody = await request.json();
+        const reqBody = await request.json() as loginReqBody;
         const {email, password} = reqBody;
-        const user = await UserModel.findOne({ email: email });
+        const user = await UserModel.findOne({ email: email }) as userDataInterface;
         if(!user){
             return NextResponse.json({status: "failed", statusCode: 400, message: "User not found"});
         }
-        const validPassword = await bcryptJs.compare(password, user.password);
+        const validPassword = await bcryptJs.compare(password, user.password );
         if(!validPassword){
             return NextResponse.json({status: "failed", statusCode: 400, message: "Password didn't matched"});
         }

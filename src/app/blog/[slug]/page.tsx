@@ -19,38 +19,40 @@ const SingleBlog = () => {
     const currentPath = usePathname();
     const { blogList, getBlogById, blog, fetchBlogs } = BlogState();
     const { addComment, getCommentListByBlogId, commentList } = CommentState();
-
-
-    useEffect(() => {
-        const fetchBlogAndComments = async () => {
-            try {
-                await fetchBlogs();
-                await getBlogById(slug as string);
-
-                if (blog && blog._id) {
-                    await getCommentListByBlogId(blog._id);
-                }
-            } catch (error) {
-                toast.error('Failed to load blog or comments');
-            }
-        };
-
-        fetchBlogAndComments();
-    }, [slug]);
-
-
-    console.log("Slug: " + slug);
-    console.log("Blog id: " + blog._id);
-    // console.log(blog);
-
-
-
     const [comment, setComment] = useState({
-        blogId: blog && blog._id ? blog._id : '',
+        blogId: "",
         name: "",
         email: "",
         comment: "",
     });
+
+    useEffect(() => {
+        (
+            async () => {
+                await fetchBlogs();
+                await getBlogById(slug as string);
+            }
+        )()
+    }, [slug]);
+
+    useEffect(() => {
+        (async ()=>{
+            if (blog && blog._id) {
+                await getCommentListByBlogId(blog._id);
+                setComment((prev) => ({
+                    ...prev,
+                    blogId: blog._id,
+                }));
+            }
+        })()
+    }, [blog._id]);
+
+    console.log("Slug: " + slug);
+    console.log("Blog id: " + blog._id);
+    console.log(blog);
+    console.log(comment);
+
+
     const handleComment = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!comment.name || !comment.email || !comment.comment) {

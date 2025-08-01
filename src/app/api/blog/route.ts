@@ -243,8 +243,7 @@ export async function GET(request: NextRequest){
         return NextResponse.json({status:"success", message:"Blogs fetched successfully", total:blogs[0].totalCount[0].totalCount || 0, loaded:blogs[0].data.length, data:blogs[0].data});
     }catch (e:any) {
         NextResponse.json(
-            {error: e.message},
-            {status: 500}
+            {status:"error", message:"Blogs fetched failed", error: e.message},
         );
     }
 }

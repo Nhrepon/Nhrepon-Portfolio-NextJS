@@ -4,7 +4,7 @@ import bcryptJs from 'bcryptjs';
 import {sendEmail} from '@/utility/mailHelper';
 import { connect } from '@/db/dbConfig';
 
-connect();
+await connect();
 
 export async function POST(request: NextRequest) {
     try {
@@ -46,6 +46,8 @@ export async function POST(request: NextRequest) {
             userName,
             email,
             password: hashPassword,
+            bio: "",
+            image: "",
             otp: "0",
             otpExpire: new Date()
         });
