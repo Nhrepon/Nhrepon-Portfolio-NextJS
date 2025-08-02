@@ -2,14 +2,20 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useState } from 'react';
-import {projects} from '@/db/data';
+import { useState, useEffect } from 'react';
+import ProjectState from '@/state/projectState';
 
 
 
 const Projects = () => {
-  
-  const [activeFilter, setActiveFilter] = useState('all');
+
+  const {projectList, fetchProject} = ProjectState();
+
+  useEffect(() => {
+    (async () => {
+      await fetchProject(0, 10);
+    })()
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -32,18 +38,6 @@ const Projects = () => {
     },
   };
 
-
-
-  const filters = [
-    { id: 'all', name: 'All Projects' },
-    { id: 'web', name: 'Web Development' },
-    { id: 'mobile', name: 'Mobile Apps' },
-    { id: 'ai', name: 'AI/ML' },
-  ];
-
-  const filteredProjects = activeFilter === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === activeFilter);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 py-20">
@@ -70,27 +64,27 @@ const Projects = () => {
         </motion.div>
 
         {/* Filters */}
-        <motion.div
+        {/* <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="flex flex-wrap justify-center gap-4 mb-12"
         >
-          {filters.map((filter) => (
+          {projectList.map((project) => (
             <motion.button
-              key={filter.id}
+              key={project.id}
               variants={itemVariants}
-              onClick={() => setActiveFilter(filter.id)}
+              onClick={() => setActiveFilter(project.id)}
               className={`px-6 py-2 rounded-full text-sm font-medium transition-colors hover:cursor-pointer ${
-                activeFilter === filter.id
+                activeFilter === project.id
                   ? 'bg-green-600 text-white'
                   : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
               }`}
             >
-              {filter.name}
+              {project.name}
             </motion.button>
           ))}
-        </motion.div>
+        </motion.div> */}
 
         {/* Projects Grid */}
         <motion.div
@@ -99,9 +93,9 @@ const Projects = () => {
           animate="visible"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {filteredProjects.map((project) => (
+          {projectList.map((project) => (
             <motion.div
-              key={project.id}
+              key={project._id}
               variants={itemVariants}
               className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
             >
@@ -111,28 +105,27 @@ const Projects = () => {
                   alt={project.title}
                   fill
                   className="object-cover"
+                  // width={1200}
+                  // height={1200}
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                <h3 className="text-md font-semibold text-gray-900 dark:text-white mb-2">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm"
-                    >
-                      {tag}
+                  {project.skill.map((skill: any, i: number) => (
+                    <span key={i} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm">
+                      {skill.title}
                     </span>
                   ))}
                 </div>
                 <div className="flex gap-4">
                   <a
-                    href={project.link}
+                    href={project.liveLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-600 dark:text-blue-400 hover:underline"
@@ -140,7 +133,7 @@ const Projects = () => {
                     Live Demo
                   </a>
                   <a
-                    href={project.github}
+                    href={project.projectLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-600 dark:text-gray-400 hover:underline"

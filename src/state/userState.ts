@@ -11,26 +11,26 @@ interface User {
     // Add other user properties as needed
 }
 
-interface UserSt {
+interface UserInterface {
     isLogin: boolean;
-    user: User | null;
-    isLoading: boolean;
-    error: string | null;
+    user: User | {};
     getLoginStatus: () => Promise<void>;
     logout: () => Promise<void>;
-    setUser: (user: User | null) => void;
+
 }
- const userState = create<UserSt>((set) => ({
+ const userState = create<UserInterface>((set) => ({
     isLogin:false,
-    user: null,
-    isLoading: false,
-    error: null,
-    setUser: (user: User | null) => set({ user }),
+    user: {},
     getLoginStatus: async () => {
         const resData = await fetch("/api/users/user");
         const res = await resData.json();
         console.log("\n\nUser login status: "+ JSON.stringify(res)+"\n\n");
-        set({isLogin: res.status === "success" && res.data.data !== null});
+
+
+        if(res.status === "success" && res.data !== null){
+        set({isLogin: res.status === "success" && res.data !== null});
+        set({user: res.data});
+        }
         //console.log("cookies data: " + Cookies.get("token") + "\nuser data: " + Cookies.get("userData"));
     },
     logout: async () => {

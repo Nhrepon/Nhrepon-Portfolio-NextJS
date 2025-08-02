@@ -9,7 +9,7 @@ await connect();
 export async function GET(request: NextRequest) {
     try {
         const token = request.cookies.get("token")?.value || "";
-        let {email, userId}:any = await decodeToken(token);
+        let {email}:any = await decodeToken(token);
         const user = await UserModel.findOne({email: email}).select("-password");
 
         return NextResponse.json({status: "success", data: user});

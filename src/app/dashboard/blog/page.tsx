@@ -5,9 +5,10 @@ import toast from 'react-hot-toast';
 import { TimestampToDate } from '@/utility/Utility';
 import Link from 'next/link';
 import BlogState from '@/state/blogState';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import Loading from '@/app/loading';
 
 export default function Blog() {
   const router = useRouter();
@@ -69,6 +70,7 @@ export default function Blog() {
             </tr>
           </thead>
           <tbody>
+            <Suspense fallback={<div className='flex justify-center items-center h-12 w-full text-center text-2xl'>Loading...</div>}>
             {blogList.map((blog, i) => (
             <tr key={blog._id}>
               <td>{i + 1}</td>
@@ -91,6 +93,7 @@ export default function Blog() {
               </td>
             </tr>
           ))}
+            </Suspense>
           </tbody>
         </table>
       </div>
