@@ -11,26 +11,20 @@ interface User {
     // Add other user properties as needed
 }
 
-interface UserInterface {
+interface UserSt {
     isLogin: boolean;
-    user: User | {};
+    user: User | null;
     getLoginStatus: () => Promise<void>;
     logout: () => Promise<void>;
-
 }
- const userState = create<UserInterface>((set) => ({
+ const userState = create<UserSt>((set) => ({
     isLogin:false,
-    user: {},
+    user: null,
     getLoginStatus: async () => {
         const resData = await fetch("/api/users/user");
         const res = await resData.json();
         console.log("\n\nUser login status: "+ JSON.stringify(res)+"\n\n");
-
-
-        if(res.status === "success" && res.data !== null){
         set({isLogin: res.status === "success" && res.data !== null});
-        set({user: res.data});
-        }
         //console.log("cookies data: " + Cookies.get("token") + "\nuser data: " + Cookies.get("userData"));
     },
     logout: async () => {
@@ -38,7 +32,7 @@ interface UserInterface {
             method: 'POST',
         });
         const data = await res.json();
-        set({isLogin: data.status === "success"});
+        set({isLogin: false});
         Cookies.remove("token", {httpOnly:true, expires: new Date(0)});
         Cookies.remove("userData");
     }
