@@ -25,7 +25,6 @@ export default function Skills() {
   // ['Flutter', 'Mobile Development', 'Dart','React','Next.js','Node.js', 'ExpressJs', 'Laravel', 'PHP', 'DotNet','MongoDB','TypeScript']
 
   const editItem = (id: string) => {
-    toast.success("Edit item" + id);
     router.push(`/dashboard/skills/${id}`);
 
   };
@@ -75,28 +74,28 @@ export default function Skills() {
             </tr>
             </thead>
             <tbody>
-            {skillList.map((skill) => (
+            {skillList && skillList.length > 0 ? skillList.map((skill) => (
                 <tr key={skill._id} className=''>
                   <td>{skill.title}</td>
                   <td>{skill.description}</td>
                   <td>
                     <img className='w-20 aspect-square p-4' src={skill.image} alt={skill.title}/>
                   </td>
-                  <td className="">
-                    <button type="button"
-                            className="bg-green-600 hover:bg-green-700 hover:cursor-pointer text-white p-2 rounded mr-2"
-                            onClick={(e) => editItem(skill._id)}>
-                      <i className='bi bi-pencil-square'></i>
-                    </button>
-                    <button type="button"
-                            className="bg-red-500 hover:bg-red-600 hover:cursor-pointer text-white p-2 rounded"
-                            onClick={(e) => deleteItem(skill._id)}>
-                      <i className='bi bi-trash'></i>
-                    </button>
+                  <td>
+                    <div className="flex gap-2 justify-end">
+                      <div onClick={(e) => editItem(skill._id)}
+                           className="bg-green-600 hover:bg-green-700 cursor-pointer text-white p-2 rounded">
+                        <i className="bi bi-pencil"></i>
+                      </div>
+                      <div onClick={(e) => deleteItem(skill._id)}
+                           className="bg-red-600 hover:bg-red-700 cursor-pointer text-white p-2 rounded">
+                        <i className="bi bi-trash"></i>
+                      </div>
+                    </div>
                   </td>
                 </tr>
 
-            ))}
+            )):(<tr><td className={"text-center text-xl"} colSpan={4}>No data found</td></tr>)}
             </tbody>
           </table>
         </div>

@@ -44,7 +44,7 @@ const SideNav = () => {
     return (
         <div className="flex flex-col h-full bg-green-700 text-white">
             <div className="flex items-center justify-center h-16 border-b">
-                <Link href={'/'} className="text-xl font-bold">NHRepon</Link>
+                <Link href={'/'} className="text-xl text-semibold">NHRepon</Link>
             </div>
 
             {/* Navigation */}

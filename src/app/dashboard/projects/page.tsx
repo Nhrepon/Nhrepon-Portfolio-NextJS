@@ -34,21 +34,20 @@ export default function Projects() {
   }
 
   return (
-    <div className="w-full mx-auto">
-      <div className="flex justify-between items-center mb-6">
+    <div className="w-full mx-auto overflow-x-auto">
+      <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-900">Projects</h1>
         <Link href={"/dashboard/projects/new"} className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded">
           Add New Project
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 gap-6">
-        <table>
-          <thead>
+      <div className="flex flex-col">
+        <table className="w-full table-auto divide-y divide-gray-400 overflow-x-auto">
+          <thead className="text-sm">
             <tr>
               <th>Name</th>
               <th>Slug</th>
-              <th>Description</th>
               <th>Image</th>
               <th>Technologies</th>
               <th>Categories</th>
@@ -61,14 +60,13 @@ export default function Projects() {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-400 bg-white text-xs">
+          <tbody className=" text-xs">
 
             {
-              projectList.length > 0 ? projectList.map((project) => (
+              projectList && projectList.length > 0 ? projectList.map((project) => (
                 <tr key={project._id}>
                   <td>{truncateText(project.title, 20)}</td>
                   <td>{truncateText(project.slug, 20)}</td>
-                  <td>{truncateText(project.description, 20)}</td>
                   <td><Image src={project.image} alt={project.title} width={1200} height={1200} className="w-32 aspect-16/9" /></td>
                   <td>{project.technology.map((tech: { name: string }) => tech.name).join(", ")}</td>
                   <td>{project.category.map((cat: { name: string }) => cat.name).join(", ")}</td>
@@ -86,7 +84,7 @@ export default function Projects() {
                   </td>
                 </tr>
               ))
-              : <tr><td colSpan={12} className="text-center">No projects found</td></tr>
+              : <tr><td colSpan={12} className="p-8 text-center text-xl w-full">No projects found</td></tr>
             }
           </tbody>
         </table>

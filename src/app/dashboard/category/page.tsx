@@ -5,9 +5,13 @@ import CategoryState from '@/state/categoryState';
 import Image from 'next/image';
 import { toast } from 'react-hot-toast';
 import { DeleteAlert } from '@/utility/Utility';
+import Link from "next/link";
+import {router} from "next/client";
+import {useRouter} from "next/navigation";
 
 export default function Category() {
   const { categoryList, getCategories, deleteCategory } = CategoryState();
+  const router = useRouter();
   useEffect(() => {
     (async () => {
       await getCategories();
@@ -15,7 +19,7 @@ export default function Category() {
   }, []);
 
   const handleEdit = (id:string) => {
-    toast.success("Edit item");
+    router.push(`/dashboard/category/update/${id}`);
   };
 
   const handleDelete = async (id:string) => {
@@ -33,43 +37,53 @@ export default function Category() {
   }
 
   return (
-    <div>
-        <h2>Category</h2>
+      <div>
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-gray-900">Categories</h1>
+          <Link href={"/dashboard/category/new"}
+                className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded">
+            Add New Category
+          </Link>
+        </div>
+
         <div>
           <table>
             <thead>
-              <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Slug</th>
-                <th>Description</th>
-                <th>Image</th>
-                <th>Actions</th>
-              </tr>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Slug</th>
+              <th>Description</th>
+              <th>Image</th>
+              <th>Actions</th>
+            </tr>
             </thead>
             <tbody>
-              {categoryList.map((category:any, index:number) => (
+            {categoryList && categoryList.length > 0 ? categoryList.map((category: any, index: number) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{category.name}</td>
                   <td>{category.slug}</td>
                   <td>{category.description}</td>
-                  <td><Image src={category.image} alt={category.name} width={100} height={100} className='w-20 aspect-16/9' /></td>
+                  <td><Image src={category.image} alt={category.name} width={100} height={100}
+                             className='w-20 aspect-16/9'/></td>
                   <td>
-                  <div className='flex gap-2 rounded justify-end'>
-                    <span onClick={() => handleEdit(category._id)} className='text-green-700 cursor-pointer p-2 bg-gray-300 hover:bg-gray-400 rounded'>
-                    <i className='bi bi-pencil'></i>
-                    </span>
-                    <span onClick={() => handleDelete(category._id)} className='text-red-600 cursor-pointer p-2 bg-gray-300 hover:bg-gray-400 rounded'>
-                    <i className='bi bi-trash'></i>
-                    </span>
-                  </div>
+                    <div className="flex gap-2 justify-end">
+                      <div onClick={() => handleEdit(category._id)}
+                           className="bg-green-600 hover:bg-green-700 cursor-pointer text-white p-2 rounded">
+                        <i className="bi bi-pencil"></i>
+                      </div>
+                      <div onClick={() => handleDelete(category._id)}
+                           className="bg-red-600 hover:bg-red-700 cursor-pointer text-white p-2 rounded">
+                        <i className="bi bi-trash"></i>
+                      </div>
+                    </div>
                   </td>
                 </tr>
-              ))}
+            )): <tr><td className={"text-center text-xl"} colSpan={6}>No data found</td></tr>}
             </tbody>
           </table>
         </div>
-    </div>
+      </div>
   )
 }

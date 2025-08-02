@@ -11,7 +11,7 @@ const DashboardLayout = ({children}: { children: React.ReactNode }) => {
 
             {/* Main Content */}
             <div className="pl-64">
-                <div className="p-8">
+                <div className="p-6">
                     {children}
                 </div>
             </div>
