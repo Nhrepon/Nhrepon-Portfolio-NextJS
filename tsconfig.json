@@ -35,7 +35,7 @@
 ,
     "src/app/dashboard/layout.tsx", "src/app/page.ts", "src/app/layout.tsx",
     "src/components/home/Skills.jsx"
-, "src/utility/Utility.js"  ],
+, "src/utility/Utility.ts"  ],
   "exclude": [
     "node_modules"
   ]

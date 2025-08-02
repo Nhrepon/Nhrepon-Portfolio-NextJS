@@ -1,31 +1,26 @@
-'use client';
-
-import React, {useEffect, useState} from 'react';
-import PickFile from "@/components/dashboard/media/pickFile";
-import toast from "react-hot-toast";
+"use client";
+import React, {useEffect, useState} from 'react'
+import ProjectState from '@/state/projectState';
+import {generateSlug} from '@/utility/Utility';
+import {formatDateToInput} from '@/utility/Utility';
+import PickFile from '@/components/dashboard/media/pickFile';
 import CategoryState from "@/state/categoryState";
 import TagState from "@/state/tagState";
 import skillState from "@/state/skillState";
-import {generateSlug} from "@/utility/Utility";
-import ProjectState from "@/state/projectState";
-import {useRouter} from "next/navigation";
+import { useSearchParams } from 'next/navigation';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 
-
-export default function AddNewProject() {
+export default function UpdateProject() {
+    const searchParams = useSearchParams();
+    const id = searchParams.get('id');
+    const {updateProject, fetchProjectById} = ProjectState();
     const {categoryList, getCategories} = CategoryState();
     const {tagList, getTags} = TagState();
     const {skillList, fetchSkills} = skillState();
-    const {createProject} = ProjectState();
-const router = useRouter();
-
-    useEffect(() => {
-        (async () => {
-            await getCategories();
-            await getTags();
-            await fetchSkills();
-        })()
-    }, []);
+    const router = useRouter();
+    console.log("Project ID: "+id);
 
     const [project, setProject] = useState({
         title: '',
@@ -40,56 +35,60 @@ const router = useRouter();
         startDate: '',
         endDate: '',
         status: 'In Progress',
+    } as {
+        title: string;
+        slug: string;
+        description: string;
+        image: string;
+        technologies: string[];
+        categories: string[];
+        skills: string[];
+        liveLink: string;
+        projectLink: string;
+        startDate: string;
+        endDate: string;
+        status: string;
     });
 
-    const addProject = async () => {
-        try {
-            if (project.title == '') {
-                toast.error("Please enter project title");
-            } else if (project.image == '') {
-                toast.error("Please enter project image");
-            } else if (project.technologies.length == 0) {
-                toast.error("Please select technologies");
-            } else if (project.categories.length == 0) {
-                toast.error("Please select categories");
-            } else if (project.skills.length == 0) {
-                toast.error("Please select skills");
-            } else if (project.startDate == '') {
-                toast.error("Please select start date");
-            } else if (project.endDate == '') {
-                toast.error("Please select end date");
-            } else {
-                const response = await createProject(project);
-                if (response.status === "success") {
-                    toast.success(response.message);
-                    setProject({
-                        title: '',
-                        slug: '',
-                        description: '',
-                        image: '',
-                        technologies: [],
-                        categories: [],
-                        skills: [],
-                        liveLink: '',
-                        projectLink: '',
-                        startDate: '',
-                        endDate: '',
-                        status: ''
-                    });
-                    await router.push('/dashboard/projects');
-                } else {
-                    toast.error(response.statusText);
-                }
+    useEffect(() => {
+        (async () => {
+          await getCategories();
+            await getTags();
+            await fetchSkills();
+            const response = await fetchProjectById(id as string);
+            if (response.status === "success") {
+              console.log("Project: "+JSON.stringify(response.data));
+                setProject({
+                  ...response.data,
+                  startDate: new Date(response.data.startDate).toISOString().split('T')[0],
+                  endDate: new Date(response.data.endDate).toISOString().split('T')[0]
+                });
             }
+        })()
+    }, []);
 
-        } catch (e:any) {
-            toast.error(e.message);
+    const handleSubmit = async () => {
+        const response = await updateProject(id as string, project);
+        if (response.status === "success") {
+          toast.success("Update project successfully");
+          router.push("/dashboard/projects");
+        } else {
+          toast.error("Update project failed");
         }
-    }
+      };
 
-    console.log("Technologies: " + JSON.stringify(project));
-    return (
-        <div className="max-w-7xl w-full mx-auto">
+      const formatDateToDisplay = (date: string) => {
+        if (!date) return '';
+        const [year, month, day] = date.split('-');
+        return `${year}-${month}-${day}`;
+      };
+
+      console.log("Project: "+JSON.stringify(project));
+      console.log("Project Start Date: "+ formatDateToDisplay(project.startDate));
+      console.log("Project End Date: "+formatDateToDisplay(project.endDate));
+
+  return (
+    <div className="max-w-7xl w-full mx-auto">
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-2xl font-bold text-gray-900">Projects</h1>
             </div>
@@ -115,7 +114,7 @@ const router = useRouter();
                         rows={4}
                         value={project.description}
                         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setProject({...project, description: e.target.value})}/>
-                    <div className={"flex flex justify-between items-center gap-2 w-full"}>
+                    <div className={"flex justify-between items-center gap-2 w-full"}>
                         <input type="text" name="image" id="image" placeholder="Image URL"
                                className="border-2 border-gray-300 rounded-md p-2"
                                value={project.image} onChange={(e: any) => {
@@ -129,7 +128,8 @@ const router = useRouter();
                         <label>Technologies:</label>
                         <div className="flex flex-wrap gap-2">
                             {
-                                project.technologies && project.technologies.map((item, i) => (
+                                project.technologies && project.technologies.map((item, i) => {
+                                    return (
                                     <div key={i}
                                          className="bg-gray-200 py-1 px-2 rounded flex items-center gap-2">{tagList.find((tag) => tag._id === item)?.name}<i
                                         onClick={() => {
@@ -138,7 +138,7 @@ const router = useRouter();
                                                 technologies: project.technologies.filter((item, index) => index !== i)
                                             })
                                         }} className="bi bi-x-circle-fill text-red-600"></i></div>
-                                ))
+                                )})
                             }
                             <select name="technologies" id="technologies" onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                 setProject({...project, technologies: [...project.technologies, e.target.value]})
@@ -158,7 +158,8 @@ const router = useRouter();
                         <label>Categories:</label>
                         <div className="flex flex-wrap gap-2">
                             {
-                                project.categories && project.categories.map((item, i) => (
+                                project.categories && project.categories.map((item, i) => {
+                                    return(
                                     <div key={i}
                                          className="bg-gray-200 py-1 px-2 rounded flex items-center gap-2">{categoryList.find((category) => category._id === item)?.name}<i
                                         onClick={() => {
@@ -167,7 +168,7 @@ const router = useRouter();
                                                 categories: project.categories.filter((item, index) => index !== i)
                                             })
                                         }} className="bi bi-x-circle-fill text-red-600"></i></div>
-                                ))
+                                )})
                             }
                             <select name="categories" id="categories" onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                 setProject({...project, categories: [...project.categories, e.target.value]})
@@ -215,18 +216,20 @@ const router = useRouter();
                     <input type="text" name="liveLink" id="liveLink" placeholder="Live Link"
                            className="border-2 border-gray-300 rounded-md p-2"
                            value={project.liveLink}
-                           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProject({...project, liveLink: e.target.value})}/>
+                           onChange={(e) => setProject({...project, liveLink: e.target.value})}/>
                     <input type="text" name="projectLink" id="projectLink" placeholder="Project Link"
                            className="border-2 border-gray-300 rounded-md p-2"
                            value={project.projectLink}
-                           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProject({...project, projectLink: e.target.value})}/>
-                    <input type="date" value={project.startDate}
-                           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProject({...project, startDate: e.target.value})}/>
-                    <input type="date" value={project.endDate}
-                           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProject({...project, endDate: e.target.value})}/>
+                           onChange={(e) => setProject({...project, projectLink: e.target.value})}/>
+                    <input type="date" name="startDate" id="startDate" className="border-2 border-gray-300 rounded-md p-2" 
+                           value={project.startDate}
+                           onChange={(e) => setProject({...project, startDate: e.target.value})}/>
+                    <input type="date" name="endDate" id="endDate" className="border-2 border-gray-300 rounded-md p-2" 
+                           value={project.endDate}
+                           onChange={(e) => setProject({...project, endDate: e.target.value})}/>
                     <select name="status" id="status" className="border-2 border-gray-300 rounded-md p-2"
                             value={project.status}
-                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setProject({...project, status: e.target.value})}>
+                            onChange={(e) => setProject({...project, status: e.target.value})}>
                         <option value="">Select Status</option>
                         <option value="In Progress">In Progress</option>
                         <option value="Completed">Completed</option>
@@ -235,7 +238,7 @@ const router = useRouter();
                         <option value="Draft">Draft</option>
                     </select>
                     <button
-                        onClick={() => addProject()}
+                        onClick={handleSubmit}
                         className="bg-green-600 hover:bg-green-700 w-fit mx-auto text-white cursor-pointer py-2 px-4 rounded">
                         Submit
                     </button>
@@ -243,5 +246,5 @@ const router = useRouter();
             </div>
 
         </div>
-    );
-} 
+  )
+}

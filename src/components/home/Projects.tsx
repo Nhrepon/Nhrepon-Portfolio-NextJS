@@ -3,39 +3,18 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import {containerVariants, itemVariants} from "@/utility/motion";
+import { containerVariants, itemVariants } from "@/utility/motion";
+import ProjectState from '@/state/projectState';
+import { useEffect } from 'react';
 
 const Projects = () => {
+  const { projectList, fetchProject } = ProjectState();
 
-  const projects = [
-    {
-      title: 'E-Commerce Platform',
-      description:
-        'A full-stack e-commerce platform with real-time inventory management, payment processing, and user authentication.',
-      image: '/project-placeholder.svg',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      github: 'https://github.com/yourusername/ecommerce',
-      live: 'https://ecommerce-demo.com',
-    },
-    {
-      title: 'Task Management App',
-      description:
-        'A collaborative task management application with real-time updates, team features, and analytics dashboard.',
-      image: '/project-placeholder.svg',
-      technologies: ['Next.js', 'TypeScript', 'Firebase', 'Tailwind CSS'],
-      github: 'https://github.com/yourusername/task-manager',
-      live: 'https://task-manager-demo.com',
-    },
-    {
-      title: 'AI-Powered Chatbot',
-      description:
-        'An intelligent chatbot using natural language processing to provide customer support and answer queries.',
-      image: '/project-placeholder.svg',
-      technologies: ['Python', 'TensorFlow', 'React', 'WebSocket'],
-      github: 'https://github.com/yourusername/ai-chatbot',
-      live: 'https://ai-chatbot-demo.com',
-    },
-  ];
+  useEffect(() => {
+    (async () => {
+      await fetchProject(0, 6);
+    })()
+  }, []);
 
   return (
     <section className="py-20 bg-gray-200 dark:bg-gray-900 w-full">
@@ -63,7 +42,7 @@ const Projects = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {projectList.map((project, index) => (
             <motion.div
               key={project.title}
               variants={itemVariants}
@@ -84,21 +63,23 @@ const Projects = () => {
 
               {/* Project Content */}
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                <Link className='cursor-pointer' href={`/projects/${project.slug}`}>
+                <h3 className="text-md font-semibold text-gray-900 dark:text-white mb-2">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
                   {project.description}
                 </p>
+                </Link>
 
                 {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.technologies.map((tech) => (
+                <div className="flex flex-wrap gap-2 mb-6 text-xs">
+                  {project.skill.map((skill: any, index: number) => (
                     <span
-                      key={tech}
-                      className="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full"
+                      key={index}
+                      className="px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded"
                     >
-                      {tech}
+                      {skill.title}
                     </span>
                   ))}
                 </div>
@@ -106,19 +87,19 @@ const Projects = () => {
                 {/* Links */}
                 <div className="flex justify-between items-center">
                   <Link
-                    href={project.github}
+                    href={project.projectLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    className="text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                   >
                     <span className="sr-only">GitHub</span>
                     <i className='bi bi-github'></i>
                   </Link>
                   <Link
-                    href={project.live}
+                    href={project.liveLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition-colors"
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 transition-colors"
                   >
                     Live Demo
                     <i className='bi bi-box-arrow-up-right'></i>
@@ -136,7 +117,7 @@ const Projects = () => {
         >
           <Link
             href="/projects"
-            className="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition-colors"
+            className="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-green-600 rounded-md hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 transition-colors"
           >
             View All Projects
             <i className='bi bi-arrow-right ml-2'></i>

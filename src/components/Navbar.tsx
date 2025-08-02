@@ -12,6 +12,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   const {isLogin, getLoginStatus} = userState();
+  
   useEffect(() => {
     (async ()=>await getLoginStatus())()
   }, []);
