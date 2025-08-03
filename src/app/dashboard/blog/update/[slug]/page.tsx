@@ -80,7 +80,8 @@ export default function UpdateBlog() {
 
     if (e.key === "Enter" && e.currentTarget.value != "" || e.key === "," && e.currentTarget.value != "") {
       e.preventDefault();
-      setBlogData({ ...blogData, tagId: [...blogData.tagId, e.currentTarget.value] })
+      const tagId = tagList.find((tag) => tag.name === e.currentTarget.value);
+      setBlogData({ ...blogData, tagId: [...blogData.tagId, tagId._id] })
       e.currentTarget.value = "";
     } else if (e.key === "Enter" && e.currentTarget.value === "" || e.key === "," && e.currentTarget.value === "") {
       e.preventDefault();
@@ -111,8 +112,13 @@ export default function UpdateBlog() {
 
               <div>
                 <label>Categories:</label>
-                {/* <input type="text" name="category" placeholder="Category" className="w-full p-2 border border-gray-300 rounded" value={blogData.category} onChange={(e) => setBlogData({ ...blogData, category: e.target.value })} /> */}
-                <select multiple name="category" id="category" className="w-full p-2 border border-gray-300 rounded" value={blogData.categoryId} onChange={(e) => setBlogData({ ...blogData, categoryId: Array.from(e.target.selectedOptions, option => option.value) })}>
+                <div className="flex flex-wrap gap-2">
+                {
+                  blogData.categoryId.map((item: string, i: number) => (
+                    <div key={i} className="bg-gray-200 py-1 px-2 rounded flex items-center gap-2">{categoryList.find((category) => category._id === item)?.name}<i onClick={() => {setBlogData({ ...blogData, categoryId: blogData.categoryId.filter((item: string, index: number) => index !== i) })}} className="bi bi-x-circle-fill text-red-600"></i></div>
+                  ))
+                }
+                <select name="category" id="category" className="w-full p-2 border border-gray-300 rounded" value={blogData.categoryId[0]} onChange={(e) => setBlogData({ ...blogData, categoryId: [...blogData.categoryId, e.currentTarget.value] })}>
                   <option value="">Select Category</option>
                   {
                     categoryList.map((category, i) => {
@@ -122,6 +128,7 @@ export default function UpdateBlog() {
                     })
                   }
                 </select>
+                </div>
               </div>
 
               <div className="my-2">
@@ -129,7 +136,7 @@ export default function UpdateBlog() {
                 <div className="flex flex-wrap gap-2">
                   {
                     blogData.tagId != null && blogData.tagId.map((item: string, i: number) => (
-                      <div key={i} className="bg-gray-200 py-1 px-2 rounded flex items-center gap-2">{item}<i onClick={() => removeTags(i)} className="bi bi-x-circle-fill text-red-600"></i></div>
+                      <div key={i} className="bg-gray-200 py-1 px-2 rounded flex items-center gap-2">{tagList.find((tag) => tag._id === item)?.name}<i onClick={() => removeTags(i)} className="bi bi-x-circle-fill text-red-600"></i></div>
                     ))
                   }
 
@@ -138,7 +145,7 @@ export default function UpdateBlog() {
                     {
                       tagList.map((tag, i) => {
                         return (
-                          <option key={i} value={tag._id}>{tag.name}</option>
+                          <option key={i} value={tag.name}/>
                         )
                       })
                     }
@@ -153,7 +160,7 @@ export default function UpdateBlog() {
                 <label>Image URL:</label>
                 <input type="text" name="image" placeholder="Image URL" className="w-full p-2 border border-gray-300 rounded" value={blogData.image} onChange={(e) => setBlogData({ ...blogData, image: e.target.value })} />
                 {
-                  blogData.image && <Image src={blogData.image} alt={blogData.title} title={blogData.title} width={1200} height={1200} className="w-full h-auto object-contain rounded-lg" loading="lazy" />
+                  blogData.image && <Image src={blogData.image} alt={blogData.title} title={blogData.title} width={1200} height={1200} className="w-full max-w-[300px] mx-auto object-contain rounded-lg" loading="lazy" />
                 }
                 <PickFile onFileSelect={(file) => setBlogData({ ...blogData, image: file })} />
               </div>

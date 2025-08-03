@@ -11,6 +11,9 @@ export async function GET(request: NextRequest){
     try {
         const categories = await CategoryModel.aggregate([
             {
+                $sort: { updatedAt: -1 }
+            },
+            {
                 $facet: {
                     totalCount: [ { $count: "total" } ],
                     data: [
@@ -21,7 +24,7 @@ export async function GET(request: NextRequest){
                             $limit: limit
                         }
                     ]
-                }
+                },
             }
         ]);
         return NextResponse.json({status:"success", message:"Categories fetched successfully",total:categories[0].totalCount[0].total, loaded:categories[0].data.length, data:categories[0].data});

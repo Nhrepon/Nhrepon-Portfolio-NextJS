@@ -2,10 +2,10 @@ import { create } from "zustand"
 
 interface CategoryState {
     categoryList: any[];
-    getCategories: () => Promise<void>;
-    createCategory: (category: string) => Promise<void>;
-    deleteCategory: (id: string) => Promise<boolean>;
-    updateCategory: (id: string, category: string) => Promise<void>;
+    getCategories: () => void;
+    createCategory: (category: any) => Promise<any>;
+    deleteCategory: (id: string) => void;
+    updateCategory: (id: string, category: string) => void;
 }
 
 const CategoryState = create<CategoryState>((set)=>({
@@ -16,28 +16,25 @@ const CategoryState = create<CategoryState>((set)=>({
         set({categoryList: data.data});
     },
 
-    createCategory: async (category: string): Promise<void> => {
+    createCategory: async (category: any)=> {
         const response = await fetch('/api/category', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                name: category,
-            }),
+            body: JSON.stringify(category),
         });
-        const data = await response.json();
-        set({categoryList: data});
+        return await response.json();
     },
-    deleteCategory: async (id: string): Promise<boolean> => {
+    deleteCategory: async (id: string)=> {
         const response = await fetch(`/api/category/${id}`, {
             method: 'DELETE',
         });
         const data = await response.json();
         set({categoryList: data});
-        return response.ok;
+        return data;
     },
-    updateCategory: async (id: string, category: string): Promise<void> => {
+    updateCategory: async (id: string, category: string)=> {
         const response = await fetch(`/api/category/${id}`, {
             method: 'PUT',
             headers: {

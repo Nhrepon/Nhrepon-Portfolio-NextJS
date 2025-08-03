@@ -109,7 +109,20 @@ export default function NewBlog() {
               <div>
                 <label>Categories:</label>
                 {/* <input type="text" name="category" placeholder="Category" className="w-full p-2 border border-gray-300 rounded" value={blogData.category} onChange={(e) => setBlogData({ ...blogData, category: e.target.value })} /> */}
-              <select multiple name="category" id="category" className="w-full p-2 border border-gray-300 rounded" value={blogData.categoryId} onChange={(e) => setBlogData({ ...blogData, categoryId: Array.from(e.target.selectedOptions, option => option.value) })}>
+                {/* onChange={(e) => setBlogData({ ...blogData, categoryId: Array.from(e.target.selectedOptions, option => option.value) })} */}
+                <div className="flex flex-wrap gap-2">
+                {
+                  blogData.categoryId.map((category, i) => {
+                    return (
+                      <div key={i} className="bg-gray-200 py-1 px-2 rounded flex items-center gap-2">{categoryList.find((item, index)=> index === i)?.name}
+                      <i onClick={()=>setBlogData({ ...blogData, categoryId: blogData.categoryId.filter((item, index)=> index !== i) })} className="bi bi-x-circle-fill text-red-600"></i>
+                      </div>
+                    )
+                  })
+                }
+              <select name="category" id="category" className="w-full p-2 border border-gray-300 rounded" 
+              value={blogData.categoryId} 
+              onChange={(e) => setBlogData({ ...blogData, categoryId: [...blogData.categoryId, e.target.value] })}>
                 <option value="">Select Category</option>
                 {
                   categoryList.map((category, i) => {
@@ -119,6 +132,7 @@ export default function NewBlog() {
                   })
                 }
               </select>
+                </div>
               </div>
 
               <div className="my-2">
