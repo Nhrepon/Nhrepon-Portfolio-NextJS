@@ -14,20 +14,17 @@ export async function POST(request: NextRequest){
 export async function GET(request: NextRequest){
     try {
         const id = request.nextUrl.searchParams.get("id");
+        const skip = Number(request.nextUrl.searchParams.get("skip")) || 0;
+        const limit = Number(request.nextUrl.searchParams.get("limit")) || 10;
 
         if(id){
-            if (!mongoose.Types.ObjectId.isValid(id)) {
-                return NextResponse.json(
-                    { error: "Invalid skill ID format" },
-                    { status: 400 }
-                );
-            }
             const skill = await SkillModel.findById(id);
             return NextResponse.json(skill);
         }
 
-        const skills = await SkillModel.find();
-        return NextResponse.json(skills);
+        const skills = await SkillModel.find().skip(skip).limit(limit);
+        const total = await SkillModel.countDocuments();
+        return NextResponse.json({status:"success", message:"Skills fetched successfully",total:total, loaded:skills.length, data:skills});
     }catch (e:any) {
         NextResponse.json(
             {error: e.message},

@@ -14,7 +14,7 @@ export default function FileUpload() {
         (
             async () => {
                 if(categoryList.length === 0){
-                    await getCategories();
+                    await getCategories(0, 1000);
                 }
             }
         )();

@@ -130,28 +130,3 @@ export const generateSlug = (data:string)=>{
 
 
 
-
-export function formatDateToInput(dateString: string): string {
-    if (!dateString) return '';
-    
-    // If it's already in the correct format, return it
-    if (dateString.match(/\d{4}-\d{2}-\d{2}/)) {
-      return dateString;
-    }
-    
-    // If it's an ISO date string, convert it
-    const date = new Date(dateString);
-    return date.toISOString().split('T')[0];
-  }
-  
-  export function formatInputDate(dateString: string): string {
-    if (!dateString) return '';
-    
-    // If it's already in ISO format, return it
-    if (dateString.match(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/)) {
-      return dateString;
-    }
-    
-    // If it's in yyyy-MM-dd format, convert to ISO
-    return dateString + 'T00:00:00.000Z';
-  }

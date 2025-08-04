@@ -43,8 +43,8 @@ export default function UpdateBlog() {
           tagId: res.data.tagId,
           image: res.data.image,
         });
-        await getCategories();
-        await getTags();
+        await getCategories(0, 1000);
+        await getTags(0, 1000);
       }
     })()
   }, []);

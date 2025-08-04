@@ -1,10 +1,9 @@
 import { create } from "zustand";
 
-
 interface CommentState {
     commentList: any[];
     totalComment: number;
-    getCommentListByBlogId: (blogId: string) => Promise<void>;
+    getCommentListByBlogId: (blogId: string) => Promise<any>;
     addComment: (comment: any) => Promise<any>;
 }
 
@@ -15,6 +14,7 @@ const CommentState = create<CommentState>((set) => ({
         const response = await fetch(`/api/blog/comment?blogId=${blogId}`);
         const data = await response.json();
         set({ commentList: data.data, totalComment: data.total });
+        return data;
     },
     addComment: async(comment: any) => {
         const response = await fetch(`/api/blog/comment`, {

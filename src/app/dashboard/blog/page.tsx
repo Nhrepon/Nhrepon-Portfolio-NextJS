@@ -5,10 +5,9 @@ import toast from 'react-hot-toast';
 import {TimestampToDate} from '@/utility/Utility';
 import Link from 'next/link';
 import BlogState from '@/state/blogState';
-import React, {Suspense, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import Image from 'next/image';
 import {useRouter} from 'next/navigation';
-import Loading from '@/app/loading';
 
 export default function Blog() {
     const router = useRouter();

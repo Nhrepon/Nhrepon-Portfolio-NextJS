@@ -1,22 +1,31 @@
-
 "use client";
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import CategoryState from '@/state/categoryState';
 import Image from 'next/image';
 import { toast } from 'react-hot-toast';
-import { DeleteAlert } from '@/utility/Utility';
+import { DeleteAlert, TimestampToDate } from '@/utility/Utility';
 import Link from "next/link";
-import {router} from "next/client";
 import {useRouter} from "next/navigation";
+import Pagination from '@/components/dashboard/Pagination';
 
 export default function Category() {
-  const { categoryList, getCategories, deleteCategory } = CategoryState();
+  const { categoryList, getCategories, deleteCategory, total, loaded} = CategoryState();
   const router = useRouter();
+  const [skip, setSkip] = useState(0);
+  const [limit, setLimit] = useState(10);
+
+
   useEffect(() => {
     (async () => {
-      await getCategories();
+      await getCategories(skip, limit);
     })()
   }, []);
+
+  const onPageChange = async (page: number) => {
+    const newSkip = (page - 1) * limit;
+    setSkip(newSkip);
+    await getCategories(newSkip, limit);
+  };
 
   const handleEdit = (id:string) => {
     router.push(`/dashboard/category/update/${id}`);
@@ -24,13 +33,13 @@ export default function Category() {
 
   const handleDelete = async (id:string) => {
     if(await DeleteAlert()){
-      const result = await deleteCategory(id);
-      if(result){
+      const response = await deleteCategory(id);
+      if(response.status === "success"){
         toast.success("Delete item successfully");
       }else{
         toast.error("Delete item failed");
       }
-      await getCategories();
+      await getCategories(skip, limit);
     }else{
       toast.error("Delete item failed");
     }
@@ -55,6 +64,8 @@ export default function Category() {
               <th>Slug</th>
               <th>Description</th>
               <th>Image</th>
+              <th>Created At</th>
+              <th>Updated At</th>
               <th>Actions</th>
             </tr>
             </thead>
@@ -65,8 +76,10 @@ export default function Category() {
                   <td>{category.name}</td>
                   <td>{category.slug}</td>
                   <td>{category.description}</td>
-                  <td><Image src={category.image} alt={category.name} width={100} height={100}
+                  <td><Image src={category.image} alt={category.name} width={1200} height={1200}
                              className='w-20 aspect-16/9'/></td>
+                  <td>{TimestampToDate(category.createdAt)}</td>
+                  <td>{TimestampToDate(category.updatedAt)}</td>  
                   <td>
                     <div className="flex gap-2 justify-end">
                       <div onClick={() => handleEdit(category._id)}
@@ -83,6 +96,9 @@ export default function Category() {
             )): <tr><td className={"text-center text-xl"} colSpan={6}>No data found</td></tr>}
             </tbody>
           </table>
+          <div>
+            <Pagination total={total} loaded={loaded} limit={limit} onPageChange={onPageChange} />
+          </div>
         </div>
       </div>
   )

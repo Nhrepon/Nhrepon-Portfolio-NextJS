@@ -2,7 +2,6 @@
 import React, {useEffect, useState} from 'react'
 import ProjectState from '@/state/projectState';
 import {generateSlug} from '@/utility/Utility';
-import {formatDateToInput} from '@/utility/Utility';
 import PickFile from '@/components/dashboard/media/pickFile';
 import CategoryState from "@/state/categoryState";
 import TagState from "@/state/tagState";
@@ -52,9 +51,9 @@ export default function UpdateProject() {
 
     useEffect(() => {
         (async () => {
-          await getCategories();
-            await getTags();
-            await fetchSkills();
+          await getCategories(0, 10);
+            await getTags(0, 10);
+            await fetchSkills(0, 10);
             const response = await fetchProjectById(id as string);
             if (response.status === "success") {
               console.log("Project: "+JSON.stringify(response.data));
