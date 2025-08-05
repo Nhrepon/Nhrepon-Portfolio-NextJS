@@ -1,7 +1,5 @@
 "use client";
-
 import Link from "next/link";
-
 type Props = {
     blog: any
 

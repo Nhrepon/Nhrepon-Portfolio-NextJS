@@ -21,9 +21,9 @@ const router = useRouter();
 
     useEffect(() => {
         (async () => {
-            await getCategories();
-            await getTags();
-            await fetchSkills();
+            await getCategories(0, 10);
+            await getTags(0, 10);
+            await fetchSkills(0, 10);
         })()
     }, []);
 

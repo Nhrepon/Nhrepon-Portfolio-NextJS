@@ -2,32 +2,41 @@ import { create } from "zustand";
 
 interface TagState {
     tagList: any[];
-    getTags: () => Promise<void>;
-    createTag: (tag: string) => Promise<void>;
+    total: number;
+    loaded: number;
+    getTags: (skip: number, limit: number) => Promise<any>;
+    fetchTagById: (id: string) => Promise<any>;
+    createTag: (tag: any) => Promise<any>;
     deleteTag: (id: string) => Promise<boolean>;
-    updateTag: (id: string, tag: string) => Promise<void>;
+    updateTag: (tag: any) => Promise<any>;
 }
 
 const TagState = create<TagState>((set)=>({
     tagList:[],
-    getTags: async()=>{
-        const response = await fetch('/api/tag');
+    total: 0,
+    loaded: 0,
+    getTags: async(skip: number, limit: number)=>{
+        const response = await fetch(`/api/tag?skip=${skip}&limit=${limit}`);
         const data = await response.json();
-        set({tagList: data.data});
+        set({tagList: data.data, total: data.total, loaded: data.loaded});
+        return data;
     },
-
-    createTag: async(tag:string)=>{
+    fetchTagById: async(id:string)=>{
+        const response = await fetch(`/api/tag?id=${id}`);
+        const data = await response.json();
+        return data;
+    },
+    createTag: async(tag:any)=>{
         const response = await fetch('/api/tag', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                name: tag,
-            }),
+            body: JSON.stringify(tag),
         });
         const data = await response.json();
         set({tagList: data.data});
+        return data;
     },
 
     deleteTag: async(id:string)=>{
@@ -39,18 +48,17 @@ const TagState = create<TagState>((set)=>({
         return response.ok;
     },
 
-    updateTag: async(id:string, tag:string)=>{
-        const response = await fetch(`/api/tag/${id}`, {
+    updateTag: async(tag:any)=>{
+        const response = await fetch(`/api/tag`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                name: tag,
-            }),
+            body: JSON.stringify(tag),
         });
         const data = await response.json();
         set({tagList: data.data});
+        return data;
     },
 
 }));

@@ -8,8 +8,16 @@ connect();
 export async function GET(request: NextRequest){
     const skip = Number(request.nextUrl.searchParams.get("skip")) || 0;
     const limit = Number(request.nextUrl.searchParams.get("limit")) || 10;
+    const id = request.nextUrl.searchParams.get("id");
     try {
+        if(id){
+            const category = await CategoryModel.findById(id);
+            return NextResponse.json({status:"success", message:"Single category fetched successfully", data:category});
+        }else{
         const categories = await CategoryModel.aggregate([
+            {
+                $sort: { updatedAt: -1 }
+            },
             {
                 $facet: {
                     totalCount: [ { $count: "total" } ],
@@ -21,10 +29,11 @@ export async function GET(request: NextRequest){
                             $limit: limit
                         }
                     ]
-                }
+                },
             }
         ]);
         return NextResponse.json({status:"success", message:"Categories fetched successfully",total:categories[0].totalCount[0].total, loaded:categories[0].data.length, data:categories[0].data});
+    }
     }catch (e:any) {
         return NextResponse.json(
             {error: e.message},
@@ -61,13 +70,15 @@ export async function POST(request: NextRequest){
 }
 
 export async function PUT(request: NextRequest){
+    const id = request.nextUrl.searchParams.get("id");
+
     const {name, slug, description, image} = await request.json();
-    const category = await CategoryModel.findByIdAndUpdate({name, slug, description, image});
+    const category = await CategoryModel.findByIdAndUpdate(id, {name, slug, description, image});
     return NextResponse.json({status:"success", message:"Category updated successfully", data:category});
 }
 
 export async function DELETE(request: NextRequest){
-    const {id} = await request.json();
+    const id = request.nextUrl.searchParams.get("id")!;
     const category = await CategoryModel.findByIdAndDelete(id);
     return NextResponse.json({status:"success", message:"Category deleted successfully", data:category});
 }
