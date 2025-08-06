@@ -19,8 +19,8 @@ export default function NewBlog() {
 
     useEffect(() => {
     (async()=>{
-      await getCategories();
-      await getTags();
+      await getCategories(0, 1000);
+      await getTags(0, 1000);
     })()
   }, []);
 

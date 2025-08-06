@@ -48,7 +48,7 @@ export default function UpdateSkills() {
 
         if (response.status === 200) {
             toast.success("Skill updated successfully");
-            await fetchSkills();
+            await fetchSkills(0, 10);
             router.push('/dashboard/skills');
 
         } else {

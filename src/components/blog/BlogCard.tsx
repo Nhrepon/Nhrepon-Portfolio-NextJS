@@ -2,10 +2,12 @@ import Image from "next/image"
 import { TimestampToDate, truncateText } from "@/utility/Utility"
 import Link from "next/link"
 
-const BlogCard = ({ blog }) => {
+
+
+const BlogCard = ({ blog }: { blog: any }) => {
     return (
-        <div key={blog._id+"-blog-card"} className="card max-w-sm overflow-hidden rounded-md shadow-lg bg-white dark:bg-gray-800">
-            <Link href={`/blog/${blog.slug}`}>
+        <div key={blog?._id+"-blog-card"} className="card max-w-sm overflow-hidden rounded-md shadow-lg bg-white dark:bg-gray-800">
+            <Link href={`/blog/${blog?.slug}`}>
                 <Image className="aspect-16/9"
                     src={blog.image}
                     alt={blog.title}
@@ -19,8 +21,8 @@ const BlogCard = ({ blog }) => {
             </Link>
             <div className="blog-card-meta pt-2 pe-2 flex gap-2 justify-between items-center text-xs">
                 <span className="flex gap-1 items-center"><i className="bi bi-person"></i>{blog.author[0].userName}</span>
-                <span className="flex gap-1 items-center"><i className="bi bi-calendar"></i>{truncateText(blog.category.map((category) => category.name).join(", "), 15)}</span>
-                <span className="flex gap-1 items-center"><i className="bi bi-tag"></i>{truncateText(blog.tag.map((tag) => tag.name).join(", "), 15)}</span>
+                <span className="flex gap-1 items-center"><i className="bi bi-calendar"></i>{truncateText(blog.category.map((category: any) => category.name).join(", "), 15)}</span>
+                <span className="flex gap-1 items-center"><i className="bi bi-tag"></i>{truncateText(blog.tag.map((tag: any) => tag.name).join(", "), 15)}</span>
             </div>
 
             <Link href={`/blog/${blog.slug}`}>

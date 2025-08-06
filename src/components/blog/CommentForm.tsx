@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import CommentState from '@/state/commentState';
 import {useState, useEffect} from 'react';
