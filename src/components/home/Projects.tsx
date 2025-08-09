@@ -54,7 +54,9 @@ const Projects = () => {
                 <Image
                   src={project.image}
                   alt={project.title}
-                  fill
+                  title={project.title}
+                  width={1280}
+                  height={720}
                   className="object-cover transition-transform duration-300 group-hover:scale-110"
                   priority={index === 0}
                 />

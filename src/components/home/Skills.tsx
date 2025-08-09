@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import {containerVariants, itemVariants} from "@/utility/motion";
 import skillState from "@/state/skillState";
 import {useEffect} from "react";
+import Image from "next/image";
 
 const SkillList = () => {
 
@@ -39,11 +40,11 @@ const SkillList = () => {
         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
           {skillList.map((skill) => (
             <div
-              className="flex flex-col items-center p-2 shadow-md border-1 border-gray-300 rounded bg-linear-to-r from-green-200 to-indigo-100 relative hover:scale-105 hover:shadow-lg transition-transform duration-500 ease-in-out cursor-pointer"
+              className="flex flex-col items-center justify-between p-2 shadow-md border-1 border-gray-300 rounded bg-linear-to-r from-green-200 to-indigo-100 relative hover:scale-105 hover:shadow-lg transition-transform duration-500 ease-in-out cursor-pointer"
               key={skill._id}
             >
-              <img className="w-3/4 h-3/4" src={skill.image} alt={skill.title} />
-              <p className="py-2 text-1xl font-bold">{skill.title}</p>
+              <Image className="w-4/5 h-4/5 object-contain" src={skill.image} alt={skill.title} title={skill.title} width={1280} height={720} loading="lazy" placeholder="blur" blurDataURL={skill.image} />
+              <p className="py-2 text-md font-semibold">{skill.title}</p>
             </div>
           ))}
         </div>

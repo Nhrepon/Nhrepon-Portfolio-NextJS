@@ -1,7 +1,7 @@
 import "@/app/blog/style.css";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { TimestampToDate } from "@/utility/Utility";
+import { TimestampToDate, truncateText, htmlToPlain } from "@/utility/Utility";
 import Image from "next/image";
 import ShareButtons from "@/components/ShareButtons";
 import CommentForm from "@/components/blog/CommentForm";
@@ -9,10 +9,15 @@ import FeaturedBlogList from "@/components/blog/FeaturedBlogList";
 import BlogPostMetaData from "@/components/blog/BlogPostMetaData";
 import BreadCrumb from "@/components/blog/BreadCrumb";
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+
+// { params }: { params: { slug: string } }
+
+
+export async function generateMetadata(context: {params: Promise<{ slug: string }>}): Promise<Metadata> {
+    const params = await context.params;
     const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blog?slug=${params.slug}`, { cache: "no-store" });
     const data = await response.json();
-    const blog = data?.data;
+    const blog = data.data;
 
     if (!response.ok || !blog) {
         return {
@@ -23,7 +28,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
     return {
         title: blog.title,
-        description: blog.description,
+        description: truncateText(htmlToPlain(blog.content), 150),
         keywords: blog.tag?.map((tag: any) => tag.name).join(", ") || "blog, article, reading",
         authors: [{ name: blog.author?.[0]?.userName || "NHRepon", url: "https://nhrepon.com" }],
         creator: blog.author?.[0]?.userName || "NHRepon",
@@ -46,12 +51,12 @@ export async function generateMetadata({ params }: { params: { slug: string } })
         },
         openGraph: {
             title: blog.title,
-            description: blog.description,
+            description: truncateText(htmlToPlain(blog.content), 150),
             type: "article",
             images: [{
                 url: blog.image,
-                width: 1200,
-                height: 630,
+                width: 1280,
+                height: 720,
                 alt: blog.title,
             }],
             siteName: "NHRepon Blog",
@@ -62,7 +67,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
         twitter: {
             card: "summary_large_image",
             title: blog.title,
-            description: blog.description,
+            description: truncateText(htmlToPlain(blog.content), 150),
             images: [blog.image],
             creator: blog.author?.[0]?.userName || "@NHRepon",
             site: "@NHRepon"
@@ -70,10 +75,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     };
 }
 
-export default async function SingleBlog({ params }: { params: { slug: string } }) {
+export default async function SingleBlog(context: {params: Promise<{ slug: string }>}) {
+    const params = await context.params;
     const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blog?slug=${params.slug}`, { cache: "no-store" });
     const data = await response.json();
-    const blog = data?.data;
+    const blog = data.data;
 
     if (!response.ok || !blog) return notFound();
 
@@ -82,15 +88,15 @@ export default async function SingleBlog({ params }: { params: { slug: string } 
             <section className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
                 <div className="single-blog max-w-[600px] mx-auto flex flex-col gap-6 items-center">
                     <div className="single-blog-content flex flex-col gap-6 items-center">
-                        <div className="w-full"><BreadCrumb /></div>
+                        <div className="w-full"><BreadCrumb segments={["home", "blog", params.slug]} /></div>
                         {blog.image &&
                             <Image
                                 className="aspect-16/9 rounded-md shadow-lg"
                                 src={blog.image}
                                 alt={blog.title}
                                 title={blog.title}
-                                width={1200}
-                                height={1200}
+                                width={1280}
+                                height={720}
                                 loading="lazy"
                                 placeholder="blur"
                                 blurDataURL={blog.image}

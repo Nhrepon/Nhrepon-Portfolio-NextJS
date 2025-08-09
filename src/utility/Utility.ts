@@ -101,6 +101,12 @@ export function truncateText (text:string, maxLength:number){
     return text.substring(0, maxLength) + '...';
 }
 
+
+export function htmlToPlain(html: string) {
+    return html.replace(/<[^>]*>/g, "");
+}
+
+
 export async function logout(){
     //(await cookies()).set('token', '')
     //Cookies.remove("token", {httpOnly: true, expires: new Date(0)});
