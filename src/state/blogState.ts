@@ -2,6 +2,8 @@ import {create} from "zustand";
 
 interface BlogStateInterface {
     blogList: any[];
+    total: number;
+    loaded: number;
     fetchBlogs: (skip: number, limit: number) => Promise<any>;
     blog: any;
     getBlogById: (slug: string) => Promise<any>;
@@ -12,11 +14,13 @@ interface BlogStateInterface {
 
 const BlogState = create<BlogStateInterface>((set) => ({
     blogList: [],
+    total:0,
+    loaded:0,
     fetchBlogs: async (skip: number, limit: number) => {
         const response = await fetch(`/api/blog?skip=${skip}&limit=${limit}`, );
         const data = await response.json();
         if(data.status === "success"){
-            set({ blogList: data.data });
+            set({ blogList: data.data, total: data.total, loaded: data.loaded });
         }
         return data;
     },
