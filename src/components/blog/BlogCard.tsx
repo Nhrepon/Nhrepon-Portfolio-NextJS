@@ -7,13 +7,13 @@ import Link from "next/link"
 const BlogCard = ({ blog }: { blog: any }) => {
     return (
         <div key={blog?._id+"-blog-card"} className="card max-w-sm overflow-hidden rounded-md shadow-lg bg-white dark:bg-gray-800">
-            <Link href={`/blog/${blog?.slug}`}>
+            <Link href={`/blog/${blog.slug}`}>
                 <Image className="aspect-16/9"
                     src={blog.image}
                     alt={blog.title}
                     title={blog.title}
-                    width={500}
-                    height={500}
+                    width={1200}
+                    height={800}
                     loading="lazy"
                     placeholder="blur"
                     blurDataURL={blog.image}

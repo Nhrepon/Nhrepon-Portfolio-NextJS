@@ -1,19 +1,23 @@
-
+"use client";
 import BlogCard from "@/components/blog/BlogCard";
+import BlogState from "@/state/blogState";
+import { useEffect } from "react";
+import Pagination from "@/components/dashboard/Pagination";
 
-const BlogPage = async () => {
-    let blogList = [];
-    try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blog`);
-        if (!response.ok) {
-            throw new Error("Failed to fetch blogs");
-        }
-        const data = await response.json();
-        blogList = data.data;
-    } catch (error) {
-        console.log(error);
-    }
+const BlogPage = () => {
 
+const {blogList, fetchBlogs, total, loaded} = BlogState();
+useEffect(() => {
+    (async () => {
+        await fetchBlogs(0, 6);
+    })()
+}, []);
+
+const handlePageChange = (page: number) => {
+    fetchBlogs((page - 1) * 6, 6);
+};
+
+    
     return (
         <div className="min-h-screen ">
             <section className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
@@ -24,6 +28,9 @@ const BlogPage = async () => {
                     {blogList.map((blog: any) => (
                         <BlogCard key={blog._id+"-blog-card-blog-page"} blog={blog}/>
                     ))}
+                </div>
+                <div className="w-full flex justify-center items-center my-6">
+                <Pagination total={total} loaded={loaded} limit={6} onPageChange={handlePageChange}/>
                 </div>
             </section>
         </div>

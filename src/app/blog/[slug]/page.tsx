@@ -10,7 +10,7 @@ import BlogPostMetaData from "@/components/blog/BlogPostMetaData";
 import BreadCrumb from "@/components/blog/BreadCrumb";
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-    const response = await fetch(`${process.env.API_URL}/api/blog?slug=${params.slug}`, { cache: "no-store" });
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blog?slug=${params.slug}`, { cache: "no-store" });
     const data = await response.json();
     const blog = data?.data;
 
@@ -71,7 +71,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default async function SingleBlog({ params }: { params: { slug: string } }) {
-    const response = await fetch(`${process.env.API_URL}/api/blog?slug=${params.slug}`, { cache: "no-store" });
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blog?slug=${params.slug}`, { cache: "no-store" });
     const data = await response.json();
     const blog = data?.data;
 
