@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 export async function connect() {
     try {
-        const url = "mongodb+srv://Repon:Repon7248@cluster0.nhslprh.mongodb.net/Portfolio";
-        await mongoose.connect(url!);
+        const url = process.env.DATABASE_URL!;
+        await mongoose.connect(url);
         const connection = mongoose.connection;
         connection.on("connected",()=>{
             console.log("Mongodb connected successfully")

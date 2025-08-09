@@ -77,7 +77,7 @@ const Projects = () => {
                   {project.skill.map((skill: any, index: number) => (
                     <span
                       key={index}
-                      className="px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded"
+                      className="px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-gray-900 dark:text-gray-400 rounded"
                     >
                       {skill.title}
                     </span>

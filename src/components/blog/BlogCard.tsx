@@ -27,7 +27,7 @@ const BlogCard = ({ blog }: { blog: any }) => {
 
             <Link href={`/blog/${blog.slug}`}>
                 <div className="card-body p-2">
-                    <h2 className="text-lg text-gray-900 dark:text-white">{truncateText(blog.title, 100)}</h2>
+                    <h2 className="text-md font-semibold text-gray-900 dark:text-white">{truncateText(blog.title, 100)}</h2>
                     {/* <p className="text-gray-600 text-sm">{truncateText(blog.content, 100)}</p> */}
                 </div>
             </Link>
