@@ -10,7 +10,7 @@ const Blogs = () => {
     const {blogList, fetchBlogs} = BlogState();
     useEffect(() => {
         (async () => {
-            await fetchBlogs();
+            await fetchBlogs(0, 6);
         })()
     }, []);
 

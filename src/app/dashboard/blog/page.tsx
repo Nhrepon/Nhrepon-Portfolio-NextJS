@@ -18,7 +18,7 @@ export default function Blog() {
     const {blogList, fetchBlogs, deleteBlog} = BlogState();
     useEffect(() => {
         (async () => {
-            await fetchBlogs();
+            await fetchBlogs(0, 10);
         })()
     }, []);
 
@@ -36,7 +36,7 @@ export default function Blog() {
             } else {
                 toast.error("Delete item failed");
             }
-            await fetchBlogs();
+            await fetchBlogs(0, 10);
         } else {
             toast.error("Delete item failed");
         }

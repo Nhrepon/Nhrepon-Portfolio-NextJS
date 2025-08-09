@@ -52,7 +52,7 @@ const Hero = () => {
           {/* Greeting */}
           <motion.div variants={itemVariants} className="mb-4">
             <span className="inline-block px-3 py-1 text-sm font-semibold text-green-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full">
-              Hello, I'm
+              Hello&nbsp; I&lsquo;m
             </span>
           </motion.div>
 
@@ -63,7 +63,7 @@ const Hero = () => {
           >
             <span className="block">Nur Hossain Repon</span>
             <span className="block text-green-700 dark:text-blue-400">
-              Full Stack Developer & Software Engineer
+              Full Stack Developer &nbsp; Software Engineer
             </span>
           </motion.h1>
 

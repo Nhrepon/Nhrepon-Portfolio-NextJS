@@ -13,7 +13,7 @@ export default function FeaturedBlogList() {
     useEffect(() => {
         (
             async () => {
-                await fetchBlogs();
+                await fetchBlogs(0, 3);
             }
         )()
     }, []);

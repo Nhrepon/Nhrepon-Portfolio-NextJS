@@ -9,7 +9,7 @@ const SkillList = () => {
   const {skillList, fetchSkills} = skillState();
 
   useEffect(() => {
-    (async ()=>{await fetchSkills();})()
+    (async ()=>{await fetchSkills(0, 12);})()
   }, []);
 
   return (
