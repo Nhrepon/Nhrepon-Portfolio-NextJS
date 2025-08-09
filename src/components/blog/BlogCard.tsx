@@ -12,8 +12,8 @@ const BlogCard = ({ blog }: { blog: any }) => {
                     src={blog.image}
                     alt={blog.title}
                     title={blog.title}
-                    width={1200}
-                    height={800}
+                    width={1280}
+                    height={720}
                     loading="lazy"
                     placeholder="blur"
                     blurDataURL={blog.image}

@@ -73,7 +73,7 @@ export default function CommentForm({blog}: {blog: any}) {
                             {blog.commentsCount > 0 ? commentList && commentList.map((item) => (
                                 <div key={item._id} className="flex py-2 my-6 shadow-sm rounded-md ">
                                     <div className="flex flex-col p-2 items-center">
-                                        <Image src="/person.svg" className="w-12 h-12 min-w-[50px] rounded-full opacity-25" alt={item.name} title={item.name} width={120} height={80} />
+                                        <Image src="/person.svg" className="w-12 h-12 min-w-[50px] rounded-full opacity-25" alt={item.name} title={item.name} width={1280} height={720} />
                                         <p className="text-gray-600 dark:text-gray-400 text-xs">{item.name}</p>
                                         {/* <p className="text-gray-600 dark:text-gray-400 text-xs">{comment.email}</p> */}
                                     </div>

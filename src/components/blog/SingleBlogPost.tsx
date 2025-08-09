@@ -51,8 +51,8 @@ export default function SingleBlogPost({slug}: {slug: string}) {
                                 src={blog.image}
                                 alt={blog.title}
                                 title={blog.title}
-                                width={1200}
-                                height={1200}
+                                width={1280}
+                                height={720}
                                 loading="lazy"
                                 placeholder="blur"
                                 blurDataURL={blog.image}
