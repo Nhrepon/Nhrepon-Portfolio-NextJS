@@ -46,7 +46,7 @@ const Footer = () => {
       href: '/contact',
     },{
       title: 'Blogs',
-      href: '/blogs',
+      href: '/blog',
     },
     {
       title: 'Privacy Policy',

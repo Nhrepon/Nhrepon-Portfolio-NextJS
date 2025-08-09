@@ -3,16 +3,11 @@ import BlogCard from "@/components/blog/BlogCard";
 
 const BlogPage = async () => {
     let blogList = [];
-    try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blog`);
-        if (!response.ok) {
-            throw new Error("Failed to fetch blogs");
-        }
-        const data = await response.json();
-        blogList = data.data;
-    } catch (error) {
-        console.log(error);
-    }
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blog`);
+    const data = await response.json();
+    blogList = data.data;
+    
+    console.log(blogList);
 
     return (
         <div className="min-h-screen ">
