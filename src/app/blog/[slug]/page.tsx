@@ -117,13 +117,7 @@ export default async function SingleBlog(context: {params: Promise<{ slug: strin
                     </div>
 
                     <BlogPostMetaData blog={blog} />
-
-                    <div className="blog-post-share w-full flex flex-col bg-gray-50 dark:bg-gray-800 p-4 rounded-md">
-                        <h3 className="text-lg text-gray-900 dark:text-white">Share</h3>
-                        <hr className="border-gray-400 dark:border-gray-600" />
-                        <ShareButtons blog={blog} />
-                    </div>
-
+                    <ShareButtons blog={blog} />
                     <FeaturedBlogList />
                     <CommentForm blog={blog} />
                 </div>

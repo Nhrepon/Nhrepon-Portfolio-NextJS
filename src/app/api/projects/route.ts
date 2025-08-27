@@ -10,20 +10,27 @@ export async function GET(request: NextRequest) {
     const skip = Number(request.nextUrl.searchParams.get("skip")) || 0;
     const limit = Number(request.nextUrl.searchParams.get("limit")) || 10;
     const id = request.nextUrl.searchParams.get("id");
-    //const slug = request.nextUrl.pathname.split("/")[2];
-    console.log("slug is: ",request.nextUrl.pathname);
+    const status = request.nextUrl.searchParams.get("status");
+    const startDate = request.nextUrl.searchParams.get("startDate");
+    const endDate = request.nextUrl.searchParams.get("endDate");
     try {
+        const pipeline = [];
+        if(status){
+            pipeline.push({$match: {status: status}});
+        }
+        if(startDate){
+            pipeline.push({$match: {startDate: {$gte: new Date(startDate)}}});
+        }
+        if(endDate){
+            pipeline.push({$match: {endDate: {$lte: new Date(endDate)}}});
+        }
+
         if(id){
             const project = await ProjectModel.findById(id);
             return NextResponse.json({status:"success", message:"Project fetched successfully", data:project});
-        }
-        // else if(slug){
-        //     const project = await ProjectModel.findOne({slug:slug});
-        //     return NextResponse.json({status:"success", message:"Project fetched successfully", data:project});
-        // }
-        else{
-            const projects = await ProjectModel.aggregate([
-                {
+        }else{
+            pipeline.push(
+                { 
                     $lookup: {
                         from: "users",
                         localField: "userId",
@@ -102,16 +109,17 @@ export async function GET(request: NextRequest) {
                 {
                     $facet: {
                         totalCount: [{$count: "total"}],
-                        data: [ { $skip: skip }, { $limit: limit } ]
+                        data: [ { $skip: skip }, { $limit: limit } ],
                     }
                 }
-            ]);
+            );
+            const projects = await ProjectModel.aggregate(pipeline as any);
             return NextResponse.json({
                 status: "success",
                 message: "Projects fetched successfully",
-                total: projects[0].totalCount[0].total,
-                loaded: projects[0].data.length,
-                data: projects[0].data
+                total: projects[0]?.totalCount[0]?.total || 0,
+                loaded: projects[0]?.data?.length || 0,
+                data: projects[0]?.data || []
             });
         }
     } catch (e:any) {

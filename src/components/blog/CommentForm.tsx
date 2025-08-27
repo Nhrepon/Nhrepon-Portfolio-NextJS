@@ -61,8 +61,8 @@ export default function CommentForm({blog}: {blog: any}) {
                             <div className="flex flex-col gap-4">
                                 <input value={comment.name} onChange={(e) => setComment({ ...comment, name: e.target.value })} id="name" name="name" className="p-2 rounded-md border border-gray-300" type="text" placeholder="Name" />
                                 <input value={comment.email} onChange={(e) => setComment({ ...comment, email: e.target.value })} id="email" name="email" className="p-2 rounded-md border border-gray-300" type="email" placeholder="Email" />
-                                <textarea value={comment.comment} onChange={(e) => setComment({ ...comment, comment: e.target.value })} id="comment" name="comment" className="p-2 rounded-md border border-gray-300" cols={30} rows={5}></textarea>
-                                <button className="bg-green-500 text-white py-2 px-4 rounded-md hover:cursor-pointer hover:bg-green-600 w-fit self-end" type="submit">Post Comment</button>
+                                <textarea value={comment.comment} onChange={(e) => setComment({ ...comment, comment: e.target.value })} id="comment" name="comment" className="p-2 rounded-md border border-gray-300" cols={30} rows={5} placeholder="Write your comment here"></textarea>
+                                <button className="bg-green-600 text-white py-2 px-4 rounded-md hover:cursor-pointer hover:bg-green-700 w-fit self-end" type="submit">Post Comment</button>
                             </div>
                         </form>
                     </div>

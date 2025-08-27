@@ -63,30 +63,6 @@ const Projects = () => {
           </motion.p>
         </motion.div>
 
-        {/* Filters */}
-        {/* <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-wrap justify-center gap-4 mb-12"
-        >
-          {projectList.map((project) => (
-            <motion.button
-              key={project.id}
-              variants={itemVariants}
-              onClick={() => setActiveFilter(project.id)}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-colors hover:cursor-pointer ${
-                activeFilter === project.id
-                  ? 'bg-green-600 text-white'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-              }`}
-            >
-              {project.name}
-            </motion.button>
-          ))}
-        </motion.div> */}
-
-        {/* Projects Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -105,8 +81,9 @@ const Projects = () => {
                   alt={project.title}
                   fill
                   className="object-cover"
-                  // width={1200}
-                  // height={1200}
+                  loading="lazy"
+                  placeholder="blur"
+                  blurDataURL={project.image}
                 />
               </div>
               <div className="p-6">

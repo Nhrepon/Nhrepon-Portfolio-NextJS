@@ -29,7 +29,7 @@ const ProjectSchema = new mongoose.Schema<IProject>({
     projectLink: {type: String,},
     startDate: {type: Date, required: true},
     endDate: {type: Date, required: true},
-    status: {type: String, enum: ['In Progress', 'Completed', 'On Hold', 'Canceled', 'Draft'], default: 'In Progress'},
+    status: {type: String, enum: ['Progress', 'Completed', 'Hold', 'Cancel', 'Draft'], default: 'Progress'},
     featured: {type: Boolean, default: false},
     userId: {type: [mongoose.Schema.Types.ObjectId], required: true, ref: "users"},
 }, {timestamps: true, versionKey: false});

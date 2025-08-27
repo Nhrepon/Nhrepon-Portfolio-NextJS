@@ -120,9 +120,17 @@ export default function NewBlog() {
                     )
                   })
                 }
-              <select name="category" id="category" className="w-full p-2 border border-gray-300 rounded" 
-              value={blogData.categoryId} 
-              onChange={(e) => setBlogData({ ...blogData, categoryId: [...blogData.categoryId, e.target.value] })}>
+              <select 
+                name="category" 
+                id="category" 
+                className="w-full p-2 border border-gray-300 rounded" 
+                multiple
+                value={blogData.categoryId}
+                onChange={(e) => {
+                  const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
+                  setBlogData({ ...blogData, categoryId: selectedOptions });
+                }}
+              >
                 <option value="">Select Category</option>
                 {
                   categoryList.map((category, i) => {

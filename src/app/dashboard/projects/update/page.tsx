@@ -51,9 +51,9 @@ export default function UpdateProject() {
 
     useEffect(() => {
         (async () => {
-          await getCategories(0, 10);
-            await getTags(0, 10);
-            await fetchSkills(0, 10);
+          await getCategories(0, 1000);
+            await getTags(0, 1000);
+            await fetchSkills(0, 1000);
             const response = await fetchProjectById(id as string);
             if (response.status === "success") {
               console.log("Project: "+JSON.stringify(response.data));
@@ -230,10 +230,10 @@ export default function UpdateProject() {
                             value={project.status}
                             onChange={(e) => setProject({...project, status: e.target.value})}>
                         <option value="">Select Status</option>
-                        <option value="In Progress">In Progress</option>
+                        <option value="Progress">Progress</option>
                         <option value="Completed">Completed</option>
-                        <option value="On Hold">On Hold</option>
-                        <option value="Cancelled">Cancelled</option>
+                        <option value="Hold">Hold</option>
+                        <option value="Cancel">Cancel</option>
                         <option value="Draft">Draft</option>
                     </select>
                     <button

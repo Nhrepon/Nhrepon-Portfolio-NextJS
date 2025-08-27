@@ -5,10 +5,11 @@ export const containerVariants = {
       transition: {
         staggerChildren: 0.2,
       },
+      
     },
   };
 
-export const itemVariants = {
+export const itemVariants = { 
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,

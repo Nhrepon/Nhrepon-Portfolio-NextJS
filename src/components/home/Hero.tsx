@@ -107,6 +107,8 @@ const Hero = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
+                title={social.name}
+                aria-label={social.name}
               ><i className={social.icon}></i>
               </Link>
             ))}
