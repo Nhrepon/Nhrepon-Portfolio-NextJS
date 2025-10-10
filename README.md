@@ -39,4 +39,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ```
 git push origin HEAD:dev
 
+npm i next@latest react@latest react-dom@latest eslint-config-next@latest
+
+
+
 ```

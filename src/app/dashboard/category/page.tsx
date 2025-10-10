@@ -93,7 +93,7 @@ export default function Category() {
                     </div>
                   </td>
                 </tr>
-            )): <tr><td className={"text-center text-xl"} colSpan={6}>No data found</td></tr>}
+            )): <tr className={"flex items-center justify-center text-3xl"}><td>No data found</td></tr>}
             </tbody>
           </table>
           <div>

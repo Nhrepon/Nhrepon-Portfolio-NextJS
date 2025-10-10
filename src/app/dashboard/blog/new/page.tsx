@@ -1,7 +1,7 @@
 'use client';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import TextEditor from '@/components/dashboard/textEditor/TextEditor';
+import TextEditor from '@/components/text-editor/TextEditor';
 import { useState, useEffect } from 'react';
 import CategoryState from '@/state/categoryState';
 import TagState from '@/state/tagState';
@@ -9,6 +9,7 @@ import { generateSlug } from '@/utility/Utility';
 import PickFile from '@/components/dashboard/media/pickFile';
 import Image from 'next/image';
 import BlogState from '@/state/blogState';
+import QuilTextEditor from "@/components/text-editor/quilTextEditor";
 
 export default function NewBlog() {
   const router = useRouter();
@@ -100,7 +101,12 @@ export default function NewBlog() {
           <div className="flex gap-4">
             <div className="flex flex-col gap-4 w-2/3">
               <input type="text" name="title" placeholder="Title" className="w-full p-2 border border-gray-300 rounded" value={blogData.title} onChange={(e) => setBlogData({ ...blogData, title: e.target.value })} />
-              <TextEditor value={blogData.content} onChange={(value)=>setBlogData({ ...blogData, content: value })}/>
+
+                <TextEditor value={blogData.content} onChange={(value)=>setBlogData({ ...blogData, content: value })}/>
+
+                <hr/>
+
+                {/*<QuilTextEditor/>*/}
             </div>
             <div className="flex flex-col gap-4 w-1/3">
               <input type="text" name="slug" placeholder="Slug" className="w-full p-2 border border-gray-300 rounded" value={blogData.slug} onChange={(e) => setBlogData({ ...blogData, slug: e.target.value})} />
@@ -114,14 +120,14 @@ export default function NewBlog() {
                 {
                   blogData.categoryId.map((category, i) => {
                     return (
-                      <div key={i} className="bg-gray-200 py-1 px-2 rounded flex items-center gap-2">{categoryList.find((item, index)=> index === i)?.name}
-                      <i onClick={()=>setBlogData({ ...blogData, categoryId: blogData.categoryId.filter((item, index)=> index !== i) })} className="bi bi-x-circle-fill text-red-600"></i>
+                      <div key={i} className="bg-gray-200 py-1 px-2 rounded flex items-center gap-2">{categoryList.find((categoryItem, index)=> categoryItem._id === category)?.name}
+                      <i onClick={()=>setBlogData({ ...blogData, categoryId: blogData.categoryId.filter((item, index)=> index !== i) })} className="bi bi-x-circle-fill text-red-600 cursor-pointer"></i>
                       </div>
                     )
                   })
                 }
               <select name="category" id="category" className="w-full p-2 border border-gray-300 rounded" 
-              value={blogData.categoryId} 
+              value={blogData.categoryId[0]}
               onChange={(e) => setBlogData({ ...blogData, categoryId: [...blogData.categoryId, e.target.value] })}>
                 <option value="">Select Category</option>
                 {
@@ -140,25 +146,35 @@ export default function NewBlog() {
                       <div className="flex flex-wrap gap-2">
                         {
                             blogData.tagId != null && blogData.tagId.map((item, i)=>(
-                                <div key={i} className="bg-gray-200 py-1 px-2 rounded flex items-center gap-2">{tagList.find((tag) => tag._id === item)?.name}<i onClick={()=>removeTags(i)} className="bi bi-x-circle-fill text-red-600"></i></div>
+                                <div key={i} className="bg-gray-200 py-1 px-2 rounded flex items-center gap-2">{tagList.find((tag) => tag._id === item)?.name}
+                                    <i onClick={()=>setBlogData({...blogData, tagId: blogData.tagId.filter((item, index)=>index !== i)})} className="bi bi-x-circle-fill text-red-600 cursor-pointer"></i>
+                                </div>
                               ))
                           }
-                          
-                      <input list="tags" type="text" name="tag" placeholder="Tag" className="w-full p-2 border border-gray-300 rounded my-2" onKeyDown={addTags}/>
-                      <datalist id="tags">
-                        {
-                          tagList.map((tag, i) => {
-                            return (
-                              <option key={i} value={tag.name}/>
-                            )
-                          })
-                        }
-                      </datalist>
+
+                      <select name="tag" id="tag" className="w-full p-2 border border-gray-300 rounded"
+                      value={blogData.tagId[0]}
+                      onChange={(e) => setBlogData({...blogData, tagId:[...blogData.tagId, e.target.value]})}>
+                        <option value="">Select Tag</option>
+                          {
+                              tagList.map((tag, i) => {
+                                  return(<option key={i} value={tag._id}>{tag.name}</option>)
+                              })
+                          }
+                      </select>
+                      {/*<input list="tags" type="text" name="tag" placeholder="Tag" className="w-full p-2 border border-gray-300 rounded my-2" onKeyDown={addTags}/>*/}
+                      {/*<datalist id="tags">*/}
+                      {/*  {*/}
+                      {/*    tagList.map((tag, i) => {*/}
+                      {/*      return (*/}
+                      {/*        <option key={i} value={tag.name}/>*/}
+                      {/*      )*/}
+                      {/*    })*/}
+                      {/*  }*/}
+                      {/*</datalist>*/}
                       </div>
                     </div>
 
-              {/* <input type="file" name="image" placeholder="Image" className="w-full h-30 p-2 border border-gray-300 rounded flex items-center hover:cursor-pointer" value={blogData.image} onChange={handleFile} accept='image/*'/>
-               */}
 
               <div className="flex flex-col gap-4">
                 <label>Image URL:</label>

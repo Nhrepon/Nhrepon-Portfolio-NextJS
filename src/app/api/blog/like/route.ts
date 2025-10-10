@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({status:"error", message:"You have already liked this blog"});
         }else{
             const blogMeta = await BlogMetaModel.findOneAndUpdate({ blogId }, {$inc: { likes: 1 }, userId: userId}, {new: true});
-            return NextResponse.json({status:"success", message:"Blog liked"});
+            return NextResponse.json({status:"success", message:"Blog liked successfully"});
         }
 
     } catch (error: any) {

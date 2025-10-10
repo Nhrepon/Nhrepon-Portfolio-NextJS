@@ -35,7 +35,7 @@ const Hero = () => {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden w-full">
+    <section className="relative h-[600px] flex items-center justify-center overflow-hidden w-full">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-gradient-to-b from-green-100 to-indigo-200 dark:from-gray-900 dark:to-gray-800">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>

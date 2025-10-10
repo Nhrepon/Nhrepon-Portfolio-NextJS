@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import ProjectState from '@/state/projectState';
 
 

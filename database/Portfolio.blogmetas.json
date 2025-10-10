@@ -1,0 +1,223 @@
+[{
+  "_id": {
+    "$oid": "68739d52c27cdb430f5ca3a8"
+  },
+  "blogId": {
+    "$oid": "68739d52c27cdb430f5ca3a4"
+  },
+  "views": 91,
+  "likes": 7,
+  "createdAt": {
+    "$date": "2025-07-13T11:49:38.846Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-01T02:18:06.687Z"
+  },
+  "userId": [
+    {
+      "$oid": "6814cf4fdd4a923742fffe09"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "68739ed1c27cdb430f5ca3ba"
+  },
+  "blogId": {
+    "$oid": "68739ed1c27cdb430f5ca3b8"
+  },
+  "views": 40,
+  "likes": 12,
+  "createdAt": {
+    "$date": "2025-07-13T11:56:01.160Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-10T09:01:15.866Z"
+  },
+  "userId": [
+    {
+      "$oid": "6814cf4fdd4a923742fffe09"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6873a799c27cdb430f5ca3e0"
+  },
+  "blogId": {
+    "$oid": "6873a799c27cdb430f5ca3de"
+  },
+  "views": 49,
+  "likes": 1,
+  "createdAt": {
+    "$date": "2025-07-13T12:33:29.852Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-01T02:17:08.799Z"
+  },
+  "userId": [
+    {
+      "$oid": "6814cf4fdd4a923742fffe09"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6873a7a5c27cdb430f5ca3e4"
+  },
+  "blogId": {
+    "$oid": "6873a7a5c27cdb430f5ca3e2"
+  },
+  "views": 97,
+  "likes": 15,
+  "createdAt": {
+    "$date": "2025-07-13T12:33:41.611Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-09T10:34:31.810Z"
+  },
+  "userId": [
+    {
+      "$oid": "6814cf4fdd4a923742fffe09"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6874abb161a6c717ecf942b5"
+  },
+  "blogId": {
+    "$oid": "6874abb161a6c717ecf942b3"
+  },
+  "views": 58,
+  "likes": 1,
+  "createdAt": {
+    "$date": "2025-07-14T07:03:13.950Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-09T11:55:02.214Z"
+  },
+  "userId": [
+    {
+      "$oid": "6814cf4fdd4a923742fffe09"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "688b12fa9ecb83f3ec8b0aa5"
+  },
+  "blogId": {
+    "$oid": "688b12fa9ecb83f3ec8b0aa3"
+  },
+  "views": 22,
+  "likes": 1,
+  "userId": [
+    {
+      "$oid": "6814cf4fdd4a923742fffe09"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-07-31T06:53:46.053Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-10T08:14:24.681Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "688b138f9ecb83f3ec8b0ab4"
+  },
+  "blogId": {
+    "$oid": "688b138f9ecb83f3ec8b0ab2"
+  },
+  "views": 23,
+  "likes": 1,
+  "userId": [
+    {
+      "$oid": "6814cf4fdd4a923742fffe09"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-07-31T06:56:15.313Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-31T17:41:55.614Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "688b34599ecb83f3ec8b0b12"
+  },
+  "blogId": {
+    "$oid": "688b34599ecb83f3ec8b0b10"
+  },
+  "views": 38,
+  "likes": 0,
+  "userId": [],
+  "createdAt": {
+    "$date": "2025-07-31T09:16:09.792Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-03T10:35:11.626Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "688f088c28a7216d4ae017af"
+  },
+  "blogId": {
+    "$oid": "688f088b28a7216d4ae017aa"
+  },
+  "views": 151,
+  "likes": 1,
+  "userId": [
+    {
+      "$oid": "6814cf4fdd4a923742fffe09"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-08-03T06:58:20.490Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-07T15:34:48.833Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68c67e7122bd4e798e365e17"
+  },
+  "blogId": {
+    "$oid": "68c67e6f22bd4e798e365e12"
+  },
+  "views": 16,
+  "likes": 1,
+  "userId": [
+    {
+      "$oid": "6814cf4fdd4a923742fffe09"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-09-14T08:36:01.374Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-07T15:34:36.667Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68e5466613d00ca912648714"
+  },
+  "blogId": {
+    "$oid": "68e5466513d00ca912648712"
+  },
+  "views": 4,
+  "likes": 0,
+  "userId": [],
+  "createdAt": {
+    "$date": "2025-10-07T16:57:10.782Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-07T17:08:31.706Z"
+  }
+}]

@@ -3,7 +3,6 @@ import "./globals.css";
 import {Toaster} from "react-hot-toast";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import {Metadata} from "next";
-import MainLayout from "@/components/MainLayout";
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
@@ -64,9 +63,9 @@ export default function RootLayout({children}: { children: ReactNode }) {
     return (
         <html lang="en">
         <body className={`bg-gray-100 dark:bg-gray-900 ${poppins.className}`} >
-        <MainLayout>
+        <div className={"max-w-[1920px] mx-auto"}>
             {children}
-        </MainLayout>
+        </div>
         <Toaster position="top-center"/>
         </body>
         </html>

@@ -1,4 +1,4 @@
-import "@/app/blog/style.css";
+import "@/app/(frontend)/blog/style.css";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { TimestampToDate, truncateText, htmlToPlain } from "@/utility/Utility";
@@ -8,6 +8,12 @@ import CommentForm from "@/components/blog/CommentForm";
 import FeaturedBlogList from "@/components/blog/FeaturedBlogList";
 import BlogPostMetaData from "@/components/blog/BlogPostMetaData";
 import BreadCrumb from "@/components/blog/BreadCrumb";
+import {NextRequest} from "next/server";
+
+const siteUrl= (request?: { nextUrl?: { origin: string } })=> {
+    return request?.nextUrl?.origin || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+}
+
 
 
 // { params }: { params: { slug: string } }
@@ -15,7 +21,7 @@ import BreadCrumb from "@/components/blog/BreadCrumb";
 
 export async function generateMetadata(context: {params: Promise<{ slug: string }>}): Promise<Metadata> {
     const params = await context.params;
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blog?slug=${params.slug}`, { cache: "no-store" });
+    const response = await fetch(`${siteUrl()}/api/blog?slug=${params.slug}`, { cache: "no-store" });
     const data = await response.json();
     const blog = data.data;
 
@@ -77,7 +83,7 @@ export async function generateMetadata(context: {params: Promise<{ slug: string 
 
 export default async function SingleBlog(context: {params: Promise<{ slug: string }>}) {
     const params = await context.params;
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/blog?slug=${params.slug}`, { cache: "no-store" });
+    const response = await fetch(`${siteUrl()}/api/blog?slug=${params.slug}`, { cache: "no-store" });
     const data = await response.json();
     const blog = data.data;
 

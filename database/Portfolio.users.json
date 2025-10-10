@@ -1,0 +1,40 @@
+[{
+  "_id": {
+    "$oid": "6814cf4fdd4a923742fffe09"
+  },
+  "userName": "NHRepon",
+  "email": "nurhossainrepon7248@gmail.com",
+  "password": "$2b$10$UOvpwKJwZvji1p3ivi25g.eHi3y3H6x35/691UfUi8ay4UxK7WIEK",
+  "userRole": "admin",
+  "isVerified": true,
+  "otp": "0",
+  "otpExpire": {
+    "$date": "2025-05-02T13:57:35.767Z"
+  },
+  "createdAt": {
+    "$date": "2025-05-02T13:57:35.768Z"
+  },
+  "updatedAt": {
+    "$date": "2025-05-02T13:57:35.768Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6816078a74ff9688a7296e43"
+  },
+  "userName": "Md Nur Hossain",
+  "email": "nhmarket.com@gmail.com",
+  "password": "$2b$10$fxkY8hxzOEaQ6gww83vxReJBxHgs/q8oOIPJEeggDD3jXemRDnPPe",
+  "userRole": "user",
+  "isVerified": false,
+  "otp": "0",
+  "otpExpire": {
+    "$date": "2025-05-03T12:09:46.055Z"
+  },
+  "createdAt": {
+    "$date": "2025-05-03T12:09:46.065Z"
+  },
+  "updatedAt": {
+    "$date": "2025-05-03T12:09:46.065Z"
+  }
+}]

@@ -36,40 +36,41 @@ const SideNav = () => {
         {name: 'Tags', href: '/dashboard/tag', icon: "bi bi-tag"},
         {name: 'Media', href: '/dashboard/media', icon: "bi bi-image"},
         {name: 'Messages', href: '/dashboard/messages', icon: "bi bi-chat-dots"},
+        {name: "Neuron", href: '/dashboard/neuron', icon: "bi bi-question-circle"},
         {name: 'Profile', href: '/dashboard/profile', icon: "bi bi-person"},
         {name: 'Settings', href: '/dashboard/settings', icon: "bi bi-gear-fill"},
     ];
 
 
     return (
-        <div className="flex flex-col h-full bg-green-700 text-white">
-            <div className="flex items-center justify-center h-16 border-b">
+        <div className="flex flex-col h-dvh bg-green-700 text-white">
+            <div className="flex flex-col items-center justify-center h-16 border-b">
                 <Link href={'/'} className="text-xl text-semibold">NHRepon</Link>
             </div>
 
             {/* Navigation */}
-            <nav className="flex-1 px-4 py-4 space-y-1">
+            <nav className="flex flex-col flex-1 p-3 gap-2 overflow-y-scroll no-scrollbar">
                 {navigation.map((item) => {
-                    const isActive = pathname === item.href;
-                    return (
-                        <Link
-                            key={item.name}
-                            href={item.href}
-                            className={`flex items-center px-2 py-2 text-sm font-medium rounded-md ${
-                                isActive
-                                    ? 'bg-gray-200 font-bold text-gray-900 transition-all duration-200 ease-in-out'
-                                    : 'text-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-200 ease-in-out'
-                            }`}
-                        >
-                            <i className={`me-1 font-bold ${item.icon}`}/>
-                            {item.name}
-                        </Link>
-                    );
-                })}
+                        const isActive = pathname === item.href;
+                        return (
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className={`flex items-center px-2 py-2 text-sm font-medium rounded-md ${
+                                    isActive
+                                        ? 'bg-gray-200 font-bold text-gray-900 transition-all duration-200 ease-in-out'
+                                        : 'text-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-200 ease-in-out'
+                                }`}
+                            >
+                                <i className={`me-1 font-bold ${item.icon}`}/>
+                                {item.name}
+                            </Link>
+                        );
+                    })}
             </nav>
 
             {/* User Profile and Logout */}
-            <div className="p-4 border-t">
+            <div className="flex flex-col p-4 h-16 border-t">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center">
                         <div className="w-8 h-8 rounded-full bg-gray-300"></div>

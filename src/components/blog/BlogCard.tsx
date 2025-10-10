@@ -6,7 +6,7 @@ import Link from "next/link"
 
 const BlogCard = ({ blog }: { blog: any }) => {
     return (
-        <div key={blog?._id+"-blog-card"} className="card max-w-sm overflow-hidden rounded-md shadow-lg bg-white dark:bg-gray-800">
+        <div key={blog?._id+"-blog-card"} className="card max-w-lg overflow-hidden rounded-md shadow-lg bg-white dark:bg-gray-800">
             <Link href={`/blog/${blog.slug}`}>
                 <Image className="aspect-16/9"
                     src={blog.image}

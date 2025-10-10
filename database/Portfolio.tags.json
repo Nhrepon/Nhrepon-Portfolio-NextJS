@@ -1,0 +1,210 @@
+[{
+  "_id": {
+    "$oid": "6873964347214ae5ce867d4c"
+  },
+  "name": "NextJS",
+  "slug": "nextjs",
+  "description": "NextJs application development",
+  "image": "/next.svg",
+  "createdAt": {
+    "$date": "2025-07-13T11:19:31.949Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-13T11:19:31.949Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6873966947214ae5ce867d50"
+  },
+  "name": "Flutter",
+  "slug": "flutter",
+  "description": "Flutter application development",
+  "image": "/flutter.svg",
+  "createdAt": {
+    "$date": "2025-07-13T11:20:09.909Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-13T11:20:09.909Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6884a10f8629bf914d6b0fae"
+  },
+  "name": "JavaScript",
+  "slug": "javascript",
+  "description": "Javascript",
+  "image": "/javascript.svg",
+  "createdAt": {
+    "$date": "2025-07-26T09:34:07.389Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-26T09:34:07.389Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6884a1c58629bf914d6b0fbb"
+  },
+  "name": "Java",
+  "slug": "java",
+  "description": "Java",
+  "image": "/java.svg",
+  "createdAt": {
+    "$date": "2025-07-26T09:37:09.818Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-26T09:37:09.818Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6884a26a8629bf914d6b0fbf"
+  },
+  "name": "MongoDB",
+  "slug": "mongodb",
+  "description": "Java",
+  "image": "/mongodb.svg",
+  "createdAt": {
+    "$date": "2025-07-26T09:39:54.002Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-26T09:39:54.002Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6884c44d8629bf914d6b102d"
+  },
+  "name": "Mobile Application Development",
+  "slug": "mobile-application-development",
+  "description": "Mobile Application Development",
+  "image": "/android.svg",
+  "createdAt": {
+    "$date": "2025-07-26T12:04:29.724Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-26T12:04:29.724Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6890a3a0a492b5e02eea2a0e"
+  },
+  "name": "MySql",
+  "slug": "mysql",
+  "description": "",
+  "image": "/mysql.svg",
+  "createdAt": {
+    "$date": "2025-08-04T12:12:16.783Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-04T12:32:44.201Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6890a3e7a492b5e02eea2a18"
+  },
+  "name": "Excel",
+  "slug": "excel",
+  "description": "",
+  "image": "/excel.svg",
+  "createdAt": {
+    "$date": "2025-08-04T12:13:27.018Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-04T12:13:27.018Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6890a88ea492b5e02eea2a73"
+  },
+  "name": "React JS",
+  "slug": "react-js",
+  "description": "",
+  "image": "/react.svg",
+  "createdAt": {
+    "$date": "2025-08-04T12:33:18.723Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-04T12:33:18.723Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6890a8b1a492b5e02eea2a81"
+  },
+  "name": "Laravel",
+  "slug": "laravel",
+  "description": "",
+  "image": "/laravel.svg",
+  "createdAt": {
+    "$date": "2025-08-04T12:33:53.472Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-04T12:33:53.472Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6890a8bea492b5e02eea2a89"
+  },
+  "name": "Github",
+  "slug": "github",
+  "description": "",
+  "image": "/github.svg",
+  "createdAt": {
+    "$date": "2025-08-04T12:34:06.099Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-04T12:34:06.099Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6890b2f7a492b5e02eea2abd"
+  },
+  "name": "Express JS",
+  "slug": "express-js",
+  "description": "",
+  "image": "/express.svg",
+  "createdAt": {
+    "$date": "2025-08-04T13:17:43.812Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-04T13:17:43.812Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6890b314a492b5e02eea2ac5"
+  },
+  "name": "Android",
+  "slug": "android",
+  "description": "",
+  "image": "/android.svg",
+  "createdAt": {
+    "$date": "2025-08-04T13:18:12.195Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-04T13:18:12.195Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6890b32ba492b5e02eea2acf"
+  },
+  "name": "DotNet",
+  "slug": "dotnet",
+  "description": "",
+  "image": "/dotnet.svg",
+  "createdAt": {
+    "$date": "2025-08-04T13:18:35.976Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-04T13:18:35.976Z"
+  }
+}]

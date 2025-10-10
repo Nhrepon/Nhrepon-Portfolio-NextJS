@@ -13,8 +13,8 @@ useEffect(() => {
     })()
 }, []);
 
-const handlePageChange = (page: number) => {
-    fetchBlogs((page - 1) * 6, 6);
+const handlePageChange = async (page: number) => {
+    await fetchBlogs((page - 1) * 6, 6);
 };
 
     
@@ -24,7 +24,7 @@ const handlePageChange = (page: number) => {
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white text-center py-4">Blogs</h1>
                 <p className="text-gray-600 dark:text-gray-400 text-center">Here are some of my Flutter and Web development latest blogs</p>
                 <hr className="border-gray-400 dark:border-gray-600 mb-6"/>
-                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {blogList.map((blog: any) => (
                         <BlogCard key={blog._id+"-blog-card-blog-page"} blog={blog}/>
                     ))}

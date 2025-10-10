@@ -1,0 +1,90 @@
+[{
+  "_id": {
+    "$oid": "68986ad5e5a12a1903091a6b"
+  },
+  "name": "Michel",
+  "email": "michel@gmail.com",
+  "subject": "Web development",
+  "message": "Hello Nur, \nPlease, Reply to me as quick as possible...",
+  "userId": {
+    "$oid": "6814cf4fdd4a923742fffe09"
+  },
+  "createdAt": {
+    "$date": "2025-08-10T09:48:05.646Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-10T09:48:05.646Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68986af3e5a12a1903091a6e"
+  },
+  "name": "Michel",
+  "email": "michel@gmail.com",
+  "subject": "Web development",
+  "message": "Hello Nur, \nPlease, Reply to me as quick as possible...",
+  "userId": {
+    "$oid": "6814cf4fdd4a923742fffe09"
+  },
+  "createdAt": {
+    "$date": "2025-08-10T09:48:35.724Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-10T09:48:35.724Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68986b5ee5a12a1903091a70"
+  },
+  "name": "Michel",
+  "email": "michel@gmail.com",
+  "subject": "Web development",
+  "message": "Hello Nur, \nPlease, Reply to me as quick as possible...",
+  "userId": {
+    "$oid": "6814cf4fdd4a923742fffe09"
+  },
+  "createdAt": {
+    "$date": "2025-08-10T09:50:22.119Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-10T09:50:22.119Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68986e82e5a12a1903091a74"
+  },
+  "name": "Michel",
+  "email": "michel@gmail.com",
+  "subject": "Web development",
+  "message": "Hello Nur, \nPlease, Reply to me as quick as possible...",
+  "userId": {
+    "$oid": "6814cf4fdd4a923742fffe09"
+  },
+  "createdAt": {
+    "$date": "2025-08-10T10:03:46.678Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-10T10:03:46.678Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68986ea0e5a12a1903091a76"
+  },
+  "name": "Michel",
+  "email": "michel@gmail.com",
+  "subject": "Web development",
+  "message": "Hello Nur, \nPlease, Reply to me as quick as possible...",
+  "userId": {
+    "$oid": "6814cf4fdd4a923742fffe09"
+  },
+  "createdAt": {
+    "$date": "2025-08-10T10:04:16.739Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-10T10:04:16.739Z"
+  }
+}]

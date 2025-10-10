@@ -24,8 +24,8 @@ export default function Blog() {
 
 
     const handleEdit = (slug: string) => {
-        toast.success("Edit item");
         router.push(`/dashboard/blog/update/${slug}`);
+        toast.success("Edit item");
     };
 
     const handleDelete = async (id: string) => {

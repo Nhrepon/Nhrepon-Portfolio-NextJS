@@ -1,9 +1,8 @@
-import { connect } from "@/db/dbConfig";
 import { NextRequest, NextResponse } from "next/server";
 import CommentModel from "@/models/commentModel";
 import mongoose from "mongoose";
 
-connect();
+//connect();
 
 export async function POST(request: NextRequest) {
     try {
@@ -29,12 +28,17 @@ export async function GET(request: NextRequest) {
         const blogId = request.nextUrl.searchParams.get("blogId")!;
         const skip = Number(request.nextUrl.searchParams.get("skip")) || 0;
         const limit = Number(request.nextUrl.searchParams.get("limit")) || 10;
+
+        const commentExist = await CommentModel.findOne({blogId:blogId});
+        if(!commentExist){
+            return NextResponse.json({status:"failed", message:"No comment found", total:0, loaded:0, data:[]});
+        }
+
         const data = await CommentModel.aggregate([
             { $match: { blogId: new mongoose.Types.ObjectId(blogId) } },
             { $lookup: { from: "users", localField: "userId", foreignField: "_id", as: "user" } },
             { $unwind: "$user" },
             { $sort: { updatedAt: -1 } },
-
             {
                 $project: {
                     totalCount: 1,
@@ -54,7 +58,7 @@ export async function GET(request: NextRequest) {
                 data: [ { $skip: skip }, { $limit: limit } ]
             } },
         ]);
-        return NextResponse.json({status:"success", message:"Comment list", total:data[0].totalCount[0].totalCount || 0, loaded:data[0].data.length, data:data[0].data});
+        return NextResponse.json({status:"success", message:"Comment list loaded successfully", total:data[0].totalCount[0].totalCount || 0, loaded:data[0].data.length, data:data[0].data});
     } catch (error: any) {
         return NextResponse.json(
             { error: error.message },

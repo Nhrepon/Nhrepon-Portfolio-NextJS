@@ -17,7 +17,7 @@ export default function BlogPostMetaData({ blog }: { blog: any }) {
         });
         const data = await response.json();
         if (data.status === "success") {
-            toast.success("Blog liked");
+            toast.success("Blog liked successfully");
             await getBlogById(blog.slug);
         } else {
             toast.error(data.message);

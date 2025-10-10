@@ -1,7 +1,7 @@
 'use client';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import TextEditor from '@/components/dashboard/textEditor/TextEditor';
+import TextEditor from '@/components/text-editor/TextEditor';
 import { useState, useEffect } from 'react';
 import CategoryState from '@/state/categoryState';
 import TagState from '@/state/tagState';
@@ -76,23 +76,6 @@ export default function UpdateBlog() {
 
 
 
-  const addTags = (e: React.KeyboardEvent<HTMLInputElement>) => {
-
-    if (e.key === "Enter" && e.currentTarget.value != "" || e.key === "," && e.currentTarget.value != "") {
-      e.preventDefault();
-      const tagId = tagList.find((tag) => tag.name === e.currentTarget.value);
-      setBlogData({ ...blogData, tagId: [...blogData.tagId, tagId._id] })
-      e.currentTarget.value = "";
-    } else if (e.key === "Enter" && e.currentTarget.value === "" || e.key === "," && e.currentTarget.value === "") {
-      e.preventDefault();
-      toast.error("Please input tag value.");
-    }
-
-  }
-  const removeTags = (e: number) => {
-    setBlogData({ ...blogData, tagId: blogData.tagId.filter((item: string, i: number) => i !== e) })
-  }
-
 
 
   return (
@@ -115,16 +98,19 @@ export default function UpdateBlog() {
                 <div className="flex flex-wrap gap-2">
                 {
                   blogData.categoryId.map((item: string, i: number) => (
-                    <div key={i} className="bg-gray-200 py-1 px-2 rounded flex items-center gap-2">{categoryList.find((category) => category._id === item)?.name}<i onClick={() => {setBlogData({ ...blogData, categoryId: blogData.categoryId.filter((item: string, index: number) => index !== i) })}} className="bi bi-x-circle-fill text-red-600"></i></div>
+                    <div key={i} className="bg-gray-200 py-1 px-2 rounded flex items-center gap-2">
+                        {categoryList.find((category) => category._id === item)?.name}
+                        <i onClick={() => {setBlogData({ ...blogData, categoryId: blogData.categoryId.filter((item: string, index: number) => index !== i) })}}
+                           className="bi bi-x-circle-fill text-red-600 cursor-pointer"></i></div>
                   ))
                 }
-                <select name="category" id="category" className="w-full p-2 border border-gray-300 rounded" value={blogData.categoryId[0]} onChange={(e) => setBlogData({ ...blogData, categoryId: [...blogData.categoryId, e.currentTarget.value] })}>
+                <select name="category" id="category" className="w-full p-2 border border-gray-300 rounded"
+                        value={blogData.categoryId[0]}
+                        onChange={(e) => setBlogData({ ...blogData, categoryId: [...blogData.categoryId, e.currentTarget.value] })}>
                   <option value="">Select Category</option>
                   {
                     categoryList.map((category, i) => {
-                      return (
-                        <option key={i} value={category._id}>{category.name}</option>
-                      )
+                      return (<option key={i} value={category._id}>{category.name}</option>)
                     })
                   }
                 </select>
@@ -136,20 +122,22 @@ export default function UpdateBlog() {
                 <div className="flex flex-wrap gap-2">
                   {
                     blogData.tagId != null && blogData.tagId.map((item: string, i: number) => (
-                      <div key={i} className="bg-gray-200 py-1 px-2 rounded flex items-center gap-2">{tagList.find((tag) => tag._id === item)?.name}<i onClick={() => removeTags(i)} className="bi bi-x-circle-fill text-red-600"></i></div>
+                      <div key={i} className="bg-gray-200 py-1 px-2 rounded flex items-center gap-2">
+                          {tagList.find((tag) => tag._id === item)?.name}
+                          <i onClick={() => setBlogData({...blogData, tagId: blogData.tagId.filter((item:string, index:number)=>index !==i)}) } className="bi bi-x-circle-fill text-red-600 cursor-pointer"></i></div>
                     ))
                   }
-
-                  <input list="tags" type="text" name="tag" placeholder="Tag" className="w-full p-2 border border-gray-300 rounded my-2" onKeyDown={addTags} />
-                  <datalist id="tags">
-                    {
-                      tagList.map((tag, i) => {
-                        return (
-                          <option key={i} value={tag.name}/>
-                        )
-                      })
-                    }
-                  </datalist>
+                  <select name="tag" id="tag" className="w-full p-2 border border-gray-300 rounded"
+                          value={blogData.tagId[0]} onChange={(e) => {
+                            setBlogData({ ...blogData, tagId: [...blogData.tagId, e.currentTarget.value] })
+                            }}>
+                    <option value="">Select Tag</option>
+                      {
+                        tagList.map((tag, i) => {
+                            return (<option key={i} value={tag._id}>{tag.name}</option>)
+                        })
+                      }
+                  </select>
                 </div>
               </div>
 

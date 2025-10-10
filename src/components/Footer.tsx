@@ -56,6 +56,14 @@ const Footer = () => {
       title: 'Terms of Service',
       href: '/terms',
     },
+      {
+          title: "Neuron",
+          href: '/neuron',
+      },
+      {
+          title: "Tools",
+          href: '/tools',
+      }
   ];
 
   return (
@@ -78,7 +86,7 @@ const Footer = () => {
               Quick Links
             </h3>
             <hr />
-            <ul className="mt-4 space-y-4">
+            <ul className="mt-4 grid grid-cols-2 gap-2">
               {quickLinks.map((item, index)=>(
                 <li key={index}>
                   <Link href={item.href} className="text-base text-white hover:text-indigo-300 hover:ps-1 transition-all ease-in-out duration-300">

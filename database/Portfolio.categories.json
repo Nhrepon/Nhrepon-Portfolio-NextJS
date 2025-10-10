@@ -1,0 +1,210 @@
+[{
+  "_id": {
+    "$oid": "6873955c47214ae5ce867d42"
+  },
+  "name": "Flutter",
+  "slug": "flutter",
+  "description": "Flutter application development",
+  "image": "/flutter.svg",
+  "createdAt": {
+    "$date": "2025-07-13T11:15:40.460Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-13T11:15:40.460Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "687395af47214ae5ce867d4a"
+  },
+  "name": "NextJS",
+  "slug": "nextjs",
+  "description": "NextJs application development",
+  "image": "/next.svg",
+  "createdAt": {
+    "$date": "2025-07-13T11:17:03.463Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-13T11:17:03.463Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6884a2e98629bf914d6b0fc3"
+  },
+  "name": "MongoDB",
+  "slug": "mongodb",
+  "description": "",
+  "image": "/mongodb.svg",
+  "createdAt": {
+    "$date": "2025-07-26T09:42:01.445Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-26T09:42:01.445Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6884a30e8629bf914d6b0fc5"
+  },
+  "name": "Java",
+  "slug": "java",
+  "description": "",
+  "image": "/java.svg",
+  "createdAt": {
+    "$date": "2025-07-26T09:42:38.126Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-26T09:42:38.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6884a3198629bf914d6b0fc7"
+  },
+  "name": "JavaScript",
+  "slug": "javascript",
+  "description": "",
+  "image": "/javascript.svg",
+  "createdAt": {
+    "$date": "2025-07-26T09:42:49.332Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-26T09:42:49.332Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6884b9378629bf914d6b101b"
+  },
+  "name": "Dart",
+  "slug": "dart",
+  "description": "",
+  "image": "/dart.svg",
+  "createdAt": {
+    "$date": "2025-07-26T11:17:11.575Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-26T11:17:11.575Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6884bafc8629bf914d6b1023"
+  },
+  "name": "MySQL",
+  "slug": "mysql",
+  "description": "",
+  "image": "/mysql.svg",
+  "createdAt": {
+    "$date": "2025-07-26T11:24:44.438Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-26T11:24:44.438Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "688f5a924536d299ec83c505"
+  },
+  "name": "Excel",
+  "slug": "excel",
+  "description": "Excel tutorial",
+  "image": "/excel.svg",
+  "createdAt": {
+    "$date": "2025-08-03T12:48:18.701Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-04T10:39:58.037Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68909410a492b5e02eea28b7"
+  },
+  "name": "Android",
+  "slug": "android",
+  "description": "",
+  "image": "/android.svg",
+  "createdAt": {
+    "$date": "2025-08-04T11:05:52.971Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-04T11:05:52.971Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6890943fa492b5e02eea28bf"
+  },
+  "name": "DotNet",
+  "slug": "dotnet",
+  "description": "",
+  "image": "/dotnet.svg",
+  "createdAt": {
+    "$date": "2025-08-04T11:06:39.634Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-04T11:06:39.634Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68909460a492b5e02eea28c7"
+  },
+  "name": "Express JS",
+  "slug": "express-js",
+  "description": "",
+  "image": "/express.svg",
+  "createdAt": {
+    "$date": "2025-08-04T11:07:12.144Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-04T11:07:12.144Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6890947fa492b5e02eea28cf"
+  },
+  "name": "Github",
+  "slug": "github",
+  "description": "",
+  "image": "/github.svg",
+  "createdAt": {
+    "$date": "2025-08-04T11:07:43.291Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-04T11:07:43.291Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6890948ca492b5e02eea28d7"
+  },
+  "name": "Laravel",
+  "slug": "laravel",
+  "description": "",
+  "image": "/laravel.svg",
+  "createdAt": {
+    "$date": "2025-08-04T11:07:56.696Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-04T11:07:56.696Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "689094e0a492b5e02eea28e2"
+  },
+  "name": "React JS",
+  "slug": "react-js",
+  "description": "",
+  "image": "/react.svg",
+  "createdAt": {
+    "$date": "2025-08-04T11:09:20.883Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-04T11:09:20.883Z"
+  }
+}]
