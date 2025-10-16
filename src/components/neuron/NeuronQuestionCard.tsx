@@ -18,12 +18,12 @@ const NeuronQuestionCard = () => {
             <div className="grid grid-cols-3 gap-2">
                 {
                     questionList.map((item, index) => (
-                        <div className="rounded shadow-lg p-2">
+                        <div key={index} className="rounded shadow-lg p-2">
                             <h3 className="py-2 ">{item.question}</h3>
                             <div className="flex flex-col gap-2">
                                 {
                                     item.options.map((option, index) => (
-                                        <div className="flex gap-2"><input type="checkbox"/>{option}</div>
+                                        <div key={index} className="flex gap-2"><input type="checkbox"/>{option}</div>
                                     ))
                                 }
                             </div>

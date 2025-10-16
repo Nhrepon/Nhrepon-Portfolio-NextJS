@@ -1,3 +1,4 @@
+"use client"
 import React, {type ReactNode, useState} from "react";
 import modelState from "@/state/modelState";
 
@@ -38,7 +39,7 @@ const Modal = ({children, text="Add", heading = "Add/Update Item"}: ModalProps) 
                                 </button>
                             </div>
                             <hr className="my-4 text-gray-400"/>
-                            <div className="overflow-y-auto py-2">
+                            <div className="overflow-y-auto py-2 no-scrollbar">
                                 {children}
                             </div>
                         </div>

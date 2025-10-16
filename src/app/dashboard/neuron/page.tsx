@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from "next/link";
 
 const NeuronPage = () => {
     return (
@@ -8,6 +9,7 @@ const NeuronPage = () => {
             </div>
             <hr/>
             <div className="flex-1 overflow-y-scroll">
+                <Link className="bg-green-700" href="/dashboard/neuron/question/new">Add new question</Link>
                 <div>
                     body
                 </div>
