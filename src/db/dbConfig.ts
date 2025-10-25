@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 
-export async function connect() {
+export async function connectDatabase() {
     try {
         const url = process.env.DATABASE_URL!;
         await mongoose.connect(url);
         const connection = mongoose.connection;
         connection.on("connected",()=>{
-            console.log("Mongodb connected successfully")
+            console.log("Database connected successfully")
         });
         connection.on("error", (err)=>{
-            console.log("Mongodb connection failed " + err)
+            console.log("Database connection failed " + err)
             process.exit();
         });
         
@@ -17,6 +17,11 @@ export async function connect() {
         console.log("Something went wrong in database connection")
         console.log(error)
     }
+}
+
+export async function disconnectDatabase() {
+    await mongoose.disconnect()
+    process.exit();
 }
 
 

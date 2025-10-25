@@ -11,6 +11,6 @@ const QuestionMetaSchema =new mongoose.Schema({
     topicId:{type: [mongoose.Schema.Types.ObjectId],},
 }, { timestamps: true , versionKey: false });
 
-const QuestionMetaModel = mongoose.models?.questionMeta || mongoose.model("QuestionMeta", QuestionMetaSchema);
+const QuestionMetaModel = mongoose.models?.questionsMetas || mongoose.model("QuestionsMetas", QuestionMetaSchema);
 
 export default QuestionMetaModel;

@@ -130,8 +130,7 @@ export function isAdmin(){
 
 
 export const generateSlug = (data:string)=>{
-    const slug = data.trim().replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '').replace(/-+/g, '-').toLowerCase();
-    return slug;
+    return data.trim().replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '').replace(/-+/g, '-').toLowerCase();
 }
 
 

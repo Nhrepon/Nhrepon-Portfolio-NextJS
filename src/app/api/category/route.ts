@@ -1,9 +1,7 @@
-import { connect } from "@/db/dbConfig";
+
 import CategoryModel from "@/models/categoryModel";
 import { generateSlug } from "@/utility/Utility";
 import { NextRequest, NextResponse } from "next/server";
-
-connect();
 
 export async function GET(request: NextRequest){
     const skip = Number(request.nextUrl.searchParams.get("skip")) || 0;

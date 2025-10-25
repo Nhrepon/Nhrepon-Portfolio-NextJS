@@ -1,11 +1,11 @@
-import { connect } from "@/db/dbConfig";
+import {connectDatabase} from "@/db/dbConfig";
 import BlogModel from "@/models/blogModel";
 import BlogMetaModel from "@/models/blogMetaModel";
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import mongoose from "mongoose";
 
-await connect();
+await connectDatabase()
 
 export async function GET(request: NextRequest){
     try {

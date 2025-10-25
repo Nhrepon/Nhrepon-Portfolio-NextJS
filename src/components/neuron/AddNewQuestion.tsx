@@ -1,6 +1,6 @@
 import React from 'react';
-import QuestionModel from "@/models/neuron/Question-Model";
-import QuestionMetaModel from "@/models/neuron/Question-Meta-Model";
+import QuestionModel from "@/models/neuron/questionModel";
+import QuestionMetaModel from "@/models/neuron/questionMetaModel";
 
 const AddNewQuestion = () => {
 
