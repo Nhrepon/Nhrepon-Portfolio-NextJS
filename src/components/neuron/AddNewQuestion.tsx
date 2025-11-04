@@ -1,14 +1,38 @@
 import React from 'react';
-import QuestionModel from "@/models/neuron/questionModel";
-import QuestionMetaModel from "@/models/neuron/questionMetaModel";
 
-const AddNewQuestion = () => {
+const AddNewQuestion = async () => {
+    const neuronCategoryList:Array<any> = [
+        {id:1,name:"Category 1"},
+        {id:2,name:"Category 2"},
+        {id:3,name:"Category 3"},
+        {id:4,name:"Category 4"},
+        {id:5,name:"Category 5"},
+    ];
+    const examList:Array<any> = [
+        {id:1,name:"Exam 1"},
+        {id:2,name:"Exam 2"},
+        {id:3,name:"Exam 3"},
+        {id:4,name:"Exam 4"},
+        {id:5,name:"Exam 5"},
+    ];
+    const subjectList:Array<any> = [
+        {id:1,name:"Subject 1"},
+        {id:2,name:"Subject 2"},
+        {id:3,name:"Subject 3"},
+        {id:4,name:"Subject 4"},
+        {id:5,name:"Subject 5"},
+    ]
+    const topicList:Array<any> = [
+        {id:1,name:"Topic 1"},
+        {id:2,name:"Topic 2"},
+        {id:3,name:"Topic 3"},
+        {id:4,name:"Topic 4"},
+        {id:5,name:"Topic 5"},
+    ];
 
-    const question = async ()=>{
-        await QuestionModel.find();
-        await QuestionMetaModel.find();
-    }
-    question();
+
+
+
     return (
         <div className="flex flex-col w-full max-w-[800px] mx-auto">
             <div className="flex flex-col md:flex-row gap-4">
@@ -54,8 +78,11 @@ const AddNewQuestion = () => {
                         <label>Categories:</label>
                         <select className=" border-gray-300 p-2 rounded shadow-lg">
                             <option>Select Category</option>
-                            <option>1</option>
-                            <option>2</option>
+                            {
+                                neuronCategoryList && neuronCategoryList.map((category, index) => {
+                                    return (<option key={index} value={index}>{category.name}</option>)
+                                })
+                            }
                         </select>
                     </div>
 
@@ -63,8 +90,11 @@ const AddNewQuestion = () => {
                         <label>Exam:</label>
                         <select className=" border-gray-300 p-2 rounded shadow-lg">
                             <option>Select Exam</option>
-                            <option>1</option>
-                            <option>2</option>
+                            {
+                                examList && examList.map((exam, index) => {
+                                    return (<option key={index} value={index}>{exam.name}</option>)
+                                })
+                            }
                         </select>
                     </div>
 
@@ -72,8 +102,9 @@ const AddNewQuestion = () => {
                         <label>Year:</label>
                         <select className=" border-gray-300 p-2 rounded shadow-lg">
                             <option>Select Year</option>
-                            <option>1</option>
-                            <option>2</option>
+                            {Array.from({ length: new Date().getFullYear() - 1989 }, (_, i) =>
+                                <option key={i} value={1990 + i}>{1990 + i}</option>
+                            )}
                         </select>
                     </div>
 
@@ -81,8 +112,11 @@ const AddNewQuestion = () => {
                         <label>Subjects:</label>
                         <select className=" border-gray-300 p-2 rounded shadow-lg">
                             <option>Select Subject</option>
-                            <option>1</option>
-                            <option>2</option>
+                            {
+                                subjectList && subjectList.map((subject, index) => {
+                                    return (<option key={index} value={index}>{subject.name}</option>)
+                                })
+                            }
                         </select>
                     </div>
 
@@ -90,8 +124,11 @@ const AddNewQuestion = () => {
                         <label>Topics:</label>
                         <select className=" border-gray-300 p-2 rounded shadow-lg">
                             <option>Select Topic</option>
-                            <option>1</option>
-                            <option>2</option>
+                            {
+                                topicList && topicList.map((topic, index) => {
+                                    return (<option key={index} value={index}>{topic.name}</option>)
+                                })
+                            }
                         </select>
                     </div>
 

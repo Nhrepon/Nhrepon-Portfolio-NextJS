@@ -33,7 +33,7 @@ const About = () => {
 
   const education = [
     {
-      degree: 'Bachelor of Business Sturdies',
+      degree: 'Bachelor of Business Studies',
       institution: 'National University',
       period: '2013 - 2015',
       description:
@@ -79,7 +79,7 @@ const About = () => {
               variants={itemVariants}
               className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto"
             >
-              I'm a passionate Full Stack Developer with a love for creating
+              I&apos;m a passionate Full Stack Developer with a love for creating
               exceptional digital experiences. My journey in technology has been
               driven by curiosity and a desire to solve complex problems.
             </motion.p>

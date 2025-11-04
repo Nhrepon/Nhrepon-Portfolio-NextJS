@@ -1,9 +1,8 @@
 import SkillModel from "@/models/skillModel";
 import { NextRequest, NextResponse } from "next/server";
-import {connect} from "@/db/dbConfig";
-import mongoose from "mongoose";
+import {connectDatabase} from '@/db/dbConfig';
 
-await connect();
+await connectDatabase();
 
 export async function POST(request: NextRequest){
     const {title, description, image} = await request.json();

@@ -1,8 +1,9 @@
-import { connect } from "@/db/dbConfig";
+
 import TagModel from "@/models/tagModel";
 import { NextRequest, NextResponse } from "next/server";
+import {connectDatabase} from '@/db/dbConfig';
 
-connect();
+await connectDatabase();
 
 export async function GET(request: NextRequest){
     const skip = Number(request.nextUrl.searchParams.get("skip")) || 0;

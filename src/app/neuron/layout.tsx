@@ -2,7 +2,7 @@ import React from 'react';
 import NeuronNavBar from "@/components/neuron/NeuronNavBar";
 import NeuronFooter from "@/components/neuron/NeuronFooter";
 
-export default function({children}:{children:React.ReactNode}) {
+export default function NeuronLayout({children}:{children:React.ReactNode}) {
     return (
         <div className="flex flex-col h-screen">
             <NeuronNavBar/>

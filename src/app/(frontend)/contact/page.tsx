@@ -38,7 +38,7 @@ export default function ContactPage() {
                         Contact Us
                     </h1>
                     <p className="mt-3 text-xl text-gray-500 sm:mt-4">
-                        Have a question or want to work together? We'd love to hear from
+                        Have a question or want to work together? We&apos;d love to hear from
                         you.
                     </p>
                 </div>

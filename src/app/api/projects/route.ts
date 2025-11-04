@@ -1,10 +1,11 @@
-import {connect} from "@/db/dbConfig";
+
 import {NextRequest, NextResponse} from "next/server";
 import ProjectModel from "@/models/projectModel";
 import {cookies} from "next/headers";
 import mongoose from "mongoose";
+import {connectDatabase} from '@/db/dbConfig';
 
-await connect();
+await connectDatabase();
 
 export async function GET(request: NextRequest) {
     const skip = Number(request.nextUrl.searchParams.get("skip")) || 0;

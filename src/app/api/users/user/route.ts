@@ -2,9 +2,9 @@
 import {NextRequest, NextResponse} from 'next/server';
 import { decodeToken } from '@/utility/jwtTokenHelper';
 import UserModel from '@/models/userModel';
-import { connect } from '@/db/dbConfig';
+import {connectDatabase} from '@/db/dbConfig';
 
-await connect();
+await connectDatabase();
 
 export async function GET(request: NextRequest) {
     try {

@@ -2,9 +2,9 @@ import UserModel from '@/models/userModel';
 import {NextRequest, NextResponse} from 'next/server';
 import bcryptJs from 'bcryptjs';
 import {sendEmail} from '@/utility/mailHelper';
-import { connect } from '@/db/dbConfig';
+import {connectDatabase} from '@/db/dbConfig';
 
-await connect();
+await connectDatabase();
 
 export async function POST(request: NextRequest) {
     try {

@@ -3,10 +3,12 @@ import FileModel from '@/models/fileModel';
 import fs from 'fs';
 import path from 'path';
 import { cookies } from 'next/headers';
-import { connect } from '@/db/dbConfig';
 import CategoryModel from '@/models/categoryModel';
 import sharp from 'sharp';
 import { generateSlug } from '@/utility/Utility';
+import {connectDatabase} from "@/db/dbConfig";
+
+await connectDatabase();
 
 export async function POST(request: Request) {
     try {
@@ -48,9 +50,6 @@ export async function POST(request: Request) {
                 { status: 400 }
             );
         }
-
-        // Connect to MongoDB
-        await connect();
 
         // Validate category exists
         const category = await CategoryModel.findById(categoryId);

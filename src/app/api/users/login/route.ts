@@ -1,12 +1,10 @@
 import UserModel from '@/models/userModel';
 import {NextRequest, NextResponse} from 'next/server';
 import bcryptJs from 'bcryptjs';
-import { connect } from '@/db/dbConfig';
 import { encodeToken } from '@/utility/jwtTokenHelper';
+import {connectDatabase} from '@/db/dbConfig';
 
-
-
-await connect();
+await connectDatabase();
 
 interface loginReqBody {
     email: string;
