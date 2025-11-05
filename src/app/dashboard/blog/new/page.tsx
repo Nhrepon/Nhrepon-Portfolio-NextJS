@@ -9,7 +9,6 @@ import { generateSlug } from '@/utility/Utility';
 import PickFile from '@/components/dashboard/media/pickFile';
 import Image from 'next/image';
 import BlogState from '@/state/blogState';
-import QuilTextEditor from "@/components/text-editor/quilTextEditor";
 
 export default function NewBlog() {
   const router = useRouter();
